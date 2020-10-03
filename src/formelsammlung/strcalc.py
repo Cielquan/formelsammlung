@@ -11,17 +11,17 @@
 import ast
 import operator
 
-from typing import Union, Optional
+from typing import Optional, Union
 
 
-T_Number = Union[int, float, complex]
+NumberType = Union[int, float, complex]
 
 
 class _StringCalculator(ast.NodeVisitor):
     """Calculate an arithmetic expression from a string using :py:mod:`ast`."""
 
-    # pylint: disable=C0103
-    def visit_BinOp(self, node: ast.BinOp) -> T_Number:  # noqa: N802
+    # pylint: disable=C0103,R0201
+    def visit_BinOp(self, node: ast.BinOp) -> NumberType:  # noqa: N802
         """Handle `BinOp` nodes."""
         return {
             ast.Add: operator.add,  #: a + b
@@ -34,7 +34,7 @@ class _StringCalculator(ast.NodeVisitor):
         }[type(node.op)](self.visit(node.left), self.visit(node.right))
 
     # fmt: off
-    def visit_UnaryOp(self, node: ast.UnaryOp) -> T_Number:  # noqa: N802
+    def visit_UnaryOp(self, node: ast.UnaryOp) -> NumberType:  # noqa: N802
         """Handle `UnaryOp` nodes."""
         return {
             ast.UAdd: operator.pos,  #: + a
@@ -42,23 +42,23 @@ class _StringCalculator(ast.NodeVisitor):
         }[type(node.op)](self.visit(node.operand))
     # fmt: on
 
-    def visit_Constant(self, node: ast.Constant) -> T_Number:  # noqa: N802
+    def visit_Constant(self, node: ast.Constant) -> NumberType:  # noqa: N802
         """Handle `Constant` nodes."""
         return node.value
 
-    def visit_Num(self, node: ast.Num) -> T_Number:  # noqa: N802
+    def visit_Num(self, node: ast.Num) -> NumberType:  # noqa: N802
         """Handle `Num` nodes.
 
         For backwards compatibility <3.8. Since 3.8 ``visit_Constant`` is used.
         """
         return node.n
 
-    def visit_Expr(self, node: ast.Expr) -> T_Number:  # noqa: N802
+    def visit_Expr(self, node: ast.Expr) -> NumberType:  # noqa: N802
         """Handle `Expr` nodes."""
         return self.visit(node.value)
 
 
-def calculate_string(expression: str) -> Optional[T_Number]:
+def calculate_string(expression: str) -> Optional[NumberType]:
     """Calculate the given expression.
 
     The given arithmetic expression string is parsed as an :py:mod:`ast` and then
