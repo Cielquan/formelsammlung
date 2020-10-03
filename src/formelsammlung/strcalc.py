@@ -18,7 +18,7 @@ NumberType = Union[int, float, complex]
 
 
 class _StringCalculator(ast.NodeVisitor):
-    """Calculate an arithmetic expression from a string using :py:mod:`ast`."""
+    """Calculate an arithmetic expression from a string using :mod:`ast`."""
 
     # pylint: disable=C0103,R0201
     def visit_BinOp(self, node: ast.BinOp) -> NumberType:  # noqa: N802
@@ -61,29 +61,29 @@ class _StringCalculator(ast.NodeVisitor):
 def calculate_string(expression: str) -> Optional[NumberType]:
     """Calculate the given expression.
 
-    The given arithmetic expression string is parsed as an :py:mod:`ast` and then
-    handled by the :py:class:`ast.NodeVisitor`.
+    The given arithmetic expression string is parsed as an :mod:`ast` and then
+    handled by the :class:`ast.NodeVisitor`.
 
     Python exceptions are risen like with normal arithmetic expression e.g.
-    :py:class:`ZeroDivisionError`.
+    :class:`ZeroDivisionError`.
 
     Supported number types:
 
-        - :py:class:`int` ``1``
-        - :py:class:`float` ``1.1``
-        - :py:class:`complex` ``1+1j``
+        - :class:`int` ``1``
+        - :class:`float` ``1.1``
+        - :class:`complex` ``1+1j``
 
     Supported mathematical operators:
 
-        - Positive (:py:func:`operator.pos`) ``+ a``
-        - Negative (:py:func:`operator.neg`) ``- a``
-        - Addition (:py:func:`operator.add`) ``a + b``
-        - Subtraction (:py:func:`operator.sub`) ``a - b``
-        - Multiplication (:py:func:`operator.mul`) ``a * b``
-        - Exponentiation (:py:func:`operator.pow`) ``a ** b``
-        - Division (:py:func:`operator.truediv`) ``a / b``
-        - FloorDivision (:py:func:`operator.floordiv`) ``a // b``
-        - Modulo (:py:func:`operator.mod`) ``a % b``
+        - Positive (:func:`operator.pos`) ``+ a``
+        - Negative (:func:`operator.neg`) ``- a``
+        - Addition (:func:`operator.add`) ``a + b``
+        - Subtraction (:func:`operator.sub`) ``a - b``
+        - Multiplication (:func:`operator.mul`) ``a * b``
+        - Exponentiation (:func:`operator.pow`) ``a ** b``
+        - Division (:func:`operator.truediv`) ``a / b``
+        - FloorDivision (:func:`operator.floordiv`) ``a // b``
+        - Modulo (:func:`operator.mod`) ``a % b``
 
     :param expression: String with arithmetic expression.
     :return: Result or None
