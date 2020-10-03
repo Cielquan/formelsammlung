@@ -17,6 +17,7 @@ from typing import Any, Iterable, Optional
 TRUE_BOOL_VALUES = ("1", "y", "yes", "t", "True")
 FALSE_BOOL_VALUES = ("0", "n", "no", "f", "False")
 
+
 def getenv_typed(
     var_name: str,
     default: Any = None,
@@ -101,10 +102,10 @@ def getenv_typed(
 
     #: Guess if `int`
     if re.fullmatch(r"^\d+$", env_var):
-        return int(env_var)
+        env_var = int(env_var)
 
     #: Guess if `float`
-    if re.fullmatch(r"^\d+\.\d+$", env_var):
-        return float(env_var)
+    elif re.fullmatch(r"^\d+\.\d+$", env_var):
+        env_var = float(env_var)
 
     return env_var
