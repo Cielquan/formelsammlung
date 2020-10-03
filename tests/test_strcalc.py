@@ -11,6 +11,7 @@
 import random
 
 import pytest
+
 from formelsammlung.strcalc import calculate_string
 
 
@@ -28,8 +29,8 @@ from formelsammlung.strcalc import calculate_string
                 f"{random.uniform(0, 100)}"
                 f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
             ),
-        )
-    ]
+        ),
+    ],
 )
 def test_addition(num_l, num_r):
     """Test addition with calculate_string."""
@@ -54,8 +55,8 @@ def test_addition(num_l, num_r):
                 f"{random.uniform(0, 100)}"
                 f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
             ),
-        )
-    ]
+        ),
+    ],
 )
 def test_subtraction(num_l, num_r):
     """Test subtraction with calculate_string."""
@@ -80,8 +81,8 @@ def test_subtraction(num_l, num_r):
                 f"{random.uniform(0, 100)}"
                 f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
             ),
-        )
-    ]
+        ),
+    ],
 )
 def test_multiplication(num_l, num_r):
     """Test multiplication with calculate_string."""
@@ -106,8 +107,8 @@ def test_multiplication(num_l, num_r):
                 f"{random.uniform(0, 100)}"
                 f"{random.choice(('+', '-'))}{random.uniform(1, 100)}j"
             ),
-        )
-    ]
+        ),
+    ],
 )
 def test_true_division(num_l, num_r):
     """Test division with calculate_string."""
@@ -132,8 +133,8 @@ def test_true_division(num_l, num_r):
                 f"{random.uniform(0, 100)}"
                 f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
             ),
-        )
-    ]
+        ),
+    ],
 )
 def test_exponentiation(num_l, num_r):
     """Test exponentiation with calculate_string."""
@@ -149,7 +150,7 @@ def test_exponentiation(num_l, num_r):
     [
         (random.randrange(100), random.randrange(1, 100)),
         (random.uniform(0, 100), random.uniform(1, 100)),
-    ]
+    ],
 )
 def test_floor_division(num_l, num_r):
     """Test floor-division with calculate_string."""
@@ -165,7 +166,7 @@ def test_floor_division(num_l, num_r):
     [
         (random.randrange(100), random.randrange(1, 100)),
         (random.uniform(0, 100), random.uniform(1, 100)),
-    ]
+    ],
 )
 def test_modulo(num_l, num_r):
     """Test modulo with calculate_string."""
