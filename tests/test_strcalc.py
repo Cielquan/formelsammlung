@@ -10,130 +10,170 @@
 """
 import random
 
-from typing import List, Tuple
+import pytest
+from formelsammlung.strcalc import calculate_string
 
-from formelsammlung.strcalc import NumberType, calculate_string
 
-
-def _number_generator(
-    left_num_min: int = 0,
-    left_num_max: int = 100,
-    right_num_min: int = 0,
-    right_num_max: int = 100,
-    include_complex: bool = True,
-) -> List[Tuple[NumberType, NumberType]]:
-    """Generate list with random number pairs for tests.
-
-    :param left_num_min: Minimum for range of left number, defaults to 0
-    :param left_num_max: Maximum for range of left number, defaults to 100
-    :param right_num_min: Minimum for range of right number, defaults to 0
-    :param right_num_max: Maximum for range of right number, defaults to 100
-    :param include_complex: Bool if a pair of complex numbers should be included
-        defaults to True
-    :return: List of tuples with number pairs
-    """
-    number_list: List[Tuple[NumberType, NumberType]] = [
-        (random.randrange(left_num_max), random.randrange(right_num_max)),
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (random.randrange(100), random.randrange(100)),
+        (random.uniform(0, 100), random.uniform(0, 100)),
         (
-            random.uniform(left_num_min, left_num_max),
-            random.uniform(right_num_min, right_num_max),
-        ),
-    ]
-
-    if include_complex:
-        number_list.append(
-            (
-                complex(
-                    f"{random.uniform(left_num_min, left_num_max)}"
-                    f"{random.choice(('+', '-'))}"
-                    f"{random.uniform(left_num_min, left_num_max)}j"
-                ),
-                complex(
-                    f"{random.uniform(right_num_min, right_num_max)}"
-                    f"{random.choice(('+', '-'))}"
-                    f"{random.uniform(right_num_min, right_num_max)}j"
-                ),
-            )
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
+            ),
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
+            ),
         )
-
-    return number_list
-
-
-def test_addition():
+    ]
+)
+def test_addition(num_l, num_r):
     """Test addition with calculate_string."""
-    for num_pair in _number_generator():
-        num_l, num_r = num_pair[0], num_pair[1]
-        assert calculate_string(f"{num_l}+{num_r}") == num_l + num_r
-        assert calculate_string(f"-{num_l}++{num_r}") == -num_l + +num_r
-        assert calculate_string(f"+{num_l}+-{num_r}") == +num_l + -num_r
-        assert calculate_string(f"-{num_l}+-{num_r}") == -num_l + -num_r
-        assert calculate_string(f"+{num_l}++{num_r}") == +num_l + +num_r
+    assert calculate_string(f"{num_l}+{num_r}") == num_l + num_r
+    assert calculate_string(f"-{num_l}++{num_r}") == -num_l + +num_r
+    assert calculate_string(f"+{num_l}+-{num_r}") == +num_l + -num_r
+    assert calculate_string(f"-{num_l}+-{num_r}") == -num_l + -num_r
+    assert calculate_string(f"+{num_l}++{num_r}") == +num_l + +num_r
 
 
-def test_subtraction():
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (random.randrange(100), random.randrange(100)),
+        (random.uniform(0, 100), random.uniform(0, 100)),
+        (
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
+            ),
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
+            ),
+        )
+    ]
+)
+def test_subtraction(num_l, num_r):
     """Test subtraction with calculate_string."""
-    for num_pair in _number_generator():
-        num_l, num_r = num_pair[0], num_pair[1]
-        assert calculate_string(f"{num_l}-{num_r}") == num_l - num_r
-        assert calculate_string(f"-{num_l}-+{num_r}") == -num_l - +num_r
-        assert calculate_string(f"+{num_l}--{num_r}") == +num_l - -num_r
-        assert calculate_string(f"-{num_l}--{num_r}") == -num_l - -num_r
-        assert calculate_string(f"+{num_l}-+{num_r}") == +num_l - +num_r
+    assert calculate_string(f"{num_l}-{num_r}") == num_l - num_r
+    assert calculate_string(f"-{num_l}-+{num_r}") == -num_l - +num_r
+    assert calculate_string(f"+{num_l}--{num_r}") == +num_l - -num_r
+    assert calculate_string(f"-{num_l}--{num_r}") == -num_l - -num_r
+    assert calculate_string(f"+{num_l}-+{num_r}") == +num_l - +num_r
 
 
-def test_multiplication():
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (random.randrange(100), random.randrange(100)),
+        (random.uniform(0, 100), random.uniform(0, 100)),
+        (
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
+            ),
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
+            ),
+        )
+    ]
+)
+def test_multiplication(num_l, num_r):
     """Test multiplication with calculate_string."""
-    for num_pair in _number_generator():
-        num_l, num_r = num_pair[0], num_pair[1]
-        assert calculate_string(f"{num_l}*{num_r}") == num_l * num_r
-        assert calculate_string(f"-{num_l}*+{num_r}") == -num_l * +num_r
-        assert calculate_string(f"+{num_l}*-{num_r}") == +num_l * -num_r
-        assert calculate_string(f"-{num_l}*-{num_r}") == -num_l * -num_r
-        assert calculate_string(f"+{num_l}*+{num_r}") == +num_l * +num_r
+    assert calculate_string(f"{num_l}*{num_r}") == num_l * num_r
+    assert calculate_string(f"-{num_l}*+{num_r}") == -num_l * +num_r
+    assert calculate_string(f"+{num_l}*-{num_r}") == +num_l * -num_r
+    assert calculate_string(f"-{num_l}*-{num_r}") == -num_l * -num_r
+    assert calculate_string(f"+{num_l}*+{num_r}") == +num_l * +num_r
 
 
-def test_true_division():
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (random.randrange(100), random.randrange(1, 100)),
+        (random.uniform(0, 100), random.uniform(1, 100)),
+        (
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(1, 100)}j"
+            ),
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(1, 100)}j"
+            ),
+        )
+    ]
+)
+def test_true_division(num_l, num_r):
     """Test division with calculate_string."""
-    for num_pair in _number_generator(right_num_min=1):
-        num_l, num_r = num_pair[0], num_pair[1]
-        assert calculate_string(f"{num_l}/{num_r}") == num_l / num_r
-        assert calculate_string(f"-{num_l}/+{num_r}") == -num_l / +num_r
-        assert calculate_string(f"+{num_l}/-{num_r}") == +num_l / -num_r
-        assert calculate_string(f"-{num_l}/-{num_r}") == -num_l / -num_r
-        assert calculate_string(f"+{num_l}/+{num_r}") == +num_l / +num_r
+    assert calculate_string(f"{num_l}/{num_r}") == num_l / num_r
+    assert calculate_string(f"-{num_l}/+{num_r}") == -num_l / +num_r
+    assert calculate_string(f"+{num_l}/-{num_r}") == +num_l / -num_r
+    assert calculate_string(f"-{num_l}/-{num_r}") == -num_l / -num_r
+    assert calculate_string(f"+{num_l}/+{num_r}") == +num_l / +num_r
 
 
-def test_exponentiation():
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (random.randrange(100), random.randrange(100)),
+        (random.uniform(0, 100), random.uniform(0, 100)),
+        (
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
+            ),
+            complex(
+                f"{random.uniform(0, 100)}"
+                f"{random.choice(('+', '-'))}{random.uniform(0, 100)}j"
+            ),
+        )
+    ]
+)
+def test_exponentiation(num_l, num_r):
     """Test exponentiation with calculate_string."""
-    for num_pair in _number_generator():
-        num_l, num_r = num_pair[0], num_pair[1]
-        assert calculate_string(f"{num_l}**{num_r}") == num_l ** num_r
-        assert calculate_string(f"-{num_l}**+{num_r}") == -(num_l ** +num_r)
-        assert calculate_string(f"+{num_l}**-{num_r}") == +(num_l ** -num_r)
-        assert calculate_string(f"-{num_l}**-{num_r}") == -(num_l ** -num_r)
-        assert calculate_string(f"+{num_l}**+{num_r}") == +(num_l ** +num_r)
+    assert calculate_string(f"{num_l}**{num_r}") == num_l ** num_r
+    assert calculate_string(f"-{num_l}**+{num_r}") == -(num_l ** +num_r)
+    assert calculate_string(f"+{num_l}**-{num_r}") == +(num_l ** -num_r)
+    assert calculate_string(f"-{num_l}**-{num_r}") == -(num_l ** -num_r)
+    assert calculate_string(f"+{num_l}**+{num_r}") == +(num_l ** +num_r)
 
 
-def test_floor_division():
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (random.randrange(100), random.randrange(1, 100)),
+        (random.uniform(0, 100), random.uniform(1, 100)),
+    ]
+)
+def test_floor_division(num_l, num_r):
     """Test floor-division with calculate_string."""
-    for num_pair in _number_generator(right_num_min=1, include_complex=False):
-        num_l, num_r = num_pair[0], num_pair[1]
-        assert calculate_string(f"{num_l}//{num_r}") == num_l // num_r
-        assert calculate_string(f"-{num_l}//+{num_r}") == -num_l // +num_r
-        assert calculate_string(f"+{num_l}//-{num_r}") == +num_l // -num_r
-        assert calculate_string(f"-{num_l}//-{num_r}") == -num_l // -num_r
-        assert calculate_string(f"+{num_l}//+{num_r}") == +num_l // +num_r
+    assert calculate_string(f"{num_l}//{num_r}") == num_l // num_r
+    assert calculate_string(f"-{num_l}//+{num_r}") == -num_l // +num_r
+    assert calculate_string(f"+{num_l}//-{num_r}") == +num_l // -num_r
+    assert calculate_string(f"-{num_l}//-{num_r}") == -num_l // -num_r
+    assert calculate_string(f"+{num_l}//+{num_r}") == +num_l // +num_r
 
 
-def test_modulo():
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (random.randrange(100), random.randrange(1, 100)),
+        (random.uniform(0, 100), random.uniform(1, 100)),
+    ]
+)
+def test_modulo(num_l, num_r):
     """Test modulo with calculate_string."""
-    for num_pair in _number_generator(right_num_min=1, include_complex=False):
-        num_l, num_r = num_pair[0], num_pair[1]
-        assert calculate_string(f"{num_l}%{num_r}") == num_l % num_r
-        assert calculate_string(f"-{num_l}%+{num_r}") == -num_l % +num_r
-        assert calculate_string(f"+{num_l}%-{num_r}") == +num_l % -num_r
-        assert calculate_string(f"-{num_l}%-{num_r}") == -num_l % -num_r
-        assert calculate_string(f"+{num_l}%+{num_r}") == +num_l % +num_r
+    assert calculate_string(f"{num_l}%{num_r}") == num_l % num_r
+    assert calculate_string(f"-{num_l}%+{num_r}") == -num_l % +num_r
+    assert calculate_string(f"+{num_l}%-{num_r}") == +num_l % -num_r
+    assert calculate_string(f"-{num_l}%-{num_r}") == -num_l % -num_r
+    assert calculate_string(f"+{num_l}%+{num_r}") == +num_l % +num_r
 
 
 def test_parenthesis():
