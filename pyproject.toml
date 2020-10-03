@@ -64,7 +64,7 @@
 
 #: -- TOWNCRIER CONFIG -----------------------------------------------------------------
 [tool.towncrier]
-    package = "formmelsammlung"
+    package = "formelsammlung"
     package_dir = "src"
     # single_file = true  # if false, filename is formatted like `title_format`.
     filename = "CHANGELOG.rst"
@@ -72,7 +72,7 @@
     template = "docs/.changes/template.jinja2"
     # start_line = "start of generated content" # u".. towncrier release notes start\n"
     title_format = "v{version} ({project_date})"
-    issue_format = "`#{issue} <https://github.com/Cielquan/formmelsammlung/issues/{issue}>`_"
+    issue_format = "`#{issue} <https://github.com/Cielquan/formelsammlung/issues/{issue}>`_"
     underlines = ["-", "~"]
     wrap = false  # Wrap text to 79 characters
     all_bullets = true  # make all fragments bullet points
@@ -144,12 +144,12 @@
 
     [tool.coverage.paths]
         combine = [
-            "src/formmelsammlung",
-            "*/.tox/*/lib/python*/site-packages/formmelsammlung",
-            "*/.tox/pypy*/site-packages/formmelsammlung",
-            "*/.tox\\*\\Lib\\site-packages\\formmelsammlung",
-            "*/src/formmelsammlung",
-            "*\\src\\formmelsammlung",
+            "src/formelsammlung",
+            "*/.tox/*/lib/python*/site-packages/formelsammlung",
+            "*/.tox/pypy*/site-packages/formelsammlung",
+            "*/.tox\\*\\Lib\\site-packages\\formelsammlung",
+            "*/src/formelsammlung",
+            "*\\src\\formelsammlung",
         ]
 
     [tool.coverage.report]
