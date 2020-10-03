@@ -49,9 +49,9 @@ jobs:
           display_name: docs_test_coverage
         docs-test-doctest:
           display_name: docs_test_doctest
-        coverage:
-          with_toxenv: 'coverage'
-          for_envs: [py36, py37, py38, py39, pypy3]
+      coverage:
+        with_toxenv: 'coverage'
+        for_envs: [py36, py37, py38, py39, pypy3]
 
   - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/tags/') }}:
     - template: jobs/publish-pypi-poetry.yml@cielquan
