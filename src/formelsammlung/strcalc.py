@@ -18,7 +18,7 @@ T_Number = Union[int, float, complex]
 
 
 class _StringCalculator(ast.NodeVisitor):
-    """Calculate an arithmetic expression from a string using ast."""
+    """Calculate an arithmetic expression from a string using :py:mod:`ast`."""
 
     # pylint: disable=C0103
     def visit_BinOp(self, node: ast.BinOp) -> T_Number:  # noqa: N802
@@ -61,8 +61,29 @@ class _StringCalculator(ast.NodeVisitor):
 def calculate_string(expression: str) -> Optional[T_Number]:
     """Calculate the given expression.
 
-    The given arithmetic expression string is parsed as an ``AST`` and then handled by
-    the ``ast.NodeVisitor``.
+    The given arithmetic expression string is parsed as an :py:mod:`ast` and then
+    handled by the :py:class:`ast.NodeVisitor`.
+
+    Python exceptions are risen like with normal arithmetic expression e.g.
+    :py:class:`ZeroDivisionError`.
+
+    Supported number types:
+
+        - :py:class:`int` ``1``
+        - :py:class:`float` ``1.1``
+        - :py:class:`complex` ``1+1j``
+
+    Supported mathematical operators:
+
+        - Positive (:py:func:`operator.pos`) ``+ a``
+        - Negative (:py:func:`operator.neg`) ``- a``
+        - Addition (:py:func:`operator.add`) ``a + b``
+        - Subtraction (:py:func:`operator.sub`) ``a - b``
+        - Multiplication (:py:func:`operator.mul`) ``a * b``
+        - Exponentiation (:py:func:`operator.pow`) ``a ** b``
+        - Division (:py:func:`operator.truediv`) ``a / b``
+        - FloorDivision (:py:func:`operator.floordiv`) ``a // b``
+        - Modulo (:py:func:`operator.mod`) ``a % b``
 
     :param expression: String with arithmetic expression.
     :return: Result or None
