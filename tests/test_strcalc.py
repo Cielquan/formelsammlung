@@ -140,9 +140,11 @@ def test_exponentiation(num_l, num_r):
     """Test exponentiation with calculate_string."""
     assert calculate_string(f"{num_l}**{num_r}") == num_l ** num_r
     assert calculate_string(f"-{num_l}**+{num_r}") == -(num_l ** +num_r)
+    assert calculate_string(f"+{num_l}**+{num_r}") == +(num_l ** +num_r)
+    num_l += 1
+    num_r += 1
     assert calculate_string(f"+{num_l}**-{num_r}") == +(num_l ** -num_r)
     assert calculate_string(f"-{num_l}**-{num_r}") == -(num_l ** -num_r)
-    assert calculate_string(f"+{num_l}**+{num_r}") == +(num_l ** +num_r)
 
 
 @pytest.mark.parametrize(
