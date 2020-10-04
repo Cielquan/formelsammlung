@@ -137,3 +137,5 @@ _backupfiles
 
 # auto generated API docs
 docs/source/autoapi
+
+poetry.lock
