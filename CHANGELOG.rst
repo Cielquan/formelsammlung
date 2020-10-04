@@ -8,3 +8,8 @@ formelsammlung Change Log
   Not all commits are linked. Commits are only linked when they match the specific note.
 
 .. towncrier release notes start
+
+v0.1.0 (2020-10-03)
+-------------------
+
+Initial release
