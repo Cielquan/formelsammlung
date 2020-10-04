@@ -73,6 +73,12 @@ def calculate_string(expression: str) -> Optional[NumberType]:
         - :class:`float` ``1.1``
         - :class:`complex` ``1+1j``
 
+    .. warning::
+        On PyPy3 only:
+        When working with :class:`complex` numbers containing :class:`float` numbers be
+        aware that the result of :func:`calculate_string` and the equivalent arithmetic
+        expression divert after the 10th decimal.
+
     Supported mathematical operators:
 
         - Positive (:func:`operator.pos`) ``+ a``
