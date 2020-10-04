@@ -23,6 +23,9 @@ formelsammlung
 
 Collection of different multipurpose functions.
 
+This library is a collection of different functions I developed which I use in different
+projects so I put them here.
+
 
 Prerequisites
 =============
