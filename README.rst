@@ -15,6 +15,10 @@ formelsammlung
 |               +----------------------------------------------------------------------+
 |               | |gh_stars| |gh_forks| |gh_contributors| |gh_watchers|                |
 +---------------+----------------------------------------------------------------------+
+| **PyPI**      | |pypi_release| |pypi_py_versions| |pypi_implementations|             |
+|               +----------------------------------------------------------------------+
+|               | |pypi_status| |pypi_format| |pypi_downloads|                         |
++---------------+----------------------------------------------------------------------+
 
 
 Collection of different multipurpose functions.
@@ -132,3 +136,29 @@ but I cannot promise a quick response time.
 .. |gh_watchers| image:: https://img.shields.io/github/watchers/Cielquan/formelsammlung.svg?style=flat-square&logo=github
     :alt: Github - Watchers
     :target: https://github.com/Cielquan/formelsammlung/watchers
+
+
+.. PyPI
+.. |pypi_release| image:: https://img.shields.io/pypi/v/formelsammlung.svg?style=flat-square&logo=pypi&logoColor=FBE072
+    :alt: PyPI - Package latest release
+    :target: https://pypi.org/project/formelsammlung/
+
+.. |pypi_py_versions| image:: https://img.shields.io/pypi/pyversions/formelsammlung.svg?style=flat-square&logo=python&logoColor=FBE072
+    :alt: PyPI - Supported Python Versions
+    :target: https://pypi.org/project/formelsammlung/
+
+.. |pypi_implementations| image:: https://img.shields.io/pypi/implementation/formelsammlung.svg?style=flat-square&logo=python&logoColor=FBE072
+    :alt: PyPI - Supported Implementations
+    :target: https://pypi.org/project/formelsammlung/
+
+.. |pypi_status| image:: https://img.shields.io/pypi/status/formelsammlung.svg?style=flat-square&logo=pypi&logoColor=FBE072
+    :alt: PyPI - Stability
+    :target: https://pypi.org/project/formelsammlung/
+
+.. |pypi_format| image:: https://img.shields.io/pypi/format/formelsammlung.svg?style=flat-square&logo=pypi&logoColor=FBE072
+    :alt: PyPI - Format
+    :target: https://pypi.org/project/formelsammlung/
+
+.. |pypi_downloads| image:: https://img.shields.io/pypi/dm/formelsammlung.svg?style=flat-square&logo=pypi&logoColor=FBE072
+    :target: https://pypi.org/project/formelsammlung/
+    :alt: PyPI - Monthly downloads
