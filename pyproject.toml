@@ -13,7 +13,7 @@
     repository = "https://github.com/Cielquan/formelsammlung"
     documentation = "https://formelsammlung.readthedocs.io/en/stable/"
     readme = "README.rst"
-    classifies = [
+    classifiers = [
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
