@@ -118,7 +118,7 @@
         showcontent = true
 
     [[tool.towncrier.type]]
-        directory = "doc"
+        directory = "docs"
         name = "Documentation"
         showcontent = true
 
