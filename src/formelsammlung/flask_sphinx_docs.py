@@ -14,7 +14,26 @@ from flask import Flask, Response
 
 
 class SphinxDocServer:  # pylint: disable=R0903
-    """Serve your sphinx docs under `/docs/` on your own flask app."""
+    """Serve your sphinx docs under `/docs/` on your own flask app.
+
+    .. highlight:: python
+
+    You can either include the plugin directly::
+
+        app = Flask(__name__)
+        SphinxDocServer(app, doc_dir="../../docs/build/html")
+
+    or you can invoke it in your app factory::
+
+        sds = SphinxDocServer()
+
+        def create_app():
+            app = Flask(__name__)
+            sds.init_app(app, doc_dir="../../docs/build/html"))
+            return app
+
+    .. highlight:: default
+    """
 
     def __init__(self, app: Optional[Flask] = None, **kwargs) -> None:
         """Init SphinxDocServer."""

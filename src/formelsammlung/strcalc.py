@@ -92,6 +92,17 @@ def calculate_string(expression: str) -> Optional[NumberType]:
         - FloorDivision (:func:`operator.floordiv`) ``a // b``
         - Modulo (:func:`operator.mod`) ``a % b``
 
+    Example:
+
+    .. testsetup::
+
+        from formelsammlung.strcalc import calculate_string
+
+    .. doctest::
+
+        >>> calculate_string("(1+2)/3")
+        1.0
+
     :param expression: String with arithmetic expression.
     :return: Result or None
     """

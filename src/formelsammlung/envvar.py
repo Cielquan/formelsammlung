@@ -40,6 +40,23 @@ def getenv_typed(
     - :class:`float`
     - :class:`str` (fallback)
 
+    Example:
+
+    .. testsetup::
+
+        import os
+        from formelsammlung.envvar import getenv_typed
+
+    .. doctest::
+
+        >>> os.environ["TEST_ENV_VAR"] = "2"
+        >>> getenv_typed("TEST_ENV_VAR", 1, int)
+        2
+
+    .. testcleanup::
+
+        os.environ["TEST_ENV_VAR"] = ""
+
     :param var_name: Name of the environment variable.
     :param default: Default value if no value is found for ``var_name``.
         Default: ``None``.
