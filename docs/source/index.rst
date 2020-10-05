@@ -19,7 +19,7 @@ projects so I put them here.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    :caption: API Reference:
 
    api
