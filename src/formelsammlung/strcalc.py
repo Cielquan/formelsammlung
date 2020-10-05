@@ -75,9 +75,10 @@ def calculate_string(expression: str) -> Optional[NumberType]:
 
     .. warning::
         On PyPy3 only:
-        When working with :class:`complex` numbers containing :class:`float` numbers be
-        aware that the result of :func:`calculate_string` and the equivalent arithmetic
-        expression divert after the 10th decimal.
+        When working with :class:`complex` numbers containing or resulting with
+        :class:`float` numbers be aware that the result of :func:`calculate_string` and
+        the equivalent arithmetic expression can divert in the decimals. The result from
+        :func:`calculate_string` is then less precise.
 
     Supported mathematical operators:
 

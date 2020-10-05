@@ -39,32 +39,30 @@ def _rand_float_wo_0():
 def _rand_complex_w_0():
     """Return random positive complex number.
 
-    The number is made of floats for real and imag part.
+    The number is made of int for real and imag part.
     The imag part is randomly positive or negative.
     """
     if hasattr(sys, "pypy_version_info"):
         return complex(
-            f"{_rand_float_w_0():.10f}"
-            f"{random.choice(('+', '-'))}{_rand_float_w_0():.10f}j"
+            f"{_rand_int_w_0()}{random.choice(('+', '-'))}{_rand_int_w_0()}j"
         )
     return complex(
-        f"{_rand_float_w_0()}{random.choice(('+', '-'))}{_rand_float_w_0()}j"
+        f"{_rand_int_w_0()}{random.choice(('+', '-'))}{_rand_int_w_0()}j"
     )
 
 
 def _rand_complex_wo_0():
     """Return random positive complex number without zero.
 
-    The number is made of floats for real and imag part.
+    The number is made of ints for real and imag part.
     The imag part is randomly positive or negative.
     """
     if hasattr(sys, "pypy_version_info"):
         return complex(
-            f"{_rand_float_wo_0():.10f}"
-            f"{random.choice(('+', '-'))}{_rand_float_wo_0():.10f}j"
+            f"{_rand_int_wo_0()}{random.choice(('+', '-'))}{_rand_int_wo_0()}j"
         )
     return complex(
-        f"{_rand_float_wo_0()}{random.choice(('+', '-'))}{_rand_float_wo_0()}j"
+        f"{_rand_int_wo_0()}{random.choice(('+', '-'))}{_rand_int_wo_0()}j"
     )
 
 
