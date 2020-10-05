@@ -160,7 +160,10 @@ extensions.append("sphinx.ext.viewcode")
 
 #: Links
 extensions.append("sphinx.ext.intersphinx")
-intersphinx_mapping = {"python": ("https://docs.python.org/3/", None)}
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3/", None),
+    "flask": ("https://flask.palletsprojects.com/en/1.1.x/api/", "flask-inv.txt"),
+}
 
 extensions.append("sphinx.ext.extlinks")
 extlinks = {
