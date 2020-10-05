@@ -35,65 +35,8 @@ NOT_LOADED_MSGS = []
 YEAR = f"{date.today().year}"
 
 
-#: -- GLOB TYPES -----------------------------------------------------------------------
-EnvVarTypes = Union[str, int, float, bool, None]
-
-
 #: -- UTILS ----------------------------------------------------------------------------
 load_dotenv(find_dotenv())  #: Load .env file from project root
-
-
-def get_env_var(
-    var_name: str,
-    default: Any = None,
-    rv_type: type = str,
-    *,
-    raise_error_if_no_value: bool = False,
-    true_bool_values: Iterable = (1, "y", "yes", "t", True),
-    false_bool_values: Iterable = (0, "n", "no", "f", False),
-) -> EnvVarTypes:
-    """Wrap `os.getenv` to adjust the type of the values.
-
-    :param var_name: Name of the environment variable.
-    :param default: Default value if no value is found for :param var_name:.
-        Default is: `None`.
-    :param rv_type: Type the value of the environment variable should be changed into.
-        Default is: `str`.
-    :param raise_error_if_no_value: If `True` raises an `KeyError` when no value is
-        found for :param var_name: and :param default: is None.
-        Parameter is keyword only and defaults to: `False`.
-    :param true_bool_values: Iterable of objects whose string representations are
-        matched against the environment variable's value if the :param rv_type: is
-        `bool`. If a match is found `True` is returned.
-        Parameter is keyword only and defaults to: (1, "y", "yes", "t", True)
-    :param false_bool_values: Iterable of objects whose string representations are
-        matched against the environment variable's value if the :param rv_type: is
-        `bool`. If a match is found `False` is returned.
-        Parameter is keyword only and defaults to: (0, "n", "no", "f", False)
-    """
-    env_var = os.getenv(var_name, default)
-
-    if not env_var and default is None:
-        if raise_error_if_no_value:
-            raise KeyError(
-                f"Environment variable '{var_name}' not set or empty and no default."
-            ) from None
-        return None
-
-    if isinstance(rv_type, bool):
-        true_bool_values = set(true_bool_values)
-        false_bool_values = set(false_bool_values)
-        if str(env_var).casefold() in (str(b).casefold() for b in true_bool_values):
-            return True
-        if str(env_var).casefold() in (str(b).casefold() for b in false_bool_values):
-            return False
-        raise KeyError(
-            f"Environment variable '{var_name}' has an invalid boolean value.\n"
-            f"For true use any of: {true_bool_values}\n"
-            f"For false use any of: {false_bool_values}"
-        ) from None
-
-    return rv_type(env_var)
 
 
 #: -- PROJECT INFORMATION --------------------------------------------------------------
