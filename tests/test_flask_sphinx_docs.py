@@ -10,7 +10,7 @@
 """
 from flask import Flask
 
-from formelsammlung.flask_sphinx_docs import SphinxDocServer as SDS
+from formelsammlung.flask_sphinx_docs import SphinxDocServer
 
 
 def test_serving_direct_app(tmp_path):
@@ -21,7 +21,7 @@ def test_serving_direct_app(tmp_path):
     test_file.write_text("TEST_CONTENT")
 
     app = Flask(__name__)
-    SDS(app, doc_dir=str(test_dir))
+    SphinxDocServer(app, doc_dir=str(test_dir))
     client = app.test_client()
 
     resp = client.get("/docs/")
@@ -36,7 +36,7 @@ def test_serving_factory_app(tmp_path):
     test_file = test_dir / "index.html"
     test_file.write_text("TEST_CONTENT_2")
 
-    sds = SDS()
+    sds = SphinxDocServer()
 
     def _create_app():
         app = Flask(__name__)

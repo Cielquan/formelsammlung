@@ -13,7 +13,7 @@ from typing import Optional
 from flask import Flask
 
 
-class SphinxDocServer:
+class SphinxDocServer:  # pylint: disable=R0903
     """Serve your sphinx docs under `/docs/` on your own flask app."""
 
     def __init__(self, app: Optional[Flask] = None, **kwargs) -> None:
@@ -21,9 +21,8 @@ class SphinxDocServer:
         if app is not None:
             self.init_app(app, **kwargs)
 
-    def init_app(
-        self, app: Flask, doc_dir: str, index_file: str = "index.html"
-    ) -> None:
+    @staticmethod
+    def init_app(app: Flask, doc_dir: str, index_file: str = "index.html") -> None:
         """Add the `/docs/` route to the `app` object.
 
         :param app: Flask object to add the route to.
@@ -34,7 +33,7 @@ class SphinxDocServer:
 
         @app.route("/docs/", defaults={"filename": index_file})
         @app.route("/docs/<path:filename>")
-        def web_docs(filename):
+        def web_docs(filename):  # pylint: disable=W0612
             """Route the given doc page.
 
             :param filename: File name from URL
