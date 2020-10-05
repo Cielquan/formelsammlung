@@ -10,7 +10,7 @@
 """
 from typing import Optional
 
-from flask import Flask
+from flask import Flask, Response
 
 
 class SphinxDocServer:  # pylint: disable=R0903
@@ -33,7 +33,7 @@ class SphinxDocServer:  # pylint: disable=R0903
 
         @app.route("/docs/", defaults={"filename": index_file})
         @app.route("/docs/<path:filename>")
-        def web_docs(filename):  # pylint: disable=W0612
+        def web_docs(filename: str) -> Response:  # pylint: disable=W0612
             """Route the given doc page.
 
             :param filename: File name from URL
