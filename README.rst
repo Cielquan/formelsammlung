@@ -21,10 +21,20 @@ formelsammlung
 +---------------+----------------------------------------------------------------------+
 
 
-Collection of different multipurpose functions.
+**Collection of different multipurpose functions.**
 
 This library is a collection of different functions I developed which I use in different
 projects so I put them here.
+
+
+Functionality
+=============
+
+- ``getenv_typed()``: is a wrapper around ``os.getenv`` returning the value of the
+    environment variable in the correct python type.
+- ``calculate_string()``: takes an arithmetic expression as a string and calculates it.
+- ``SphinxDocServer``: is a flask plugin to serve the repository's docs build as HTML
+    (by sphinx).
 
 
 Prerequisites
