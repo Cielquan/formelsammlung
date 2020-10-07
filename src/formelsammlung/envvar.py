@@ -35,12 +35,12 @@ def getenv_typed(
 
     Guessable types are:
 
-    - :class:`bool`
-    - :class:`int`
-    - :class:`float`
-    - :class:`str` (fallback)
+        - :class:`bool`
+        - :class:`int`
+        - :class:`float`
+        - :class:`str` (fallback)
 
-    Example:
+    How to use:
 
     .. testsetup::
 

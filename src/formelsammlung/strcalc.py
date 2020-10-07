@@ -92,7 +92,7 @@ def calculate_string(expression: str) -> Optional[NumberType]:
         - FloorDivision (:func:`operator.floordiv`) ``a // b``
         - Modulo (:func:`operator.mod`) ``a % b``
 
-    Example:
+    How to use:
 
     .. testsetup::
 

@@ -46,9 +46,7 @@ def _rand_complex_w_0():
         return complex(
             f"{_rand_int_w_0()}{random.choice(('+', '-'))}{_rand_int_w_0()}j"
         )
-    return complex(
-        f"{_rand_int_w_0()}{random.choice(('+', '-'))}{_rand_int_w_0()}j"
-    )
+    return complex(f"{_rand_int_w_0()}{random.choice(('+', '-'))}{_rand_int_w_0()}j")
 
 
 def _rand_complex_wo_0():
@@ -61,9 +59,7 @@ def _rand_complex_wo_0():
         return complex(
             f"{_rand_int_wo_0()}{random.choice(('+', '-'))}{_rand_int_wo_0()}j"
         )
-    return complex(
-        f"{_rand_int_wo_0()}{random.choice(('+', '-'))}{_rand_int_wo_0()}j"
-    )
+    return complex(f"{_rand_int_wo_0()}{random.choice(('+', '-'))}{_rand_int_wo_0()}j")
 
 
 @pytest.mark.parametrize(
