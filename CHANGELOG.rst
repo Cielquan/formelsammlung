@@ -9,6 +9,26 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v0.2.1 (2020-10-07)
+-------------------
+
+Bugfixes
+~~~~~~~~
+
+- Removed redundant dependency python-dotenv.
+  `#12 <https://github.com/Cielquan/formelsammlung/issues/12>`_
+
+
+Documentation
+~~~~~~~~~~~~~
+
+- Added instruction for creating a venv to install the packge into to ``installation`` docs.
+  `#13 <https://github.com/Cielquan/formelsammlung/issues/13>`_
+
+
+----
+
+
 v0.2.0 (2020-10-06)
 -------------------
 
