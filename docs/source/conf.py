@@ -20,8 +20,6 @@ from typing import List
 
 import sphinx_rtd_theme  # type: ignore[import]
 
-from dotenv import find_dotenv, load_dotenv
-
 from formelsammlung import __version__
 
 
@@ -33,10 +31,6 @@ sys.path.insert(0, str(Path(__file__).parents[2]))  #: Add Repo to PATH
 CONF_DIR = Path(__file__)
 NOT_LOADED_MSGS = []
 YEAR = f"{date.today().year}"
-
-
-#: -- UTILS ----------------------------------------------------------------------------
-load_dotenv(find_dotenv())  #: Load .env file from project root
 
 
 #: -- PROJECT INFORMATION --------------------------------------------------------------
