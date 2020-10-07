@@ -92,6 +92,7 @@ extensions.append("sphinx.ext.doctest")  #: sphinx-build -b doctest ...
 #: ReStructuredText
 extensions.append("sphinx.ext.autosectionlabel")
 autosectionlabel_prefix_document = True
+autosectionlabel_maxdepth = 2
 extensions.append("sphinx.ext.ifconfig")
 extensions.append("sphinx.ext.viewcode")
 
