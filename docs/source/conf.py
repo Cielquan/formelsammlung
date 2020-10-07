@@ -105,8 +105,8 @@ intersphinx_mapping = {
 
 extensions.append("sphinx.ext.extlinks")
 extlinks = {
-    "issue": ("https://github.com/Cielquan/formelsammlung/issues/%s", "#"),  # CHANGE ME
-    "pull": ("https://github.com/Cielquan/formelsammlung/pull/%s", "pr"),  # CHANGE ME
+    "issue": ("https://github.com/Cielquan/formelsammlung/issues/%s", "#"),
+    "pull": ("https://github.com/Cielquan/formelsammlung/pull/%s", "pr"),
     "user": ("https://github.com/%s", "@"),
 }
 
