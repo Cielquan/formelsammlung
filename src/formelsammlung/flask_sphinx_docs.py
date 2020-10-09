@@ -66,7 +66,7 @@ class SphinxDocServer:  # pylint: disable=R0903
             :param filename: File name from URL
             :return: Requested doc page
             """
-            app.static_folder = doc_dir or self._find_build_docs(app.root_path)
+            app.static_folder = doc_dir or self._find_build_docs(app.root_path or "")
             doc_file = app.send_static_file(filename)
             app.static_folder = "static"
             return doc_file
@@ -77,11 +77,16 @@ class SphinxDocServer:  # pylint: disable=R0903
 
         :param app_root: Root directory of the app.
         :param steps_up_the_tree: Amount of steps to go up the file tree, defaults to 3
+        :raises IOError: if no root dir path for the app is given.
         :raises IOError: if no 'doc' or 'docs' directory is found.
-        :raises IOError: if no '_build' or 'build' directory is found in the doc/docs dir.
+        :raises IOError: if no '_build' or 'build' directory is found in the
+            doc/docs dir.
         :raises IOError: if no 'html' directory is found in the _build/build dir.
         :return: Path to directory holding the build sphinx docs.
         """
+        if not app_root:
+            raise OSError("Got no root dir for the flask app to start search.")
+
         check_dir = file_dir = Path(app_root).parent
 
         #: Search doc(s) dir up the tree
@@ -98,7 +103,7 @@ class SphinxDocServer:  # pylint: disable=R0903
             check_dir = file_dir.parents[i]
 
         if not doc_dir:
-            raise IOError("No 'doc' or 'docs' directory found.")
+            raise OSError("No 'doc' or 'docs' directory found.")
 
         #: search for (_)build dir
         build_dir = None
@@ -108,15 +113,15 @@ class SphinxDocServer:  # pylint: disable=R0903
             build_dir = doc_dir / "build"
 
         if not build_dir:
-            raise IOError(
-                f"No '_build' or 'build' directory found in {doc_dir}."
+            raise OSError(
+                f"No '_build' or 'build' directory found in {doc_dir}. "
                 "Maybe you forgot to build the docs."
             )
 
         #: check for html dir
-        if Path("html") in build_dir.iterdir():
+        if (build_dir / "html").is_dir():
             return build_dir / "html"
-        raise IOError(
-            f"No 'html' directory found in {build_dir}."
+        raise OSError(
+            f"No 'html' directory found in {build_dir}. "
             "Maybe you forgot to build the HTML docs."
         )

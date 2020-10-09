@@ -8,9 +8,11 @@
     :copyright: (c) Christian Riedel
     :license: GPLv3
 """
+# pylint: disable=W0212
 from pathlib import Path
 
 import pytest
+
 from flask import Flask
 
 from formelsammlung.flask_sphinx_docs import SphinxDocServer
@@ -70,7 +72,16 @@ def test_custom_index_file(tmp_path):
     assert resp.data.decode() == "TEST_CONTENT"
 
 
-def doc_dir_guessing_option_1(tmp_path, monkeypatch):
+def test_no_app_root():
+    """Test error when no app root dir is given."""
+    with pytest.raises(OSError, match="Got no root dir"):
+        SphinxDocServer._find_build_docs("")
+
+
+@pytest.mark.parametrize(
+    ("doc_dir_name", "build_dir_name"), [("doc", "_build"), ("docs", "build")]
+)
+def test_doc_dir_guessing_option_1(doc_dir_name, build_dir_name, tmp_path, monkeypatch):
     """Test guessing of doc dir with 'doc/_build'."""
     test_repo = tmp_path / "testrepo"
     test_repo.mkdir()
@@ -80,63 +91,22 @@ def doc_dir_guessing_option_1(tmp_path, monkeypatch):
 
     monkeypatch.setattr(Path, "parent", py_code_dir)
 
-    with pytest.raises(IOError) as excinfo:
-        SphinxDocServer._find_build_docs("")
-        assert "No 'doc' or 'docs'" in str(excinfo.value)
+    with pytest.raises(OSError, match="No 'doc' or 'docs'"):
+        SphinxDocServer._find_build_docs("fake_app_root")
 
-    doc_dir = test_repo / "doc"
+    doc_dir = test_repo / doc_dir_name
     doc_dir.mkdir()
 
-    for child in doc_dir.iterdir(): print(child)
+    with pytest.raises(OSError, match="No '_build' or 'build'"):
+        SphinxDocServer._find_build_docs("fake_app_root")
 
-    with pytest.raises(IOError) as excinfo:
-        SphinxDocServer._find_build_docs("")
-        assert "No '_build' or 'build'" in str(excinfo.value)
-
-    build_dir = doc_dir / "_build"
+    build_dir = doc_dir / build_dir_name
     build_dir.mkdir()
 
-    with pytest.raises(IOError) as excinfo:
-        SphinxDocServer._find_build_docs("")
-        assert "No 'html'" in str(excinfo.value)
+    with pytest.raises(OSError, match="No 'html'"):
+        SphinxDocServer._find_build_docs("fake_app_root")
 
     html_dir = build_dir / "html"
     html_dir.mkdir()
 
-    assert SphinxDocServer._find_build_docs("") == html_dir
-
-
-def doc_dir_guessing_option_2(tmp_path, monkeypatch):
-    """Test guessing of doc dir with 'docs/build'."""
-    test_repo = tmp_path / "testrepo"
-    test_repo.mkdir()
-
-    py_code_dir = test_repo / "src" / "testrepo"
-    py_code_dir.mkdir(parents=True)
-
-    monkeypatch.setattr(Path, "parent", py_code_dir)
-
-    with pytest.raises(IOError) as excinfo:
-        SphinxDocServer._find_build_docs("")
-        assert "No 'doc' or 'docs'" in str(excinfo.value)
-
-    doc_dir = test_repo / "docs"
-    doc_dir.mkdir()
-
-    for child in doc_dir.iterdir(): print(child)
-
-    with pytest.raises(IOError) as excinfo:
-        SphinxDocServer._find_build_docs("")
-        assert "No '_build' or 'build'" in str(excinfo.value)
-
-    build_dir = doc_dir / "build"
-    build_dir.mkdir()
-
-    with pytest.raises(IOError) as excinfo:
-        SphinxDocServer._find_build_docs("")
-        assert "No 'html'" in str(excinfo.value)
-
-    html_dir = build_dir / "html"
-    html_dir.mkdir()
-
-    assert SphinxDocServer._find_build_docs("") == html_dir
+    assert SphinxDocServer._find_build_docs("fake_app_root") == html_dir
