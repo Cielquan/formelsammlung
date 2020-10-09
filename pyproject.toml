@@ -6,7 +6,7 @@
 #: -- POETRY CONFIG --------------------------------------------------------------------
 [tool.poetry]
     name = "formelsammlung"
-    version = "0.2.1"
+    version = "0.3.0"
     description = "Collection of different functions"
     authors = ["Cielquan <cielquan@protonmail.com>"]
     license = "GPL-3.0-or-later"

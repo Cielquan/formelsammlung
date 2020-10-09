@@ -9,6 +9,19 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v0.3.0 (2020-10-09)
+-------------------
+
+New Features
+~~~~~~~~~~~~
+
+- Added autodetection for sphinx doc dir for `SphinxDocServer`.
+  `#14 <https://github.com/Cielquan/formelsammlung/issues/14>`_
+
+
+----
+
+
 v0.2.1 (2020-10-07)
 -------------------
 
