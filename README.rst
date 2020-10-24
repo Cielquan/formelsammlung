@@ -30,11 +30,9 @@ projects so I put them here.
 Functionality
 =============
 
-- ``getenv_typed()``: is a wrapper around ``os.getenv`` returning the value of the
-    environment variable in the correct python type.
+- ``getenv_typed()``: is a wrapper around ``os.getenv`` returning the value of the environment variable in the correct python type.
 - ``calculate_string()``: takes an arithmetic expression as a string and calculates it.
-- ``SphinxDocServer``: is a flask plugin to serve the repository's docs build as HTML
-    (by sphinx).
+- ``SphinxDocServer``: is a flask plugin to serve the repository's docs build as HTML (by sphinx). Needs ``flask`` extra to be also installed to work.
 
 
 Prerequisites
