@@ -7,6 +7,33 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v0.3.1 (2020-10-24)
+-------------------
+
+Bugfixes
+~~~~~~~~
+
+- Put `pytest-flask` into `testing` extra, put `flask` into `flask` extra.
+  `#16 <https://github.com/Cielquan/formelsammlung/issues/16>`_
+
+
+Documentation
+~~~~~~~~~~~~~
+
+- Removed old "commit mentioning" passage from changelog.
+  `#15 <https://github.com/Cielquan/formelsammlung/issues/15>`_
+
+
+Miscellaneous
+~~~~~~~~~~~~~
+
+- Update `flake8-eradicate` to 1.0 in pre-commit.
+  `#6 <https://github.com/Cielquan/formelsammlung/issues/6>`_
+
+
+----
+
+
 v0.3.0 (2020-10-09)
 -------------------
 
