@@ -82,6 +82,9 @@
         pre-commit = ["pre-commit", "mypy", "pylint"]
         flask = ["flask"]
 
+    [tool.poetry.scripts]
+        tox_env_exe_runner = 'formelsammlung.tox_env_exe_runner:cli_caller'
+
 
 #: -- TOWNCRIER CONFIG -----------------------------------------------------------------
 [tool.towncrier]
