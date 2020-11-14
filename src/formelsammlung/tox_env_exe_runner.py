@@ -22,7 +22,7 @@ def tox_env_exe_runner(
     :param tool: Name of the executable to run.
     :param envs: List of tox environments to search the ``tool`` in.
     :param tool_args: Arguments to give to the ``tool``.
-    :return: Exit code 1 if no executable is found or the exit code of the called cmd.
+    :return: Exit code 127 if no executable is found or the exit code of the called cmd.
     """
     is_win = sys.platform == "win32"
 
@@ -42,7 +42,7 @@ def tox_env_exe_runner(
             f"No '{tool}' executable found. Make sure one of the "
             f"following `tox` envs is accessible: {envs}"
         )
-        return 1
+        return 127
 
     return subprocess.call(cmd)  # nosec
 
@@ -61,7 +61,9 @@ def cli_caller() -> int:
 
     :return: Exit code from ``tox_env_exe_runner``
     """
-    return tox_env_exe_runner(sys.argv[1], sys.argv[2].split(","), sys.argv[3:])
+    return tox_env_exe_runner(
+        sys.argv[1], sys.argv[2].split(","), sys.argv[3:]
+    )  # pragma: no cover
 
 
 if __name__ == "__main__":
