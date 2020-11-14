@@ -53,9 +53,10 @@ def cli_caller() -> int:
     Script to call executables in `tox` envs considering OS.
 
     The script takes two mandatory arguments:
+
     1. The executable to call like e.g. `pylint`.
     2. A string with comma separated `tox` envs to check for the executable.
-        The envs are checked in given order.
+       The envs are checked in given order.
 
     All other arguments after are passed to the tool on call.
 
