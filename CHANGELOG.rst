@@ -7,6 +7,31 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v0.4.0 (2020-11-14)
+-------------------
+
+New Features
+~~~~~~~~~~~~
+
+- Added tox_env_exe_runner with wrapper to call it from cli.
+  `#17 <https://github.com/Cielquan/formelsammlung/issues/17>`_
+
+
+----
+
+
+v0.3.2 (2020-11-13)
+-------------------
+
+Miscellaneous
+~~~~~~~~~~~~~
+
+- Broaden importlib-metadata version dependency
+
+
+----
+
+
 v0.3.1 (2020-10-24)
 -------------------
 
