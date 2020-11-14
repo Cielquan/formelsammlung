@@ -15,6 +15,7 @@ python:
       path: .
       extra_requirements:
         - docs
+        - flask
 
 sphinx:
   configuration: docs/source/conf.py
