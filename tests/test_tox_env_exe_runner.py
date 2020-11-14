@@ -8,12 +8,9 @@
     :copyright: (c) Christian Riedel
     :license: GPLv3
 """
-import random
-import sys
 import subprocess
-from pathlib import Path
 
-import pytest
+from pathlib import Path
 
 from formelsammlung.tox_env_exe_runner import tox_env_exe_runner as runner
 
