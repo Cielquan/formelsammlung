@@ -7,6 +7,19 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v1.0.0 (2020-11-21)
+-------------------
+
+Breaking Changes
+~~~~~~~~~~~~~~~~
+
+- Renamed ``tox_env_exe_runner`` to ``env_exe_runner`` adn added ``runner`` argument
+  on 2nd place, which takes either `tox` or `nox`. With this both runner are supported.
+
+
+----
+
+
 v0.4.0 (2020-11-14)
 -------------------
 

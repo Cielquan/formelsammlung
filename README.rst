@@ -33,7 +33,7 @@ Functionality
 - ``getenv_typed()``: is a wrapper around ``os.getenv`` returning the value of the environment variable in the correct python type.
 - ``calculate_string()``: takes an arithmetic expression as a string and calculates it.
 - ``SphinxDocServer``: is a flask plugin to serve the repository's docs build as HTML (by sphinx). Needs ``flask`` extra to be also installed to work.
-- ``tox_env_exe_runner()``: is a function to call a given ``tool`` from the first tox environments that has it installed in a list of tx environments.
+- ``env_exe_runner()``: is a function to call a given ``tool`` from the first tox/nox environments that has it installed in a list of tox/nox environments.
 
 
 Prerequisites
