@@ -83,7 +83,7 @@
         flask = ["flask"]
 
     [tool.poetry.scripts]
-        tox_env_exe_runner = 'formelsammlung.tox_env_exe_runner:cli_caller'
+        env_exe_runner = 'formelsammlung.env_exe_runner:cli_caller'
 
 
 #: -- TOWNCRIER CONFIG -----------------------------------------------------------------

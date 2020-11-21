@@ -14,16 +14,21 @@ from pathlib import Path
 from typing import List, Optional
 
 
-def tox_env_exe_runner(
-    tool: str, envs: List[str], tool_args: Optional[List[str]] = None
+def env_exe_runner(
+    runner: str, envs: List[str], tool: str, tool_args: Optional[List[str]] = None
 ) -> int:
-    """Call given ``tool`` from given ``tox`` env considering OS.
+    """Call given ``tool`` from given ``tox`` or ``nox`` env considering OS.
 
+    :param runner: 'nox' or 'tox'
+    :param envs: List of environments to search the ``tool`` in.
     :param tool: Name of the executable to run.
-    :param envs: List of tox environments to search the ``tool`` in.
     :param tool_args: Arguments to give to the ``tool``.
     :return: Exit code 127 if no executable is found or the exit code of the called cmd.
     """
+    if runner not in ("tox", "nox"):
+        print("No valid runner was given. Choose either 'tox' or 'nox'.")
+        return 127
+
     is_win = sys.platform == "win32"
 
     exe = Path(f"Scripts/{tool}.exe") if is_win else Path(f"bin/{tool}")
@@ -33,14 +38,14 @@ def tox_env_exe_runner(
         tool_args = []
 
     for env in envs:
-        path = Path(".tox") / env / exe
+        path = Path(f".{runner}") / env / exe
         if path.is_file():
             cmd = (str(path), *tool_args)
 
     if cmd is None:
         print(
             f"No '{tool}' executable found. Make sure one of the "
-            f"following `tox` envs is accessible: {envs}"
+            f"following `{runner}` envs is accessible: {envs}"
         )
         return 127
 
@@ -48,22 +53,23 @@ def tox_env_exe_runner(
 
 
 def cli_caller() -> int:
-    """Warp ``tox_env_exe_runner`` to be callable by cli.
+    """Warp ``env_exe_runner`` to be callable by cli.
 
-    Script to call executables in `tox` envs considering OS.
+    Script to call executables in `tox`/`nox` envs considering OS.
 
     The script takes two mandatory arguments:
 
-    1. The executable to call like e.g. `pylint`.
-    2. A string with comma separated `tox` envs to check for the executable.
+    1. The runner managing the env: `tox` or `nox`.
+    2. A string with comma separated `tox`/`nox` envs to check for the executable.
        The envs are checked in given order.
+    3. The executable to call like e.g. `pylint`.
 
     All other arguments after are passed to the tool on call.
 
-    :return: Exit code from ``tox_env_exe_runner``
+    :return: Exit code from ``env_exe_runner``
     """
-    return tox_env_exe_runner(
-        sys.argv[1], sys.argv[2].split(","), sys.argv[3:]
+    return env_exe_runner(
+        sys.argv[1], sys.argv[2].split(","), sys.argv[3], sys.argv[4:]
     )  # pragma: no cover
 
 
