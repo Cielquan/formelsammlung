@@ -1,9 +1,9 @@
 # noqa: D205,D208,D400
 """
     tests.test_tox_env_exe_runner
-    ~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Tests for test_tox_env_exe_runner.py.
+    Tests for tox_env_exe_runner.py.
 
     :copyright: (c) Christian Riedel
     :license: GPLv3
