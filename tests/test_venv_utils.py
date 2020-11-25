@@ -10,6 +10,7 @@
 import os
 import shutil
 import sys
+
 import formelsammlung.venv_utils as vu
 
 
@@ -40,7 +41,7 @@ def test_get_venv_path_no_venv(monkeypatch):
 
     result = vu.get_venv_path()
 
-    assert result == None
+    assert result is None
 
 
 def test_get_venv_site_packages_dir(tmp_path):
@@ -87,7 +88,7 @@ def test_where_installed_only_venv(tmp_path, monkeypatch):
 
 def test_where_installed_only_global_no_venv(tmp_path, monkeypatch):
     """Test where_installed with only global existing program and no venv."""
-    monkeypatch.setattr(vu, "get_venv_path", lambda : None)
+    monkeypatch.setattr(vu, "get_venv_path", lambda: None)
 
     fake_glob_bin = tmp_path / "bin"
     fake_glob_bin.mkdir()
