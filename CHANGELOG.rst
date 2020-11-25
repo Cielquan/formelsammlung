@@ -7,6 +7,18 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v1.1.0 (2020-11-25)
+-------------------
+
+New Features
+~~~~~~~~~~~~
+
+- Added ``venv_utils`` module.
+
+
+----
+
+
 v1.0.0 (2020-11-21)
 -------------------
 

@@ -34,6 +34,9 @@ Functionality
 - ``calculate_string()``: takes an arithmetic expression as a string and calculates it.
 - ``SphinxDocServer``: is a flask plugin to serve the repository's docs build as HTML (by sphinx). Needs ``flask`` extra to be also installed to work.
 - ``env_exe_runner()``: is a function to call a given ``tool`` from the first tox/nox environments that has it installed in a list of tox/nox environments.
+- ``get_venv_path()``: is a function to get the path to the current venv.
+- ``get_venv_site_packages_dir()``: is a function to get the path to the site-packages dir of a given venv.
+- ``where_installed()``: is a function to find the installation places in and outside a venv.
 
 
 Prerequisites
