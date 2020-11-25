@@ -49,6 +49,7 @@ def where_installed(program: str) -> Tuple[int, Optional[str], Optional[str]]:
     - 2 = global
     - 3 = both
 
+    :param program: Program to search
     :return: Exit code, venv executable path, glob executable path
     """
     exit_code = 0
