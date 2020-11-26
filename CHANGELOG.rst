@@ -7,6 +7,18 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v1.2.0 (2020-11-26)
+-------------------
+
+New Features
+~~~~~~~~~~~~
+
+- ``env_exe_runner`` now takes a list of runners which can also be a venv.
+
+
+----
+
+
 v1.1.0 (2020-11-25)
 -------------------
 
