@@ -22,9 +22,11 @@ def env_exe_runner(  # pylint: disable=R0912
 ) -> int:
     """Call given ``tool`` from given `tox` or `nox` or `virtual` env considering OS.
 
-    :param venv_runner: 'nox' and/or 'tox' and/or a 'virtual environment'
+    :param venv_runner: List containing: 'nox' and/or 'tox' and/or one or more
+        'virtual environment's
     :param envs: List of environments to search the ``tool`` in when 'tox' or 'nox' is
-        in venv_runner.
+        in venv_runner. If neither 'tox' nor 'nox' is in ``venv_runner`` you may pass
+        an empty list.
     :param tool: Name of the executable to run.
     :param tool_args: Arguments to give to the ``tool``.
     :return: Exit code 127 if no executable is found or the exit code of the called cmd.
@@ -68,13 +70,13 @@ def env_exe_runner(  # pylint: disable=R0912
 def cli_caller() -> int:
     """Warp ``env_exe_runner`` to be callable by cli.
 
-    Script to call executables in `tox`/`nox` envs considering OS.
+    Script to call executables in `tox`/`nox`/`virtual` envs considering OS.
 
-    The script takes two mandatory arguments:
+    The script takes three mandatory arguments:
 
-    1. The runner managing the env: `tox` or `nox`.
+    1. A string with comma separated runner (`tox` and/or `nox`) and/or virtual envs.
     2. A string with comma separated `tox`/`nox` envs to check for the executable.
-       The envs are checked in given order.
+       The envs are checked in given order and will only be considered for `tox`/`nox`.
     3. The executable to call like e.g. `pylint`.
 
     All other arguments after are passed to the tool on call.
