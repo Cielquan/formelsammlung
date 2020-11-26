@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import List, Optional
 
 
-def env_exe_runner(  # pylint: disable=R0912
+def env_exe_runner(
     venv_runner: List[str],
     envs: List[str],
     tool: str,
@@ -56,10 +56,8 @@ def env_exe_runner(  # pylint: disable=R0912
     if cmd is None:
         print(f"No '{tool}' executable found. Search in:")
         for runner in venv_runner:
-            if runner == "tox":
-                print(f"- 'tox' envs: {envs}")
-            elif runner == "nox":
-                print(f"- 'nox' envs: {envs}")
+            if runner in ("tox", "nox"):
+                print(f"- '{runner}' envs: {envs}")
             else:
                 print(f"- virtual env: ['{runner}']")
         return 127
@@ -76,7 +74,8 @@ def cli_caller() -> int:
 
     1. A string with comma separated runner (`tox` and/or `nox`) and/or virtual envs.
     2. A string with comma separated `tox`/`nox` envs to check for the executable.
-       The envs are checked in given order and will only be considered for `tox`/`nox`.
+       The envs are checked in given order. If `tox`/`nox` are not part of the first arg
+       you may pass a '-' as second arg.
     3. The executable to call like e.g. `pylint`.
 
     All other arguments after are passed to the tool on call.
