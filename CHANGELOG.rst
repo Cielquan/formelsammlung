@@ -7,6 +7,20 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v3.0.0 (2020-12-07)
+-------------------
+
+Breaking Changes
+~~~~~~~~~~~~~~~~
+
+- ``get_venv_path``, ``get_venv_bin_dir``, ``get_venv_tmp_dir`` and
+  ``get_venv_site_packages_dir`` now always raise ``FileNotFoundError`` when a venv or
+  the corresponding directory could not be found. Removed the ``raises_error`` parameter.
+
+
+----
+
+
 v2.0.0 (2020-12-07)
 -------------------
 
