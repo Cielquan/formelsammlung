@@ -39,23 +39,13 @@ def test_get_venv_path_w_prefix(monkeypatch):
     assert result == Path("path-to-venv-via-prefix")
 
 
-def test_get_venv_path_no_venv(monkeypatch):
-    """Test get_venv_path return when no venv is used."""
-    monkeypatch.delattr(sys, "real_prefix", raising=False)
-    monkeypatch.setattr(sys, "prefix", sys.base_prefix)
-
-    result = vu.get_venv_path()
-
-    assert result is None
-
-
 def test_get_venv_path_raise(monkeypatch):
-    """Test get_venv_path raising exception if raise_error is True."""
+    """Test get_venv_path raising exception on no found venv."""
     monkeypatch.delattr(sys, "real_prefix", raising=False)
     monkeypatch.setattr(sys, "prefix", sys.base_prefix)
 
     with pytest.raises(FileNotFoundError) as excinfo:
-        vu.get_venv_path(raise_error=True)
+        vu.get_venv_path()
     assert "No calling venv could" in str(excinfo.value)
 
 
@@ -71,23 +61,13 @@ def test_get_venv_bin_dir(tmp_path):
     assert result == bin_dir
 
 
-def test_get_venv_bin_dir_no_found(tmp_path):
-    """Test get_venv_bin_dir return when no bin/Scripts dir is found."""
-    fake_venv = tmp_path / ".venv"
-    fake_venv.mkdir(parents=True)
-
-    result = vu.get_venv_bin_dir(fake_venv)
-
-    assert result is None
-
-
 def test_get_venv_bin_dir_raise(tmp_path):
-    """Test get_venv_bin_dir raising exception if raise_error is True."""
+    """Test get_venv_bin_dir raising exception on no found dir."""
     fake_venv = tmp_path / ".venv"
     fake_venv.mkdir(parents=True)
 
     with pytest.raises(FileNotFoundError) as excinfo:
-        vu.get_venv_bin_dir(fake_venv, raise_error=True)
+        vu.get_venv_bin_dir(fake_venv)
     assert "Given venv has no" in str(excinfo.value)
 
 
@@ -114,23 +94,13 @@ def test_get_venv_temp_dir(tmp_path):
     assert result == tmp_dir
 
 
-def test_get_venv_tmp_dir_no_found(tmp_path):
-    """Test get_venv_tmp_dir return when no temp/temp dir is found."""
-    fake_venv = tmp_path / ".venv"
-    fake_venv.mkdir(parents=True)
-
-    result = vu.get_venv_tmp_dir(fake_venv)
-
-    assert result is None
-
-
 def test_get_venv_tmp_dir_raise(tmp_path):
-    """Test get_venv_tmp_dir raising exception if raise_error is True."""
+    """Test get_venv_tmp_dir raising exception on no found dir."""
     fake_venv = tmp_path / ".venv"
     fake_venv.mkdir(parents=True)
 
     with pytest.raises(FileNotFoundError) as excinfo:
-        vu.get_venv_tmp_dir(fake_venv, raise_error=True)
+        vu.get_venv_tmp_dir(fake_venv)
     assert "Given venv has no" in str(excinfo.value)
 
 
@@ -146,23 +116,13 @@ def test_get_venv_site_packages_dir(tmp_path):
     assert result == site_pkg_dir
 
 
-def test_get_venv_site_packages_dir_no_found(tmp_path):
-    """Test get_venv_site_packages_dir return when no site-packages dir is found."""
-    fake_venv = tmp_path / ".venv"
-    fake_venv.mkdir(parents=True)
-
-    result = vu.get_venv_site_packages_dir(fake_venv)
-
-    assert result is None
-
-
 def test_get_venv_site_packages_dir_raise(tmp_path):
-    """Test get_venv_site_packages_dir raising exception if raise_error is True."""
+    """Test get_venv_site_packages_dir raising exception on no found dir."""
     fake_venv = tmp_path / ".venv"
     fake_venv.mkdir(parents=True)
 
     with pytest.raises(FileNotFoundError) as excinfo:
-        vu.get_venv_site_packages_dir(fake_venv, raise_error=True)
+        vu.get_venv_site_packages_dir(fake_venv)
     assert "Given venv has no" in str(excinfo.value)
 
 

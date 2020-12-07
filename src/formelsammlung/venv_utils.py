@@ -18,82 +18,63 @@ from typing import Optional, Tuple, Union
 OS_BIN = "Scripts" if sys.platform == "win32" else "bin"
 
 
-def get_venv_path(raise_error: bool = False) -> Optional[Path]:
+def get_venv_path() -> Path:
     """Get path to the venv from where the python executable runs.
 
-    :param raise_error: raise FileNotFoundError if no venv is detected.
-        Default: ``False``
     :raises FileNotFoundError: when no calling venv can be detected.
-    :return: Return venv path or None if python is not called from a venv.
+    :return: Return venv path
     """
     if hasattr(sys, "real_prefix"):
         return Path(sys.real_prefix)  # type: ignore[no-any-return,attr-defined] # pylint: disable=E1101
     if sys.base_prefix != sys.prefix:
         return Path(sys.prefix)
-    if raise_error:
-        raise FileNotFoundError("No calling venv could be detected.")
-    return None
+    raise FileNotFoundError("No calling venv could be detected.")
 
 
-def get_venv_bin_dir(
-    venv_path: Union[str, Path], raise_error: bool = False
-) -> Optional[Path]:
+def get_venv_bin_dir(venv_path: Union[str, Path]) -> Path:
     """Return path to bin/Scripts dir of given venv.
 
     :param venv_path: Path to venv
-    :param raise_error: raise FileNotFoundError if no bin/Scripts dir is found.
-        Default: ``False``
     :raises FileNotFoundError: when no bin/Scripts dir can be found for given venv.
-    :return: Path to bin/Scripts dir or None
+    :return: Path to bin/Scripts dir
     """
     bin_dir = Path(venv_path) / OS_BIN
+    if bin_dir.is_dir():
+        return bin_dir
 
-    if not bin_dir.is_dir():
-        if raise_error:
-            raise FileNotFoundError(f"Given venv has no '{OS_BIN}' directory.")
-        return None
-    return bin_dir
+    raise FileNotFoundError(f"Given venv has no '{OS_BIN}' directory.")
 
 
-def get_venv_tmp_dir(
-    venv_path: Union[str, Path], raise_error: bool = False
-) -> Optional[Path]:
+def get_venv_tmp_dir(venv_path: Union[str, Path]) -> Path:
     """Return path to tmp/temp dir of given venv.
 
     :param venv_path: Path to venv
-    :param raise_error: raise FileNotFoundError if no tmp/temp dir is found.
-        Default: ``False``
     :raises FileNotFoundError: when no tmp/temp dir can be found for given venv.
-    :return: Path to tmp/temp dir or None
+    :return: Path to tmp/temp dir
     """
     tmp_dir = Path(venv_path) / "tmp"
-    if not tmp_dir.is_dir():
-        tmp_dir = Path(venv_path) / "temp"
-        if not tmp_dir.is_dir():
-            if raise_error:
-                raise FileNotFoundError("Given venv has no 'tmp' or 'temp' directory.")
-            return None
-    return tmp_dir
+    if tmp_dir.is_dir():
+        return tmp_dir
+
+    tmp_dir = Path(venv_path) / "temp"
+    if tmp_dir.is_dir():
+        return tmp_dir
+
+    raise FileNotFoundError("Given venv has no 'tmp' or 'temp' directory.")
 
 
-def get_venv_site_packages_dir(
-    venv_path: Union[str, Path], raise_error: bool = False
-) -> Optional[Path]:
+def get_venv_site_packages_dir(venv_path: Union[str, Path]) -> Path:
     """Return path to site-packages dir of given venv.
 
     :param venv_path: Path to venv
-    :param raise_error: raise FileNotFoundError if no site-packages dir is found.
-        Default: ``False``
     :raises FileNotFoundError: when no site-packages dir can be found for given venv.
-    :return: Path to site-packages dir or None
+    :return: Path to site-packages dir
     """
     paths = list(Path(venv_path).glob("**/site-packages"))
+    if paths:
+        return paths[0]
 
-    if not paths:
-        if raise_error:
-            raise FileNotFoundError("Given venv has no 'site-packages' directory.")
-        return None
-    return paths[0]
+    raise FileNotFoundError("Given venv has no 'site-packages' directory.")
 
 
 def where_installed(program: str) -> Tuple[int, Optional[str], Optional[str]]:
