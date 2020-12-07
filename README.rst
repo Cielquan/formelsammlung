@@ -35,6 +35,8 @@ Functionality
 - ``SphinxDocServer``: is a flask plugin to serve the repository's docs build as HTML (by sphinx). Needs ``flask`` extra to be also installed to work.
 - ``env_exe_runner()``: is a function to call a given ``tool`` from the first venv/tox/nox environment that has it installed in a list of venv/tox/nox environments.
 - ``get_venv_path()``: is a function to get the path to the current venv.
+- ``get_venv_bin_dir()``: is a function to get the path to the bin/Scripts dir of a given venv.
+- ``get_venv_tmp_dir()``: is a function to get the path to the tmp/temp dir of a given venv.
 - ``get_venv_site_packages_dir()``: is a function to get the path to the site-packages dir of a given venv.
 - ``where_installed()``: is a function to find the installation places in and outside a venv.
 
