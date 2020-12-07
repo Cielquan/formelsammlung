@@ -7,6 +7,24 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v2.0.0 (2020-12-07)
+-------------------
+
+New Features
+~~~~~~~~~~~~
+
+- Added ``get_venv_bin_dir`` and ``get_venv_tmp_dir`` functions.
+
+
+Breaking Changes
+~~~~~~~~~~~~~~~~
+
+- ``get_venv_path`` now returns a ``pathlib.Path`` object instead of a string.
+
+
+----
+
+
 v1.2.0 (2020-11-26)
 -------------------
 
