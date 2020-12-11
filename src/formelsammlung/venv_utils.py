@@ -7,6 +7,7 @@
     :copyright: 2020 (c) Christian Riedel
     :license: GPLv3, see LICENSE file for more details
 """  # noqa: D205, D208, D400
+import contextlib
 import os
 import shutil
 import sys
@@ -99,7 +100,9 @@ def where_installed(program: str) -> Tuple[int, Optional[str], Optional[str]]:
     if not exe:
         return exit_code, None, None
 
-    venv_path = get_venv_path()
+    venv_path = None
+    with contextlib.suppress(FileNotFoundError):
+        venv_path = get_venv_path()
     bin_dir = "\\Scripts" if sys.platform == "win32" else "/bin"
     path_wo_venv = os.environ["PATH"].replace(f"{venv_path}{bin_dir}", "")
     glob_exe = shutil.which(program, path=path_wo_venv)
