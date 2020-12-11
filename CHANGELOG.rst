@@ -7,6 +7,18 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v3.0.1 (2020-12-11)
+-------------------
+
+Bugfixes
+~~~~~~~~
+
+- ``where_installed`` no longer fails when no venv is active.
+
+
+----
+
+
 v3.0.0 (2020-12-07)
 -------------------
 
