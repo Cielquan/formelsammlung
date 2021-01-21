@@ -10,8 +10,8 @@ formelsammlung Change Log
 v3.1.0 (2021-01-21)
 -------------------
 
-Bugfixes
-~~~~~~~~
+New Features
+~~~~~~~~~~~~
 
 - ``get_venv_tmp_dir`` now also finds dotted tmp directories.
 
