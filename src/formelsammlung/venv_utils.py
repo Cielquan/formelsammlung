@@ -46,7 +46,12 @@ def get_venv_bin_dir(venv_path: Union[str, Path]) -> Path:
     raise FileNotFoundError(f"Given venv has no '{OS_BIN}' directory.")
 
 
-def get_venv_tmp_dir(venv_path: Union[str, Path], search_tmp_dirs: Optional[Tuple[str]] = None, create_if_missing: bool = False, create_dir_name: Optional[str] = None) -> Path:
+def get_venv_tmp_dir(
+    venv_path: Union[str, Path],
+    search_tmp_dirs: Optional[Tuple[str]] = None,
+    create_if_missing: bool = False,
+    create_dir_name: Optional[str] = None,
+) -> Path:
     """Return path to tmp/temp dir of given venv.
 
     :param venv_path: Path to venv
