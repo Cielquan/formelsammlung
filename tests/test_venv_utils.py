@@ -84,6 +84,33 @@ def test_get_venv_tmp_dir(tmp_dir_name, tmp_path):
     assert result == tmp_dir
 
 
+def test_get_venv_tmp_dir_custom_search(tmp_path):
+    """Test get_venv_tmp_dir finding custom temp dirs."""
+    fake_venv = tmp_path / ".venv"
+    tmp_dir = fake_venv / "custom_tmp"
+    tmp_dir.mkdir(parents=True)
+
+    result = vu.get_venv_tmp_dir(fake_venv, search_tmp_dirs=("custom_tmp",))
+
+    assert result == tmp_dir
+
+
+@pytest.mark.parametrize(
+    ("tmp_dir_name", "create_dir_name"), [("custom_temp", "custom_temp"), ("tmp", None)]
+)
+def test_get_venv_tmp_dir_create_if_missing(tmp_dir_name, create_dir_name, tmp_path):
+    """Test get_venv_tmp_dir creating tmp dirs if missing."""
+    fake_venv = tmp_path / ".venv"
+    fake_venv.mkdir(parents=True)
+    tmp_dir = fake_venv / tmp_dir_name
+
+    result = vu.get_venv_tmp_dir(
+        fake_venv, create_if_missing=True, create_dir_name=create_dir_name
+    )
+
+    assert result == tmp_dir
+
+
 def test_get_venv_tmp_dir_raise(tmp_path):
     """Test get_venv_tmp_dir raising exception on no found dir."""
     fake_venv = tmp_path / ".venv"
