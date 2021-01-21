@@ -72,21 +72,11 @@ def test_get_venv_bin_dir_raise(tmp_path):
 
 
 #: Test get_venv_tmp_dir()
-def test_get_venv_tmp_dir(tmp_path):
+@pytest.mark.parametrize("tmp_dir_name", ("tmp", "temp", ".tmp", ".temp"))
+def test_get_venv_tmp_dir(tmp_dir_name, tmp_path):
     """Test get_venv_tmp_dir return a venv's tmp dir."""
     fake_venv = tmp_path / ".venv"
-    tmp_dir = fake_venv / "tmp"
-    tmp_dir.mkdir(parents=True)
-
-    result = vu.get_venv_tmp_dir(fake_venv)
-
-    assert result == tmp_dir
-
-
-def test_get_venv_temp_dir(tmp_path):
-    """Test get_venv_tmp_dir return a venv's temp dir."""
-    fake_venv = tmp_path / ".venv"
-    tmp_dir = fake_venv / "temp"
+    tmp_dir = fake_venv / tmp_dir_name
     tmp_dir.mkdir(parents=True)
 
     result = vu.get_venv_tmp_dir(fake_venv)

@@ -53,13 +53,10 @@ def get_venv_tmp_dir(venv_path: Union[str, Path]) -> Path:
     :raises FileNotFoundError: when no tmp/temp dir can be found for given venv.
     :return: Path to tmp/temp dir
     """
-    tmp_dir = Path(venv_path) / "tmp"
-    if tmp_dir.is_dir():
-        return tmp_dir
-
-    tmp_dir = Path(venv_path) / "temp"
-    if tmp_dir.is_dir():
-        return tmp_dir
+    for tmp_dir in ("tmp", "temp", ".tmp", ".temp"):
+        tmp_path = Path(venv_path) / tmp_dir
+        if tmp_path.is_dir():
+            return tmp_path
 
     raise FileNotFoundError("Given venv has no 'tmp' or 'temp' directory.")
 
