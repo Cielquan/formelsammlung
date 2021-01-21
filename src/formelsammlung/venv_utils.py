@@ -46,19 +46,30 @@ def get_venv_bin_dir(venv_path: Union[str, Path]) -> Path:
     raise FileNotFoundError(f"Given venv has no '{OS_BIN}' directory.")
 
 
-def get_venv_tmp_dir(venv_path: Union[str, Path]) -> Path:
+def get_venv_tmp_dir(venv_path: Union[str, Path], search_tmp_dirs: Optional[Tuple[str]] = None, create_if_missing: bool = False, create_dir_name: Optional[str] = None) -> Path:
     """Return path to tmp/temp dir of given venv.
 
     :param venv_path: Path to venv
+    :param search_tmp_dirs: List of temp dir names to look for;
+        defaults to ("tmp", "temp", ".tmp", ".temp")
+    :param create_if_missing: Create a temp dir in the given venv if non exists;
+        defaults to ``False``
+    :param create_dir_name: Name of the venv to create; defaults to ``tmp``
     :raises FileNotFoundError: when no tmp/temp dir can be found for given venv.
     :return: Path to tmp/temp dir
     """
-    for tmp_dir in ("tmp", "temp", ".tmp", ".temp"):
+    tmp_dirs = search_tmp_dirs if search_tmp_dirs else ("tmp", "temp", ".tmp", ".temp")
+    for tmp_dir in tmp_dirs:
         tmp_path = Path(venv_path) / tmp_dir
         if tmp_path.is_dir():
             return tmp_path
 
-    raise FileNotFoundError("Given venv has no 'tmp' or 'temp' directory.")
+    if create_if_missing:
+        tmp_path = Path(venv_path) / (create_dir_name if create_dir_name else "tmp")
+        tmp_path.mkdir(exist_ok=True)
+        return tmp_path
+
+    raise FileNotFoundError(f"Given venv has non of theses directories: {tmp_dirs}.")
 
 
 def get_venv_site_packages_dir(venv_path: Union[str, Path]) -> Path:
