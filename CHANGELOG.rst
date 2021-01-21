@@ -7,6 +7,18 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v3.1.0 (2021-01-21)
+-------------------
+
+Bugfixes
+~~~~~~~~
+
+- ``get_venv_tmp_dir`` now also finds dotted tmp directories.
+
+
+----
+
+
 v3.0.1 (2020-12-11)
 -------------------
 
