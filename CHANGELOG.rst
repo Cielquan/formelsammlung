@@ -7,6 +7,17 @@ formelsammlung Change Log
 
 .. towncrier release notes start
 
+v3.2.0 (2021-01-21)
+-------------------
+
+New Features
+~~~~~~~~~~~~
+
+- ``get_venv_tmp_dir`` now take a tuple of temp dir names to search (optional).
+- ``get_venv_tmp_dir`` now can create a temp dir if non is found (opt-in). The name of
+  the temp dir can be customized.
+
+
 v3.1.0 (2021-01-21)
 -------------------
 
