@@ -135,7 +135,7 @@ def test_true_division(num_l, num_r):
     [
         (_rand_int_w_0(), _rand_int_w_0()),
         (_rand_float_w_0(), _rand_float_w_0()),
-        (_rand_complex_w_0(), _rand_complex_w_0()),
+        (_rand_complex_wo_0(), _rand_complex_w_0()),
     ],
 )
 def test_exponentiation(num_l, num_r):
