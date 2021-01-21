@@ -16,6 +16,12 @@ New Features
 - ``get_venv_tmp_dir`` now also finds dotted tmp directories.
 
 
+Bugfixes
+~~~~~~~~
+
+- ``test_exponentiation`` no allows 0 for first number, which caused ``ZeroDivisionError``.
+
+
 ----
 
 
