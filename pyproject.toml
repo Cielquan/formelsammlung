@@ -48,6 +48,8 @@
         coverage = {extras = ["toml"], version = "^5.2.1", optional = true}
         pytest-sugar = {version = "^0.9.4", optional = true}
         pytest-randomly = {version = "^3.4", optional = true}
+        pytest-mock = {version = "^3.5.1", optional = true}
+        mock = {version = "^4.0.3", optional = true}
         pytest-flask = {version = "^1.0", optional = true}
         #: Docs
         sphinx = {version = "^3.2", optional = true}
@@ -200,4 +202,5 @@
 #: -- PYTEST CONFIG --------------------------------------------------------------------
 [tool.pytest.ini_options]
     addopts = "-ra --showlocals"
+    mock_use_standalone_module = true
     junit_family = "xunit2"
