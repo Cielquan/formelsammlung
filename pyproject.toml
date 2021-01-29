@@ -40,6 +40,7 @@
         python = "^3.6.1"
         importlib-metadata = {version = ">1.6;<3.0", python = "<3.8"}
         flask = {version = "^1.1.2", optional = true}
+        nox = {version = "^2020.12.31", optional = true}
         #: Testing
         pytest = {version = "^6", optional = true}
         pytest-xdist = {version = "^1.34", optional = true}
@@ -81,6 +82,7 @@
         ]
         pre-commit = ["pre-commit", "mypy", "pylint"]
         flask = ["flask"]
+        nox = ["nox"]
 
     [tool.poetry.scripts]
         env_exe_runner = 'formelsammlung.env_exe_runner:cli_caller'
