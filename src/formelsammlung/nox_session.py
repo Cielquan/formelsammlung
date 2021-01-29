@@ -67,7 +67,7 @@ class Session(_Session):  # noqa: R0903
         self._run("poetry", "install", *install_args, external="error", **kwargs)
 
 
-def monkeypatch_session(session_func: Callable) -> Callable:
+def _monkeypatch_session(session_func: Callable) -> Callable:
     """Decorate nox session functions to add `poetry_install` method.
 
     :param session_func: decorated function with commands for nox session
@@ -89,4 +89,4 @@ def monkeypatch_session(session_func: Callable) -> Callable:
     return switch_session_class
 
 
-session_w_poetry = monkeypatch_session
+session_w_poetry = _monkeypatch_session

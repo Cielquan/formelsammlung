@@ -39,6 +39,7 @@ Functionality
 - ``get_venv_tmp_dir()``: is a function to get the path to the tmp/temp dir of a given venv.
 - ``get_venv_site_packages_dir()``: is a function to get the path to the site-packages dir of a given venv.
 - ``where_installed()``: is a function to find the installation places in and outside a venv.
+- ``session_w_poetry``: decorator to change ``nox`` session class to include ``poetry_install()`` method.
 
 
 Prerequisites
