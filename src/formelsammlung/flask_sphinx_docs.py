@@ -8,7 +8,7 @@
     :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 from flask import Flask, Response
 
@@ -40,10 +40,16 @@ class SphinxDocServer:  # noqa: R0903
     .. highlight:: default
     """
 
-    def __init__(self, app: Optional[Flask] = None, **kwargs) -> None:
+    def __init__(
+        self,
+        app: Optional[Flask] = None,
+        *,
+        doc_dir: Optional[str] = None,
+        index_file: str = "index.html",
+    ) -> None:
         """Init SphinxDocServer."""
         if app is not None:
-            self.init_app(app, **kwargs)
+            self.init_app(app, doc_dir, index_file)
 
     def init_app(
         self, app: Flask, doc_dir: Optional[str] = None, index_file: str = "index.html"
@@ -71,7 +77,7 @@ class SphinxDocServer:  # noqa: R0903
             return doc_file
 
     @staticmethod
-    def _find_build_docs(app_root: str, steps_up_the_tree: int = 3):
+    def _find_build_docs(app_root: str, steps_up_the_tree: int = 3) -> Path:
         """Find build sphinx html docs.
 
         :param app_root: Root directory of the app.
