@@ -4,10 +4,10 @@
 
     Call tools from tox environments.
 
-    :copyright: 2020 (c) Christian Riedel
-    :license: GPLv3, see LICENSE file for more details
-"""  # noqa: D205, D208, D400
-import subprocess  # nosec
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
+"""  # noqa: D205,D208,D400
+import subprocess  # noqa: S404
 import sys
 
 from pathlib import Path
@@ -62,7 +62,7 @@ def env_exe_runner(
                 print(f"- virtual env: ['{runner}']")
         return 127
 
-    return subprocess.call(cmd)  # nosec
+    return subprocess.call(cmd)  # noqa: S603
 
 
 def cli_caller() -> int:

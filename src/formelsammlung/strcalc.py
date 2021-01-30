@@ -1,13 +1,12 @@
-# noqa: D205,D208,D400
 """
     formelsammlung.strcalc
     ~~~~~~~~~~~~~~~~~~~~~~
 
     Calculate arithmetic expressions from strings.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
-"""
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
+"""  # noqa: D205,D208,D400
 import ast
 import operator
 
@@ -20,7 +19,6 @@ NumberType = Union[int, float, complex]
 class _StringCalculator(ast.NodeVisitor):
     """Calculate an arithmetic expression from a string using :mod:`ast`."""
 
-    # pylint: disable=C0103,R0201
     def visit_BinOp(self, node: ast.BinOp) -> NumberType:  # noqa: N802
         """Handle `BinOp` nodes."""
         return {
@@ -42,16 +40,18 @@ class _StringCalculator(ast.NodeVisitor):
         }[type(node.op)](self.visit(node.operand))
     # fmt: on
 
-    def visit_Constant(self, node: ast.Constant) -> NumberType:  # noqa: N802
+    @staticmethod
+    def visit_Constant(node: ast.Constant) -> NumberType:  # noqa: N802
         """Handle `Constant` nodes."""
-        return node.value
+        return node.value  # pragma: py-lt-38
 
-    def visit_Num(self, node: ast.Num) -> NumberType:  # noqa: N802
+    @staticmethod
+    def visit_Num(node: ast.Num) -> NumberType:  # noqa: N802
         """Handle `Num` nodes.
 
         For backwards compatibility <3.8. Since 3.8 ``visit_Constant`` is used.
         """
-        return node.n
+        return node.n  # pragma: py-gte-38
 
     def visit_Expr(self, node: ast.Expr) -> NumberType:  # noqa: N802
         """Handle `Expr` nodes."""

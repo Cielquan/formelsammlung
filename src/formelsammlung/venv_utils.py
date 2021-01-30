@@ -4,9 +4,9 @@
 
     Utility function for working with virtual environments.
 
-    :copyright: 2020 (c) Christian Riedel
-    :license: GPLv3, see LICENSE file for more details
-"""  # noqa: D205, D208, D400
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
+"""  # noqa: D205,D208,D400
 import contextlib
 import os
 import shutil
@@ -26,7 +26,9 @@ def get_venv_path() -> Path:
     :return: Return venv path
     """
     if hasattr(sys, "real_prefix"):
-        return Path(sys.real_prefix)  # type: ignore[no-any-return,attr-defined] # pylint: disable=E1101
+        return Path(
+            sys.real_prefix  # type: ignore[no-any-return,attr-defined]  # noqa: E1101
+        )
     if sys.base_prefix != sys.prefix:
         return Path(sys.prefix)
     raise FileNotFoundError("No calling venv could be detected.")

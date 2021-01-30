@@ -1,20 +1,19 @@
-# noqa: D205,D208,D400
 """
     formelsammlung.flask_sphinx_docs
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Serve sphinx docs in your flask app.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
-"""
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
+"""  # noqa: D205,D208,D400
 from pathlib import Path
 from typing import Optional
 
 from flask import Flask, Response
 
 
-class SphinxDocServer:  # pylint: disable=R0903
+class SphinxDocServer:  # noqa: R0903
     """Serve your sphinx docs under `/docs/` on your own flask app.
 
     .. highlight:: python
@@ -60,7 +59,7 @@ class SphinxDocServer:  # pylint: disable=R0903
 
         @app.route("/docs/", defaults={"filename": index_file})
         @app.route("/docs/<path:filename>")
-        def web_docs(filename: str) -> Response:  # pylint: disable=W0612
+        def web_docs(filename: str) -> Response:
             """Route the given doc page.
 
             :param filename: File name from URL

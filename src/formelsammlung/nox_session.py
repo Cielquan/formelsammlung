@@ -4,8 +4,8 @@
 
     Monkypatched ``nox`` session object.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
 from typing import Any, Callable, Dict, Optional
 
@@ -33,7 +33,7 @@ class Session(_Session):  # noqa: R0903
         :param extras: string of space separated extras to install
         :param no_dev: if `--no-dev` should be set; defaults to: False
         :param no_root: if `--no-root` should be set; defaults to: False
-        :param pip_require_venv: if ``True`` sets environment variable 
+        :param pip_require_venv: if ``True`` sets environment variable
             ``PIP_REQUIRE_VIRTUALENV`` to ``true`` for this call. ``pip`` then requires
             to be run inside a venv. ``pip`` is used to install ``poetry`` inside the
             venv, if no ``poetry`` executable can be found.

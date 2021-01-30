@@ -1,13 +1,12 @@
-# noqa: D205,D208,D400
 """
     formelsammlung.envvar
     ~~~~~~~~~~~~~~~~~~~~~
 
     Get environment variables and transform their type.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
-"""
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
+"""  # noqa: D205,D208,D400
 import os
 import re
 
