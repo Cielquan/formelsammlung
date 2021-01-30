@@ -27,6 +27,8 @@ For a list of all available releases see the
 
 - fixed constructor of `flask_sphinx_docs.SphinxDocServer` to take the right arguments
 - fixed type hints `flask_sphinx_docs`
+- fixed `SphinxDocServer.web_docs`'s (view function) way of patching the
+  `app.static_folder`.
 
 #### Miscellaneous
 
