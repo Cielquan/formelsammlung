@@ -73,15 +73,15 @@ class SphinxDocServer:  # noqa: R0903
             """
             static_folder = app.static_folder
             app.static_folder = doc_dir or str(
-                self._find_build_docs(app.root_path or "")
+                self._find_built_docs(app.root_path or "")
             )
             doc_file = app.send_static_file(filename)
             app.static_folder = static_folder
             return doc_file
 
     @staticmethod
-    def _find_build_docs(app_root: str, steps_up_the_tree: int = 3) -> Path:
-        """Find build sphinx html docs.
+    def _find_built_docs(app_root: str, steps_up_the_tree: int = 3) -> Path:
+        """Find built sphinx html docs.
 
         :param app_root: Root directory of the app.
         :param steps_up_the_tree: Amount of steps to go up the file tree, defaults to 3
