@@ -37,7 +37,6 @@ pip-delete-this-directory.txt
 
 # Unit test / coverage reports
 htmlcov/
-.tox/
 .coverage
 .coverage.*
 .cache
@@ -47,6 +46,8 @@ coverage.xml
 *,cover
 .hypothesis/
 .pytest_cache/
+.coverage_cache/
+.junit_cache/
 
 # Translations
 *.mo
@@ -84,14 +85,15 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
+.tox/
+.nox/
 .env
 .flaskenv
-.venv
 env/
-venv/
+*venv*/
 ENV/
 env.bak/
-venv.bak/
+*venv*.bak/
 
 # Spyder project settings
 .spyderproject
@@ -109,9 +111,11 @@ venv.bak/
 # IDE folder
 .idea/
 .vscode/
+# from vscode or an extension
+cache.txt
 
-# Versioning
-version.py
+# Tool installation dir
+node_modules/
 
 # Configs
 *.list
@@ -132,10 +136,16 @@ version.py
 _backupfiles
 .backupfiles
 
-# Python debugger config
-.pdbrc
-
 # auto generated API docs
 docs/source/autoapi
+docs/source/autoapidoc
+
+# personal config
+.pdbrc
+
+## created via nox sessions
+# ignorefile for spellchecking
+.spellignore
+
 
 poetry.lock
