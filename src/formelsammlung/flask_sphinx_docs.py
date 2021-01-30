@@ -71,9 +71,12 @@ class SphinxDocServer:  # noqa: R0903
             :param filename: File name from URL
             :return: Requested doc page
             """
-            app.static_folder = doc_dir or self._find_build_docs(app.root_path or "")
+            static_folder = app.static_folder
+            app.static_folder = doc_dir or str(
+                self._find_build_docs(app.root_path or "")
+            )
             doc_file = app.send_static_file(filename)
-            app.static_folder = "static"
+            app.static_folder = static_folder
             return doc_file
 
     @staticmethod
