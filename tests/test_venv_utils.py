@@ -73,7 +73,7 @@ def test_get_venv_bin_dir_raise(tmp_path):
 
 #: Test get_venv_tmp_dir()
 @pytest.mark.parametrize("tmp_dir_name", ("tmp", "temp", ".tmp", ".temp"))
-def test_get_venv_tmp_dir(tmp_dir_name, tmp_path):
+def test_get_venv_tmp_dir(tmp_dir_name: str, tmp_path):
     """Test get_venv_tmp_dir return a venv's tmp dir."""
     fake_venv = tmp_path / ".venv"
     tmp_dir = fake_venv / tmp_dir_name
@@ -98,7 +98,9 @@ def test_get_venv_tmp_dir_custom_search(tmp_path):
 @pytest.mark.parametrize(
     ("tmp_dir_name", "create_dir_name"), [("custom_temp", "custom_temp"), ("tmp", None)]
 )
-def test_get_venv_tmp_dir_create_if_missing(tmp_dir_name, create_dir_name, tmp_path):
+def test_get_venv_tmp_dir_create_if_missing(
+    tmp_dir_name: str, create_dir_name: str, tmp_path
+):
     """Test get_venv_tmp_dir creating tmp dirs if missing."""
     fake_venv = tmp_path / ".venv"
     fake_venv.mkdir(parents=True)
