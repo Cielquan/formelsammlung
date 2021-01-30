@@ -4,8 +4,8 @@
 
     Tests for nox_session.py.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
 #: Tests are based on:
 #: https://github.com/theacodes/nox/blob/156765c343942233bf6cbfa59391ec63d6fedc29/tests/test_sessions.py  # noqa: E501
@@ -214,16 +214,19 @@ def test_run_install_only_should_install(
 
 def test_session_w_poetry_decorator_name_overwrite() -> None:
     """Test if decorator takes decorated functions name and docstring."""
+
     def testing_func() -> None:
         """Test docstr."""
-        pass
+
     deco_func = nox_session.session_w_poetry(testing_func)
 
     assert deco_func.__name__ == testing_func.__name__
     assert deco_func.__doc__ == testing_func.__doc__
 
 
-def test_session_w_poetry_decorator_session_change(runner: nox.sessions.SessionRunner, mocker: MockerFixture) -> None:
+def test_session_w_poetry_decorator_session_change(
+    runner: nox.sessions.SessionRunner, mocker: MockerFixture
+) -> None:
     """Test if decorator changes session class."""
     mocker.patch.object(nox.command, "run")
 

@@ -1,13 +1,12 @@
-# noqa: D205,D208,D400
 """
     tests.test_envvar
     ~~~~~~~~~~~~~~~~~
 
     Tests for envvar.py.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
-"""
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
+"""  # noqa: D205,D208,D400
 from decimal import Decimal
 
 import pytest

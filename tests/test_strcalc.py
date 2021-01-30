@@ -1,13 +1,12 @@
-# noqa: D205,D208,D400
 """
     tests.test_strcalc
     ~~~~~~~~~~~~~~~~~~
 
     Tests for strcalc.py.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
-"""
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
+"""  # noqa: D205,D208,D400
 import random
 import sys
 
