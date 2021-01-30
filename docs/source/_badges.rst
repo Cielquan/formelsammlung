@@ -1,7 +1,3 @@
-==============
-formelsammlung
-==============
-
 +-------------------+---------------------------------------------------------------------------------------------+
 | **General**       | |maintenance_n| |license| |rtd|                                                             |
 |                   +---------------------------------------------------------------------------------------------+
@@ -23,57 +19,11 @@ formelsammlung
 +-------------------+---------------------------------------------------------------------------------------------+
 
 
-**Collection of different multipurpose functions.**
-
-This library is a collection of different functions I developed which I use in different
-projects so I put them here. New features are added when I need them somewhere.
-
-
-Functionality
-=============
-
-- ``getenv_typed()``: is a wrapper around ``os.getenv`` returning the value of the environment variable in the correct python type.
-- ``calculate_string()``: takes an arithmetic expression as a string and calculates it.
-- ``SphinxDocServer``: is a flask plugin to serve the repository's docs build as HTML (by sphinx). Needs ``flask`` extra to be also installed to work.
-- ``env_exe_runner()``: is a function to call a given ``tool`` from the first venv/tox/nox environment that has it installed in a list of venv/tox/nox environments.
-- ``get_venv_path()``: is a function to get the path to the current venv.
-- ``get_venv_bin_dir()``: is a function to get the path to the bin/Scripts dir of a given venv.
-- ``get_venv_tmp_dir()``: is a function to get the path to the tmp/temp dir of a given venv.
-- ``get_venv_site_packages_dir()``: is a function to get the path to the site-packages dir of a given venv.
-- ``where_installed()``: is a function to find the installation places in and outside a venv.
-- ``session_w_poetry``: decorator to change ``nox`` session class to include ``poetry_install()`` method.
-
-
-Prerequisites
-=============
-
-*Works only with python version >= 3.6*
-
-A new version of ``pip`` that supports PEP-517/PEP-518 is required.
-When the setup fails try updating ``pip``.
-
-
-Disclaimer
-==========
-
-No active maintenance is intended for this project.
-You may leave an issue if you have a questions, bug report or feature request,
-but I cannot promise a quick response time.
-
-
-License
-=======
-
-This project is licensed under the GPL-3.0 or newer.
-
-
-.. ############################### LINKS FOR BADGES ###############################
-
-
-.. Change badges in docs/source/_badges.rst also
-
+.. Change badges in README also
 
 .. General
+
+.. Change maintenance status in README also
 
 .. |maintenance_n| image:: https://img.shields.io/badge/Maintenance%20Intended-✖-red.svg?style=flat-square
     :target: http://unmaintained.tech/
