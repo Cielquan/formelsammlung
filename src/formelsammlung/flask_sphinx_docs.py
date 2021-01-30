@@ -8,7 +8,7 @@
     :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 
 from flask import Flask, Response
 
@@ -65,7 +65,7 @@ class SphinxDocServer:  # noqa: R0903
 
         @app.route("/docs/", defaults={"filename": index_file})
         @app.route("/docs/<path:filename>")
-        def web_docs(filename: str) -> Response:
+        def web_docs(filename: str) -> Response:  # noqa: W0612
             """Route the given doc page.
 
             :param filename: File name from URL

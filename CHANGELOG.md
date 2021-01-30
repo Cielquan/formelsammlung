@@ -20,7 +20,7 @@ For a list of all available releases see the
 
 #### New features
 
-- added `nox_session.session_w_poetry` decorator for use in noxfile.py. 
+- added `nox_session.session_w_poetry` decorator for use in noxfile.py.
 - updated root `__init__.py` to serve more metadata.
 
 #### Bugfixes

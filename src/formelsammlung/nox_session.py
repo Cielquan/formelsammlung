@@ -13,7 +13,7 @@ from nox.sessions import CondaEnv, PassthroughEnv
 from nox.sessions import Session as _Session
 from nox.sessions import VirtualEnv
 
-from .venv_utils import where_installed
+from formelsammlung.venv_utils import where_installed
 
 
 class Session(_Session):  # noqa: R0903
