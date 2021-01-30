@@ -19,7 +19,7 @@ NumberType = Union[int, float, complex]
 class _StringCalculator(ast.NodeVisitor):
     """Calculate an arithmetic expression from a string using :mod:`ast`."""
 
-    def visit_BinOp(self, node: ast.BinOp) -> NumberType:  # noqa: N802
+    def visit_BinOp(self, node: ast.BinOp) -> NumberType:  # noqa: N802,C0103
         """Handle `BinOp` nodes."""
         return {
             ast.Add: operator.add,  #: a + b
@@ -32,7 +32,7 @@ class _StringCalculator(ast.NodeVisitor):
         }[type(node.op)](self.visit(node.left), self.visit(node.right))
 
     # fmt: off
-    def visit_UnaryOp(self, node: ast.UnaryOp) -> NumberType:  # noqa: N802
+    def visit_UnaryOp(self, node: ast.UnaryOp) -> NumberType:  # noqa: N802,C0103
         """Handle `UnaryOp` nodes."""
         return {
             ast.UAdd: operator.pos,  #: + a
@@ -41,19 +41,19 @@ class _StringCalculator(ast.NodeVisitor):
     # fmt: on
 
     @staticmethod
-    def visit_Constant(node: ast.Constant) -> NumberType:  # noqa: N802
+    def visit_Constant(node: ast.Constant) -> NumberType:  # noqa: N802,C0103
         """Handle `Constant` nodes."""
         return node.value  # pragma: py-lt-38
 
     @staticmethod
-    def visit_Num(node: ast.Num) -> NumberType:  # noqa: N802
+    def visit_Num(node: ast.Num) -> NumberType:  # noqa: N802,C0103
         """Handle `Num` nodes.
 
         For backwards compatibility <3.8. Since 3.8 ``visit_Constant`` is used.
         """
         return node.n  # pragma: py-gte-38
 
-    def visit_Expr(self, node: ast.Expr) -> NumberType:  # noqa: N802
+    def visit_Expr(self, node: ast.Expr) -> NumberType:  # noqa: N802,C0103
         """Handle `Expr` nodes."""
         return self.visit(node.value)
 
