@@ -7,6 +7,12 @@
     :copyright: (c) 2020, Christian Riedel and AUTHORS
     :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
+########################################################################################
+# THIS FILE WAS CHANGED FROM DEFAULT !!! (sessions: pre_commit)
+# Installs by poetry and nox somehow break pre-commit. At least flakehell which does
+# not report the errors anymore regardless of the exit code 1. Therefore pip installs
+# the package w/o editable mode.
+########################################################################################
 import contextlib
 import os
 import re
@@ -333,10 +339,11 @@ def pre_commit(session: Session) -> None:  # noqa: R0912
         extras = "pre-commit testing docs poetry dev_nox"
         session.poetry_install(
             extras,
-            no_root=(TOX_CALLS or SKIP_INSTALL),
+            no_root=True,
             no_dev=(TOX_CALLS or IN_CI),
             pip_require_venv=poetry_require_venv(session),
         )
+        session.install(".")
     else:
         session.log("Skipping install step.")
 
