@@ -18,6 +18,9 @@ For a list of all available releases see the
 ## Unreleased
 [diff v3.2.0...main](https://github.com/Cielquan/formelsammlung/compare/v3.2.0...main)
 
+#### BREAKING CHANGES
+- `strcalc.calculate_string` now raises `strcalc.StringCalculatorError` exceptions
+
 #### New features
 
 - added `nox_session.session_w_poetry` decorator for use in noxfile.py.
