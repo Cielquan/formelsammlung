@@ -42,7 +42,7 @@ def test_serving_factory_app(tmp_path) -> None:
 
     sds = SphinxDocServer()
 
-    def _create_app() -> None:
+    def _create_app() -> Flask:
         app = Flask(__name__)
         sds.init_app(app, doc_dir=str(test_dir))
         return app
