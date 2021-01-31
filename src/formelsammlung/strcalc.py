@@ -9,11 +9,17 @@
 """  # noqa: D205,D208,D400
 import ast
 import operator
+import sys
 
 from typing import Optional, Union
 
 
 NumberType = Union[int, float, complex]
+NUMBERTYPES = (int, float, complex)
+
+
+class StringCalculatorError(Exception):
+    """Exception for the StringCalculator."""
 
 
 class _StringCalculator(ast.NodeVisitor):
@@ -21,7 +27,7 @@ class _StringCalculator(ast.NodeVisitor):
 
     def visit_BinOp(self, node: ast.BinOp) -> NumberType:  # noqa: N802,C0103
         """Handle `BinOp` nodes."""
-        return {
+        return {  # type: ignore[no-any-return]
             ast.Add: operator.add,  #: a + b
             ast.Sub: operator.sub,  #: a - b
             ast.Mult: operator.mul,  #: a * b
@@ -34,16 +40,21 @@ class _StringCalculator(ast.NodeVisitor):
     # fmt: off
     def visit_UnaryOp(self, node: ast.UnaryOp) -> NumberType:  # noqa: N802,C0103
         """Handle `UnaryOp` nodes."""
-        return {
+        return {  # type: ignore[no-any-return]
             ast.UAdd: operator.pos,  #: + a
             ast.USub: operator.neg,  #: - a
         }[type(node.op)](self.visit(node.operand))
     # fmt: on
 
     @staticmethod
-    def visit_Constant(node: ast.Constant) -> NumberType:  # noqa: N802,C0103
+    def visit_Constant(  # noqa: N802,C0103
+        node: ast.Constant,
+    ) -> NumberType:  # pragma: py-lt-38
         """Handle `Constant` nodes."""
-        return node.value  # pragma: py-lt-38
+        ret_val = node.value
+        if isinstance(ret_val, bool) or not isinstance(ret_val, NUMBERTYPES):
+            raise ValueError(f"Extracted `Constant` is not of type {NumberType}.")
+        return ret_val
 
     @staticmethod
     def visit_Num(node: ast.Num) -> NumberType:  # noqa: N802,C0103
@@ -55,7 +66,14 @@ class _StringCalculator(ast.NodeVisitor):
 
     def visit_Expr(self, node: ast.Expr) -> NumberType:  # noqa: N802,C0103
         """Handle `Expr` nodes."""
-        return self.visit(node.value)
+        # safety hurdle from visist_Constant for backwards compatibility
+        if sys.version_info[0:2] < (3, 8):  # pragma: py-gte-38
+            ret_val = self.visit(node.value)
+            if isinstance(ret_val, bool) or not isinstance(ret_val, NUMBERTYPES):
+                raise ValueError(f"`Expr` did not return a {NumberType}.")
+            return ret_val
+
+        return self.visit(node.value)  # type: ignore[no-any-return]  # pragma: py-lt-38
 
 
 def calculate_string(expression: str) -> Optional[NumberType]:
@@ -104,8 +122,21 @@ def calculate_string(expression: str) -> Optional[NumberType]:
         1.0
 
     :param expression: String with arithmetic expression.
+    :raises StringCalculatorError: if given expression cannot be calculated.
     :return: Result or None
     """
     if expression == "":
         return None
-    return _StringCalculator().visit(ast.parse(expression).body[0])
+
+    try:
+        ret_val = _StringCalculator().visit(ast.parse(expression).body[0])
+    except KeyError as exc:
+        raise StringCalculatorError(
+            f"Expression `{expression}` has unsupported node: `{exc}`."
+        ) from exc
+    except ValueError as exc:
+        raise StringCalculatorError(
+            f"Expression `{expression}` could not be calculated due to: `{exc}`."
+        ) from exc
+    else:
+        return ret_val  # type: ignore[no-any-return]

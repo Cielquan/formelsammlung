@@ -9,9 +9,11 @@
 """  # noqa: D205,D208,D400
 import random
 
+from typing import Union
+
 import pytest
 
-from formelsammlung.strcalc import NumberType, calculate_string
+from formelsammlung.strcalc import NumberType, StringCalculatorError, calculate_string
 
 
 def _rand_int_w_0() -> int:
@@ -151,7 +153,7 @@ def test_exponentiation(num_l: NumberType, num_r: NumberType) -> None:
         (_rand_float_w_0(), _rand_float_wo_0()),
     ],
 )
-def test_floor_division(num_l: NumberType, num_r: NumberType) -> None:
+def test_floor_division(num_l: Union[int, float], num_r: Union[int, float]) -> None:
     """Test floor-division with calculate_string."""
     assert calculate_string(f"{num_l}//{num_r}") == num_l // num_r
     assert calculate_string(f"-{num_l}//+{num_r}") == -num_l // +num_r
@@ -167,7 +169,7 @@ def test_floor_division(num_l: NumberType, num_r: NumberType) -> None:
         (_rand_float_w_0(), _rand_float_wo_0()),
     ],
 )
-def test_modulo(num_l: NumberType, num_r: NumberType) -> None:
+def test_modulo(num_l: Union[int, float], num_r: Union[int, float]) -> None:
     """Test modulo with calculate_string."""
     assert calculate_string(f"{num_l}%{num_r}") == num_l % num_r
     assert calculate_string(f"-{num_l}%+{num_r}") == -num_l % +num_r
@@ -188,3 +190,15 @@ def test_parenthesis() -> None:
 def test_empty_str() -> None:
     """Test with empty string."""
     assert calculate_string("") is None
+
+
+def test_error_not_numbertype() -> None:
+    """Test ValueError ist risen when return type is not NumberType."""
+    with pytest.raises(StringCalculatorError, match="could not be calculated due to"):
+        calculate_string("True")
+
+
+def test_error_unsupported_operator() -> None:
+    """Test KeyError ist risen when return type is not NumberType."""
+    with pytest.raises(StringCalculatorError, match="has unsupported node"):
+        calculate_string("1 @ 1")
