@@ -232,17 +232,6 @@
     max_complexity = 20
     max_cognitive_complexity = 20
     pytest_fixture_no_parentheses = true
-    rst_roles = "func"
-    # rst-roles = [
-    #     "class",
-    #     "meth",
-    #     "func",
-    #     "mod",
-    # ]
-    rst-directives = [
-        "envvar",
-        "exception",
-    ]
 
     [tool.flakehell.plugins]
         pylint = [
