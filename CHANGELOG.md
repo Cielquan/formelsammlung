@@ -38,6 +38,7 @@ For a list of all available releases see the
 - moved CI to Github Actions
 - added Github templates
 - updated dev tools and repo structure to match my new *standard*
+- revised test suit
 
 
 
