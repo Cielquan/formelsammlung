@@ -61,7 +61,7 @@ Example::
         ...
 
 :param session_func: decorated function with commands for nox session. This argument is
-automatically provided by python. You must not provide it yourself.
+    automatically provided by python. You must not provide it yourself.
 """
 
 
