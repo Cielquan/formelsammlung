@@ -59,6 +59,9 @@ def _rand_complex_wo_0() -> complex:
     )
 
 
+# Addition
+
+
 @pytest.mark.parametrize(
     ("num_l", "num_r"),
     [
@@ -68,12 +71,89 @@ def _rand_complex_wo_0() -> complex:
     ],
 )
 def test_addition(num_l: NumberType, num_r: NumberType) -> None:
-    """Test addition with calculate_string."""
-    assert calculate_string(f"{num_l}+{num_r}") == num_l + num_r
-    assert calculate_string(f"-{num_l}++{num_r}") == -num_l + +num_r
-    assert calculate_string(f"+{num_l}+-{num_r}") == +num_l + -num_r
-    assert calculate_string(f"-{num_l}+-{num_r}") == -num_l + -num_r
-    assert calculate_string(f"+{num_l}++{num_r}") == +num_l + +num_r
+    """Test addition with calculate_string w/o signs."""
+    result = calculate_string(f"{num_l}+{num_r}")
+
+    assert result == num_l + num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_addition_minus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test addition with calculate_string.
+
+    Sign left number: minus
+    Sign right number: plus
+    """
+    result = calculate_string(f"-{num_l}++{num_r}")
+
+    assert result == -num_l + +num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_addition_plus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test addition with calculate_string.
+
+    Sign left number: plus
+    Sign right number: minus
+    """
+    result = calculate_string(f"+{num_l}+-{num_r}")
+
+    assert result == +num_l + -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_addition_minus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test addition with calculate_string.
+
+    Sign left number: minus
+    Sign right number: minus
+    """
+    result = calculate_string(f"-{num_l}+-{num_r}")
+
+    assert result == -num_l + -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_addition_plus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test addition with calculate_string.
+
+    Sign left number: plus
+    Sign right number: plus
+    """
+    result = calculate_string(f"+{num_l}++{num_r}")
+
+    assert result == +num_l + +num_r
+
+
+# Subtraction
 
 
 @pytest.mark.parametrize(
@@ -85,12 +165,89 @@ def test_addition(num_l: NumberType, num_r: NumberType) -> None:
     ],
 )
 def test_subtraction(num_l: NumberType, num_r: NumberType) -> None:
-    """Test subtraction with calculate_string."""
-    assert calculate_string(f"{num_l}-{num_r}") == num_l - num_r
-    assert calculate_string(f"-{num_l}-+{num_r}") == -num_l - +num_r
-    assert calculate_string(f"+{num_l}--{num_r}") == +num_l - -num_r
-    assert calculate_string(f"-{num_l}--{num_r}") == -num_l - -num_r
-    assert calculate_string(f"+{num_l}-+{num_r}") == +num_l - +num_r
+    """Test subtraction with calculate_string w/o signs."""
+    result = calculate_string(f"{num_l}-{num_r}")
+
+    assert result == num_l - num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_subtraction_minus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test subtraction with calculate_string.
+
+    Sign left number: minus
+    Sign right number: plus
+    """
+    result = calculate_string(f"-{num_l}-+{num_r}")
+
+    assert result == -num_l - +num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_subtraction_plus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test subtraction with calculate_string.
+
+    Sign left number: plus
+    Sign right number: minus
+    """
+    result = calculate_string(f"+{num_l}--{num_r}")
+
+    assert result == +num_l - -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_subtraction_minus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test subtraction with calculate_string.
+
+    Sign left number: minus
+    Sign right number: minus
+    """
+    result = calculate_string(f"-{num_l}--{num_r}")
+
+    assert result == -num_l - -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_subtraction_plus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test subtraction with calculate_string.
+
+    Sign left number: plus
+    Sign right number: plus
+    """
+    result = calculate_string(f"+{num_l}-+{num_r}")
+
+    assert result == +num_l - +num_r
+
+
+# Multiplication
 
 
 @pytest.mark.parametrize(
@@ -102,12 +259,89 @@ def test_subtraction(num_l: NumberType, num_r: NumberType) -> None:
     ],
 )
 def test_multiplication(num_l: NumberType, num_r: NumberType) -> None:
-    """Test multiplication with calculate_string."""
-    assert calculate_string(f"{num_l}*{num_r}") == num_l * num_r
-    assert calculate_string(f"-{num_l}*+{num_r}") == -num_l * +num_r
-    assert calculate_string(f"+{num_l}*-{num_r}") == +num_l * -num_r
-    assert calculate_string(f"-{num_l}*-{num_r}") == -num_l * -num_r
-    assert calculate_string(f"+{num_l}*+{num_r}") == +num_l * +num_r
+    """Test multiplication with calculate_string w/o signs."""
+    result = calculate_string(f"{num_l}*{num_r}")
+
+    assert result == num_l * num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_multiplication_minus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test multiplication with calculate_string.
+
+    Sign left number: minus
+    Sign right number: plus
+    """
+    result = calculate_string(f"-{num_l}*+{num_r}")
+
+    assert result == -num_l * +num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_multiplication_plus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test multiplication with calculate_string.
+
+    Sign left number: plus
+    Sign right number: minus
+    """
+    result = calculate_string(f"+{num_l}*-{num_r}")
+
+    assert result == +num_l * -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_multiplication_minus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test multiplication with calculate_string.
+
+    Sign left number: minus
+    Sign right number: minus
+    """
+    result = calculate_string(f"-{num_l}*-{num_r}")
+
+    assert result == -num_l * -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_w_0(), _rand_complex_w_0()),
+    ],
+)
+def test_multiplication_plus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test multiplication with calculate_string.
+
+    Sign left number: plus
+    Sign right number: plus
+    """
+    result = calculate_string(f"+{num_l}*+{num_r}")
+
+    assert result == +num_l * +num_r
+
+
+# Division
 
 
 @pytest.mark.parametrize(
@@ -118,13 +352,90 @@ def test_multiplication(num_l: NumberType, num_r: NumberType) -> None:
         (_rand_complex_wo_0(), _rand_complex_wo_0()),
     ],
 )
-def test_true_division(num_l: NumberType, num_r: NumberType) -> None:
-    """Test division with calculate_string."""
-    assert calculate_string(f"{num_l}/{num_r}") == num_l / num_r
-    assert calculate_string(f"-{num_l}/+{num_r}") == -num_l / +num_r
-    assert calculate_string(f"+{num_l}/-{num_r}") == +num_l / -num_r
-    assert calculate_string(f"-{num_l}/-{num_r}") == -num_l / -num_r
-    assert calculate_string(f"+{num_l}/+{num_r}") == +num_l / +num_r
+def test_division(num_l: NumberType, num_r: NumberType) -> None:
+    """Test division with calculate_string w/o signs."""
+    result = calculate_string(f"{num_l}/{num_r}")
+
+    assert result == num_l / num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+        (_rand_complex_wo_0(), _rand_complex_wo_0()),
+    ],
+)
+def test_division_minus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test division with calculate_string.
+
+    Sign left number: minus
+    Sign right number: plus
+    """
+    result = calculate_string(f"-{num_l}/+{num_r}")
+
+    assert result == -num_l / +num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+        (_rand_complex_wo_0(), _rand_complex_wo_0()),
+    ],
+)
+def test_division_plus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test division with calculate_string.
+
+    Sign left number: plus
+    Sign right number: minus
+    """
+    result = calculate_string(f"+{num_l}/-{num_r}")
+
+    assert result == +num_l / -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+        (_rand_complex_wo_0(), _rand_complex_wo_0()),
+    ],
+)
+def test_division_minus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test division with calculate_string.
+
+    Sign left number: minus
+    Sign right number: minus
+    """
+    result = calculate_string(f"-{num_l}/-{num_r}")
+
+    assert result == -num_l / -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+        (_rand_complex_wo_0(), _rand_complex_wo_0()),
+    ],
+)
+def test_division_plus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test division with calculate_string.
+
+    Sign left number: plus
+    Sign right number: plus
+    """
+    result = calculate_string(f"+{num_l}/+{num_r}")
+
+    assert result == +num_l / +num_r
+
+
+# Exponentiation
 
 
 @pytest.mark.parametrize(
@@ -136,14 +447,89 @@ def test_true_division(num_l: NumberType, num_r: NumberType) -> None:
     ],
 )
 def test_exponentiation(num_l: NumberType, num_r: NumberType) -> None:
-    """Test exponentiation with calculate_string."""
-    assert calculate_string(f"{num_l}**{num_r}") == num_l ** num_r
-    assert calculate_string(f"-{num_l}**+{num_r}") == -(num_l ** +num_r)
-    assert calculate_string(f"+{num_l}**+{num_r}") == +(num_l ** +num_r)
-    num_l += 1
-    num_r += 1
-    assert calculate_string(f"+{num_l}**-{num_r}") == +(num_l ** -num_r)
-    assert calculate_string(f"-{num_l}**-{num_r}") == -(num_l ** -num_r)
+    """Test exponentiation with calculate_string w/o signs."""
+    result = calculate_string(f"{num_l}**{num_r}")
+
+    assert result == num_l ** num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_wo_0(), _rand_complex_w_0()),
+    ],
+)
+def test_exponentiation_minus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test exponentiation with calculate_string.
+
+    Sign left number: minus
+    Sign right number: plus
+    """
+    result = calculate_string(f"-{num_l}**+{num_r}")
+
+    assert result == -(num_l ** +num_r)
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_wo_0(), _rand_int_wo_0()),
+        (_rand_float_wo_0(), _rand_float_wo_0()),
+        (_rand_complex_wo_0(), _rand_complex_wo_0()),
+    ],
+)
+def test_exponentiation_plus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test exponentiation with calculate_string.
+
+    Sign left number: plus
+    Sign right number: minus
+    """
+    result = calculate_string(f"+{num_l}**-{num_r}")
+
+    assert result == +(num_l ** -num_r)
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_wo_0(), _rand_int_wo_0()),
+        (_rand_float_wo_0(), _rand_float_wo_0()),
+        (_rand_complex_wo_0(), _rand_complex_wo_0()),
+    ],
+)
+def test_exponentiation_minus_minus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test exponentiation with calculate_string.
+
+    Sign left number: minus
+    Sign right number: minus
+    """
+    result = calculate_string(f"-{num_l}**-{num_r}")
+
+    assert result == -(num_l ** -num_r)
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_w_0()),
+        (_rand_float_w_0(), _rand_float_w_0()),
+        (_rand_complex_wo_0(), _rand_complex_w_0()),
+    ],
+)
+def test_exponentiation_plus_plus(num_l: NumberType, num_r: NumberType) -> None:
+    """Test exponentiation with calculate_string.
+
+    Sign left number: plus
+    Sign right number: plus
+    """
+    result = calculate_string(f"+{num_l}**+{num_r}")
+
+    assert result == +(num_l ** +num_r)
+
+
+# Floor-division
 
 
 @pytest.mark.parametrize(
@@ -154,12 +540,93 @@ def test_exponentiation(num_l: NumberType, num_r: NumberType) -> None:
     ],
 )
 def test_floor_division(num_l: Union[int, float], num_r: Union[int, float]) -> None:
-    """Test floor-division with calculate_string."""
-    assert calculate_string(f"{num_l}//{num_r}") == num_l // num_r
-    assert calculate_string(f"-{num_l}//+{num_r}") == -num_l // +num_r
-    assert calculate_string(f"+{num_l}//-{num_r}") == +num_l // -num_r
-    assert calculate_string(f"-{num_l}//-{num_r}") == -num_l // -num_r
-    assert calculate_string(f"+{num_l}//+{num_r}") == +num_l // +num_r
+    """Test floor-division with calculate_string w/o signs."""
+    result = calculate_string(f"{num_l}//{num_r}")
+
+    assert result == num_l // num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+    ],
+)
+def test_floor_division_minus_plus(
+    num_l: Union[int, float], num_r: Union[int, float]
+) -> None:
+    """Test floor-division with calculate_string.
+
+    Sign left number: minus
+    Sign right number: plus
+    """
+    result = calculate_string(f"-{num_l}//+{num_r}")
+
+    assert result == -num_l // +num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+    ],
+)
+def test_floor_division_plus_minus(
+    num_l: Union[int, float], num_r: Union[int, float]
+) -> None:
+    """Test floor-division with calculate_string.
+
+    Sign left number: plus
+    Sign right number: minus
+    """
+    result = calculate_string(f"+{num_l}//-{num_r}")
+
+    assert result == +num_l // -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+    ],
+)
+def test_floor_division_minus_minus(
+    num_l: Union[int, float], num_r: Union[int, float]
+) -> None:
+    """Test floor-division with calculate_string.
+
+    Sign left number: minus
+    Sign right number: minus
+    """
+    result = calculate_string(f"-{num_l}//-{num_r}")
+
+    assert result == -num_l // -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+    ],
+)
+def test_floor_division_plus_plus(
+    num_l: Union[int, float], num_r: Union[int, float]
+) -> None:
+    """Test floor-division with calculate_string.
+
+    Sign left number: plus
+    Sign right number: plus
+    """
+    result = calculate_string(f"+{num_l}//+{num_r}")
+
+    assert result == +num_l // +num_r
+
+
+# Modulo
 
 
 @pytest.mark.parametrize(
@@ -170,26 +637,117 @@ def test_floor_division(num_l: Union[int, float], num_r: Union[int, float]) -> N
     ],
 )
 def test_modulo(num_l: Union[int, float], num_r: Union[int, float]) -> None:
-    """Test modulo with calculate_string."""
-    assert calculate_string(f"{num_l}%{num_r}") == num_l % num_r
-    assert calculate_string(f"-{num_l}%+{num_r}") == -num_l % +num_r
-    assert calculate_string(f"+{num_l}%-{num_r}") == +num_l % -num_r
-    assert calculate_string(f"-{num_l}%-{num_r}") == -num_l % -num_r
-    assert calculate_string(f"+{num_l}%+{num_r}") == +num_l % +num_r
+    """Test modulo with calculate_string w/o signs."""
+    result = calculate_string(f"{num_l}%{num_r}")
+
+    assert result == num_l % num_r
 
 
-def test_parenthesis() -> None:
-    """Test parenthesis with calculate_string."""
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+    ],
+)
+def test_modulo_minus_plus(num_l: Union[int, float], num_r: Union[int, float]) -> None:
+    """Test modulo with calculate_string.
+
+    Sign left number: minus
+    Sign right number: plus
+    """
+    result = calculate_string(f"-{num_l}%+{num_r}")
+
+    assert result == -num_l % +num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+    ],
+)
+def test_modulo_plus_minus(num_l: Union[int, float], num_r: Union[int, float]) -> None:
+    """Test modulo with calculate_string.
+
+    Sign left number: plus
+    Sign right number: minus
+    """
+    result = calculate_string(f"+{num_l}%-{num_r}")
+
+    assert result == +num_l % -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+    ],
+)
+def test_modulo_minus_minus(num_l: Union[int, float], num_r: Union[int, float]) -> None:
+    """Test modulo with calculate_string.
+
+    Sign left number: minus
+    Sign right number: minus
+    """
+    result = calculate_string(f"-{num_l}%-{num_r}")
+
+    assert result == -num_l % -num_r
+
+
+@pytest.mark.parametrize(
+    ("num_l", "num_r"),
+    [
+        (_rand_int_w_0(), _rand_int_wo_0()),
+        (_rand_float_w_0(), _rand_float_wo_0()),
+    ],
+)
+def test_modulo_plus_plus(num_l: Union[int, float], num_r: Union[int, float]) -> None:
+    """Test modulo with calculate_string.
+
+    Sign left number: plus
+    Sign right number: plus
+    """
+    result = calculate_string(f"+{num_l}%+{num_r}")
+
+    assert result == +num_l % +num_r
+
+
+# Parenthesis
+
+
+def test_parenthesis_line_calculation() -> None:
+    """Test parenthesis with calculate_string for line calculation."""
     num_1 = _rand_int_w_0()
     num_2 = _rand_int_w_0()
     num_3 = _rand_int_w_0()
-    assert calculate_string(f"({num_1}+{num_2})*{num_3}") == (num_1 + num_2) * num_3
-    assert calculate_string(f"{num_1}+({num_2}*{num_3})") == num_1 + (num_2 * num_3)
+
+    result = calculate_string(f"({num_1}+{num_2})*{num_3}")
+
+    assert result == (num_1 + num_2) * num_3
+
+
+def test_parenthesis_point_calculation() -> None:
+    """Test parenthesis with calculate_string for point calculation."""
+    num_1 = _rand_int_w_0()
+    num_2 = _rand_int_w_0()
+    num_3 = _rand_int_w_0()
+
+    result = calculate_string(f"{num_1}+({num_2}*{num_3})")
+
+    assert result == num_1 + (num_2 * num_3)
+
+
+# Miscellaneous
 
 
 def test_empty_str() -> None:
     """Test with empty string."""
-    assert calculate_string("") is None
+    result = calculate_string("")
+
+    assert result is None
 
 
 def test_error_not_numbertype() -> None:
