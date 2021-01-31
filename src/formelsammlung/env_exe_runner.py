@@ -39,27 +39,31 @@ def env_exe_runner(
     if not tool_args:
         tool_args = []
 
+    error_msgs = []
+
     for runner in venv_runner:
+
         if runner in ("tox", "nox"):
+            error_msgs.append(f"- '{runner}' envs: {envs}")
+
             for env in envs:
                 path = Path(f".{runner}") / env / exe
                 if path.is_file():
                     cmd = (str(path), *tool_args)
                     break
+
         else:
+            error_msgs.append(f"- virtual env: ['{runner}']")
+
             path = Path(runner) / exe
             if path.is_file():
                 cmd = (str(path), *tool_args)
-        if cmd:
-            break
+                break
 
     if cmd is None:
-        print(f"No '{tool}' executable found. Search in:")
-        for runner in venv_runner:
-            if runner in ("tox", "nox"):
-                print(f"- '{runner}' envs: {envs}")
-            else:
-                print(f"- virtual env: ['{runner}']")
+        print(f"No '{tool}' executable found. Searched in:")
+        for msg in error_msgs:
+            print(msg)
         return 127
 
     return subprocess.call(cmd)  # noqa: S603
