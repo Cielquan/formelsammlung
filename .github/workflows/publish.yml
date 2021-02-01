@@ -502,12 +502,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
       - name: Build package
-        run: poetry build
+        run: poetry build --ansi
 
       - name: Publish package on PyPI
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
-        run: poetry publish
+        run: poetry publish --ansi
 
       - name: Create GH Release
         id: create-release
