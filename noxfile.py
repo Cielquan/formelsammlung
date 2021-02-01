@@ -171,7 +171,8 @@ def package(session: Session) -> None:
     else:
         session.log("Skipping install step.")
 
-    color = ["--ansi"] if FORCE_COLOR else []
+    #: color not in CI b/c output stalls
+    color = ["--ansi"] if FORCE_COLOR and not IN_CI else []
     session.run("poetry", "build", *color, "-vvv")
     session.run("twine", "check", "--strict", "dist/*")
 
