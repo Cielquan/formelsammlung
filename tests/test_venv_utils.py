@@ -166,7 +166,7 @@ def test_where_installed_only_venv(
     """Test where_installed with only global existing program and with venv."""
     #: create fake venv dir
     fake_venv = tmp_path / ".venv"
-    monkeypatch.setattr(vu, "get_venv_path", lambda: str(fake_venv))
+    monkeypatch.setattr(vu, "get_venv_path", lambda: fake_venv)
     #: create fake venv bin dir
     fake_venv_bin = fake_venv / vu.OS_BIN
     fake_venv_bin.mkdir(parents=True)
@@ -211,7 +211,7 @@ def test_where_installed_only_global_with_venv(
     """Test where_installed with only global existing program and with venv."""
     #: create fake venv dir
     fake_venv = tmp_path / ".venv"
-    monkeypatch.setattr(vu, "get_venv_path", lambda: str(fake_venv))
+    monkeypatch.setattr(vu, "get_venv_path", lambda: fake_venv)
     #: create fake venv bin dir
     fake_venv_bin = fake_venv / vu.OS_BIN
     fake_venv_bin.mkdir(parents=True)
@@ -234,7 +234,7 @@ def test_where_installed_both(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
     """Test where_installed with only global existing program and with venv."""
     #: create fake venv dir
     fake_venv = tmp_path / ".venv"
-    monkeypatch.setattr(vu, "get_venv_path", lambda: str(fake_venv))
+    monkeypatch.setattr(vu, "get_venv_path", lambda: fake_venv)
     #: create fake venv bin dir
     fake_venv_bin = fake_venv / vu.OS_BIN
     fake_venv_bin.mkdir(parents=True)
