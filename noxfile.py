@@ -66,7 +66,7 @@ def patched_popen(
 
     return_code = proc.wait()
 
-    return return_code, out.decode(sys.getdefaultencoding()) if out else ""
+    return return_code, out.decode(sys.stdout.encoding) if out else ""
 
 
 nox.command.popen = patched_popen
