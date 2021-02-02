@@ -111,16 +111,18 @@ def where_installed(program: str) -> Tuple[int, Optional[str], Optional[str]]:
     """
     exit_code = 0
 
-    exe = shutil.which(program)
+    glob_exe = exe = shutil.which(program)
     if not exe:
         return exit_code, None, None
 
     venv_path = None
     with contextlib.suppress(FileNotFoundError):
         venv_path = get_venv_path()
-    bin_dir = "\\Scripts" if sys.platform == "win32" else "/bin"
-    path_wo_venv = os.environ["PATH"].replace(f"{venv_path}{bin_dir}", "")
-    glob_exe = shutil.which(program, path=path_wo_venv)
+
+    if venv_path is not None:
+        path_list = os.environ["PATH"].split(os.pathsep)
+        path_list.remove(f"{venv_path / OS_BIN}")
+        glob_exe = shutil.which(program, path=os.pathsep.join(path_list))
 
     if glob_exe is None:
         exit_code += 1
@@ -129,4 +131,5 @@ def where_installed(program: str) -> Tuple[int, Optional[str], Optional[str]]:
         exe = None
     else:
         exit_code += 3
+
     return exit_code, exe, glob_exe
