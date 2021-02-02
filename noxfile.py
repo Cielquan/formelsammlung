@@ -21,9 +21,21 @@ import sys
 
 from importlib.util import find_spec
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional
+from typing import (
+    IO,
+    Any,
+    Callable,
+    Dict,
+    List,
+    Mapping,
+    Optional,
+    Sequence,
+    Tuple,
+    Union,
+)
 
 import nox
+import nox.command  # TODO:#i# remove after bugfix (see below)
 import tomlkit  # type: ignore[import]
 
 from nox.command import CommandFailed
@@ -31,6 +43,43 @@ from nox.logger import logger as nox_logger
 
 from formelsammlung.nox_session import Session, session_w_poetry
 from formelsammlung.venv_utils import get_venv_bin_dir, get_venv_path, get_venv_tmp_dir
+
+
+#: Monkeypatch of nox.command.popen to fix windows encoding issue
+# TODO:#i# Remove after bugfix
+def _patched_popen(
+    args: Sequence[str],
+    env: Mapping[str, str] = None,
+    silent: bool = False,
+    stdout: Union[int, IO] = None,
+    stderr: Union[int, IO] = subprocess.STDOUT,
+) -> Tuple[int, str]:
+    if silent and stdout is not None:
+        raise ValueError(
+            "Can not specify silent and stdout; passing a custom stdout "
+            "always silences the commands output in Nox's log."
+        )
+
+    if silent:
+        stdout = subprocess.PIPE
+
+    proc = subprocess.Popen(args, env=env, stdout=stdout, stderr=stderr)  # noqa: S603
+
+    try:
+        out, _ = proc.communicate()
+        sys.stdout.flush()
+
+    except KeyboardInterrupt:
+        proc.terminate()
+        proc.wait()
+        raise
+
+    return_code = proc.wait()
+
+    return return_code, out.decode(sys.stdout.encoding) if out else ""
+
+
+nox.command.popen = _patched_popen
 
 
 #: -- NOX OPTIONS ----------------------------------------------------------------------
