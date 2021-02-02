@@ -168,7 +168,7 @@ def test_where_installed_only_venv(
     fake_venv = tmp_path / ".venv"
     monkeypatch.setattr(vu, "get_venv_path", lambda: str(fake_venv))
     #: create fake venv bin dir
-    fake_venv_bin = fake_venv / ("Scripts" if sys.platform == "win32" else "bin")
+    fake_venv_bin = fake_venv / vu.OS_BIN
     fake_venv_bin.mkdir(parents=True)
     #: create fake global bin dir
     fake_glob_bin = tmp_path / "bin"
@@ -213,7 +213,7 @@ def test_where_installed_only_global_with_venv(
     fake_venv = tmp_path / ".venv"
     monkeypatch.setattr(vu, "get_venv_path", lambda: str(fake_venv))
     #: create fake venv bin dir
-    fake_venv_bin = fake_venv / ("Scripts" if sys.platform == "win32" else "bin")
+    fake_venv_bin = fake_venv / vu.OS_BIN
     fake_venv_bin.mkdir(parents=True)
     #: create fake global bin dir
     fake_glob_bin = tmp_path / "bin"
@@ -236,7 +236,7 @@ def test_where_installed_both(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
     fake_venv = tmp_path / ".venv"
     monkeypatch.setattr(vu, "get_venv_path", lambda: str(fake_venv))
     #: create fake venv bin dir
-    fake_venv_bin = fake_venv / ("Scripts" if sys.platform == "win32" else "bin")
+    fake_venv_bin = fake_venv / vu.OS_BIN
     fake_venv_bin.mkdir(parents=True)
     #: create fake exe file in venv bin dir
     venv_fake_exe = fake_venv_bin / "program"
