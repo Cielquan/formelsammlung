@@ -32,6 +32,45 @@ from nox.logger import logger as nox_logger
 from formelsammlung.nox_session import Session, session_w_poetry
 from formelsammlung.venv_utils import get_venv_bin_dir, get_venv_path, get_venv_tmp_dir
 
+import nox.command
+from typing import IO, Mapping, Sequence, Tuple, Union
+
+
+def patched_popen(
+    args: Sequence[str],
+    env: Mapping[str, str] = None,
+    silent: bool = False,
+    stdout: Union[int, IO] = None,
+    stderr: Union[int, IO] = subprocess.STDOUT,
+) -> Tuple[int, str]:
+    print('patched popen ran')
+    if silent and stdout is not None:
+        raise ValueError(
+            "Can not specify silent and stdout; passing a custom stdout "
+            "always silences the commands output in Nox's log."
+        )
+
+    if silent:
+        stdout = subprocess.PIPE
+
+    proc = subprocess.Popen(args, env=env, stdout=stdout, stderr=stderr)
+
+    try:
+        out, _ = proc.communicate()
+        sys.stdout.flush()
+
+    except KeyboardInterrupt:
+        proc.terminate()
+        proc.wait()
+        raise
+
+    return_code = proc.wait()
+
+    return return_code, out.decode(sys.getdefaultencoding()) if out else ""
+
+
+nox.command.popen = patched_popen
+
 
 #: -- NOX OPTIONS ----------------------------------------------------------------------
 nox.options.reuse_existing_virtualenvs = True
