@@ -120,9 +120,12 @@ def where_installed(program: str) -> Tuple[int, Optional[str], Optional[str]]:
         venv_path = get_venv_path()
 
     if venv_path is not None:
-        path_list = os.environ["PATH"].split(os.pathsep)
-        path_list.remove(f"{venv_path / OS_BIN}")
-        glob_exe = shutil.which(program, path=os.pathsep.join(path_list))
+        path = os.pathsep.join(
+            p
+            for p in os.environ["PATH"].split(os.pathsep)
+            if Path(p) != venv_path / OS_BIN
+        )
+        glob_exe = shutil.which(program, path=path)
 
     if glob_exe is None:
         exit_code += 1
