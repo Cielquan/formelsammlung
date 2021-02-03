@@ -40,7 +40,7 @@ For a list of all available releases see the
 - updated dev tools and repo structure to match my new *standard*
 - revised test suit
 - fixed `where_installed` tests for windows
-- tests now also run for PyPy3 on Linux/macOS and py3.10 on all 3 OS
+- tests now also run for PyPy3 on Linux/mac-OS and py3.10 on all 3 OS
 
 
 
