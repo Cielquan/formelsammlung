@@ -424,8 +424,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: >
-          steps.check-step.outcome != 'success' ||
-          steps.check-notes.outcome != 'success'
+          (steps.check-step.outcome != 'success' ||
+          steps.check-notes.outcome != 'success') &&
+          steps.repo-dir.outcome == 'success'
 
       - name: Check (for) comment from prior run
         id: check-comments
