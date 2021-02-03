@@ -64,7 +64,7 @@ but I cannot promise a quick response time.
 License
 =======
 
-This project is licensed under the GPL-3.0 or newer.
+This project is licensed under the GPL-3.0 or later.
 
 
 .. ############################### LINKS FOR BADGES ###############################
