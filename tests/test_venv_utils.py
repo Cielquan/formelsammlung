@@ -198,12 +198,12 @@ def test_integr_where_installed_only_venv(
     #: create fake exe file
     program = "venv_program" if sys.platform != "win32" else "venv_program.EXE"
     fake_exe = fake_venv_bin / program
-    fake_exe.write_text("# just a fake exe")
+    fake_exe.write_text("#!/usr/bin/env python\nprint('hello world')")
     fake_exe.chmod(0o777)
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
 
-    result = vu.where_installed(program)
+    result = vu.where_installed("venv_program")
 
     assert result == (1, str(fake_exe), None)
 
@@ -237,12 +237,12 @@ def test_integr_where_installed_only_global_no_venv(
     #: create fake exe file
     program = "global_program" if sys.platform != "win32" else "global_program.EXE"
     fake_exe = fake_glob_bin / program
-    fake_exe.write_text("# just a fake exe")
+    fake_exe.write_text("#!/usr/bin/env python\nprint('hello world')")
     fake_exe.chmod(0o777)
     #: adjust PATH
     os.environ["PATH"] = str(fake_glob_bin)
 
-    result = vu.where_installed(program)
+    result = vu.where_installed("global_program")
 
     assert result == (2, None, str(fake_exe))
 
@@ -285,12 +285,12 @@ def test_integr_where_installed_only_global_with_venv(
     #: create fake exe file
     program = "global_program" if sys.platform != "win32" else "global_program.EXE"
     fake_exe = fake_glob_bin / program
-    fake_exe.write_text("# just a fake exe")
+    fake_exe.write_text("#!/usr/bin/env python\nprint('hello world')")
     fake_exe.chmod(0o777)
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
 
-    result = vu.where_installed(program)
+    result = vu.where_installed("global_program")
 
     assert result == (2, None, str(fake_exe))
 
@@ -334,18 +334,18 @@ def test_integr_where_installed_both(
     #: create fake exe file in venv bin dir
     program = "program" if sys.platform != "win32" else "program.EXE"
     venv_fake_exe = fake_venv_bin / program
-    venv_fake_exe.write_text("# just a fake exe")
+    venv_fake_exe.write_text("#!/usr/bin/env python\nprint('hello world')")
     venv_fake_exe.chmod(0o777)
     #: create fake global bin dir
     fake_glob_bin = tmp_path / "bin"
     fake_glob_bin.mkdir()
     #: create fake exe file in global bin dir
     glob_fake_exe = fake_glob_bin / program
-    glob_fake_exe.write_text("# just a fake exe")
+    glob_fake_exe.write_text("#!/usr/bin/env python\nprint('hello world')")
     glob_fake_exe.chmod(0o777)
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
 
-    result = vu.where_installed(program)
+    result = vu.where_installed("program")
 
     assert result == (3, str(venv_fake_exe), str(glob_fake_exe))
