@@ -186,4 +186,4 @@ jobs:
           context: ci-code-quality
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: needs.pre-commit.result != 'skipped' && needs.set-git-env-vars.result != 'skipped'
+        if: steps.repo-dir.outcome == 'success'
