@@ -220,4 +220,4 @@ jobs:
           context: ci-test-docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: needs.test-docs.result != 'skipped' && needs.set-git-env-vars.result != 'skipped'
+        if: steps.repo-dir.outcome == 'success'
