@@ -617,11 +617,7 @@ jobs:
   set-status:
     name: Set status on commit
     needs: [test-code, report-coverage, push-coverage-to-code-climate, set-git-env-vars]
-    if: >
-      github.event_name == 'pull_request' ||
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'push'
-      && contains(toJson(github.event.head_commit.message), '[skip ci]') == false)
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Process total success
@@ -639,6 +635,11 @@ jobs:
             state=failure
           fi
           echo -e "::set-output name=state::${state}"
+        if: >
+          needs.test-code.result != 'skipped' &&
+          needs.report-coverage.result != 'skipped' &&
+          needs.push-coverage-to-code-climate.result != 'skipped' &&
+          needs.set-git-env-vars.result != 'skipped'
 
       - name: Get repo dir name
         id: repo-dir
@@ -646,6 +647,7 @@ jobs:
         run: |
           repo_dir=${GITHUB_REPOSITORY#${{ github.repository_owner }}/}
           echo "::set-output name=repo-dir::$repo_dir"
+        if: steps.total-success.outcome == 'success'
 
       - name: Set status via gihub API
         uses: octokit/request-action@v2.x
@@ -661,3 +663,4 @@ jobs:
           context: ci-test-code
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: steps.repo-dir.outcome == 'success'
