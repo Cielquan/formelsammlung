@@ -188,4 +188,4 @@ jobs:
           context: ci-dependency-safety
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: needs.safety.result != 'skipped' && needs.set-git-env-vars.result != 'skipped'
+        if: steps.repo-dir.outcome == 'success'
