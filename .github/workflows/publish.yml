@@ -203,24 +203,28 @@ jobs:
           import json
           import sys
 
+          needed_ci = ("ci-code-quality", "ci-test-code", "ci-test-docs")
+
           status_json = json.loads("""${{ steps.get-status.outputs.data }}""")
 
-          if status_json["state"] != "success":
-              print("The CI pipeline state of this commit is not 'success'.")
-              sys.exit(1)
-
           ci_that_ran = []
+          unsuccessful_ci = []
           for ci in status_json["statuses"]:
               ci_that_ran.append(ci["context"])
+              if ci["state"] != "success":
+                  unsuccessful_ci.append(ci["context"])
 
-          needed_ci = ("ci-code-quality", "ci-test-code", "ci-test-docs")
+          do_exit_1 = False
           for ci in needed_ci:
               if ci not in ci_that_ran:
-                  print(
-                      "Not all CI pipelines ran. Please make sure all CI pipelines "
-                      f"ran successfully and try again.\nNeeded CI: {needed_ci}"
-                  )
-                  sys.exit(1)
+                  print(f"Needed CI pipeline '{ci}' did not run at all.")
+                  do_exit_1 = True
+              if ci in unsuccessful_ci:
+                  print(f"Needed CI pipeline '{ci}' did not run successfully.")
+                  do_exit_1 = True
+
+          if do_exit_1:
+              sys.exit(1)
 
 
   old-test-code:
