@@ -29,7 +29,7 @@ For a list of all available releases see the
 #### Bugfixes
 
 - fixed constructor of `flask_sphinx_docs.SphinxDocServer` to take the right arguments
-- fixed type hints `flask_sphinx_docs`
+- fixed type hints in `flask_sphinx_docs`
 - fixed `SphinxDocServer.web_docs`'s (view function) way of patching the
   `app.static_folder`.
 
@@ -40,6 +40,7 @@ For a list of all available releases see the
 - updated dev tools and repo structure to match my new *standard*
 - revised test suit
 - fixed `where_installed` tests for windows
+- tests now also run for PyPy3 on Linux/macOS and py3.10 on all 3 OS
 
 
 
