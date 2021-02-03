@@ -4,8 +4,8 @@
 
     Fixtures for tests for nox_session.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
 import sys
 
@@ -27,7 +27,7 @@ def runner(mocker: MockerFixture) -> nox.sessions.SessionRunner:
     """Create mocked session runner for testing."""
     curr_py_ver = ".".join([str(v) for v in sys.version_info[0:2]])
     func = mocker.Mock(spec=["python"], python=curr_py_ver)
-    runner = nox.sessions.SessionRunner(
+    _runner = nox.sessions.SessionRunner(
         name="test",
         signatures=["test"],
         func=func,
@@ -38,19 +38,19 @@ def runner(mocker: MockerFixture) -> nox.sessions.SessionRunner:
         ),
         manifest=mocker.create_autospec(nox.manifest.Manifest),
     )
-    runner.venv = mocker.create_autospec(nox.virtualenv.VirtualEnv)
-    runner.venv.env = {}  # type: ignore[union-attr]
-    runner.venv.bin_paths = ["/dummy/bin/"]  # type: ignore[misc,union-attr]
-    return runner
+    _runner.venv = mocker.create_autospec(nox.virtualenv.VirtualEnv)
+    _runner.venv.env = {}  # type: ignore[union-attr]
+    _runner.venv.bin_paths = ["/dummy/bin/"]  # type: ignore[misc,union-attr]
+    return _runner
 
 
 @pytest.fixture
-def session(runner: nox.sessions.SessionRunner) -> nox_session.Session:
+def session(runner: nox.sessions.SessionRunner) -> nox_session.Session:  # noqa: W0621
     """Create mocked session for testing."""
     return nox_session.Session(runner=runner)
 
 
 @pytest.fixture
-def _poetry_installed(monkeypatch) -> None:
+def _poetry_installed(monkeypatch: pytest.MonkeyPatch) -> None:
     """Mock that poetry is installed."""
     monkeypatch.setattr(nox_session, "where_installed", lambda _: (3, None, None))

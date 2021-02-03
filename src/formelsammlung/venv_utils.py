@@ -4,9 +4,9 @@
 
     Utility function for working with virtual environments.
 
-    :copyright: 2020 (c) Christian Riedel
-    :license: GPLv3, see LICENSE file for more details
-"""  # noqa: D205, D208, D400
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
+"""  # noqa: D205,D208,D400
 import contextlib
 import os
 import shutil
@@ -26,7 +26,9 @@ def get_venv_path() -> Path:
     :return: Return venv path
     """
     if hasattr(sys, "real_prefix"):
-        return Path(sys.real_prefix)  # type: ignore[no-any-return,attr-defined] # pylint: disable=E1101
+        return Path(
+            sys.real_prefix  # type: ignore[no-any-return,attr-defined]  # noqa: E1101
+        )
     if sys.base_prefix != sys.prefix:
         return Path(sys.prefix)
     raise FileNotFoundError("No calling venv could be detected.")
@@ -109,16 +111,21 @@ def where_installed(program: str) -> Tuple[int, Optional[str], Optional[str]]:
     """
     exit_code = 0
 
-    exe = shutil.which(program)
+    glob_exe = exe = shutil.which(program)
     if not exe:
         return exit_code, None, None
 
     venv_path = None
     with contextlib.suppress(FileNotFoundError):
         venv_path = get_venv_path()
-    bin_dir = "\\Scripts" if sys.platform == "win32" else "/bin"
-    path_wo_venv = os.environ["PATH"].replace(f"{venv_path}{bin_dir}", "")
-    glob_exe = shutil.which(program, path=path_wo_venv)
+
+    if venv_path is not None:
+        path = os.pathsep.join(
+            p
+            for p in os.environ["PATH"].split(os.pathsep)
+            if Path(p) != venv_path / OS_BIN
+        )
+        glob_exe = shutil.which(program, path=path)
 
     if glob_exe is None:
         exit_code += 1
@@ -127,4 +134,5 @@ def where_installed(program: str) -> Tuple[int, Optional[str], Optional[str]]:
         exe = None
     else:
         exit_code += 3
+
     return exit_code, exe, glob_exe

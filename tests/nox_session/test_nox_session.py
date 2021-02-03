@@ -4,8 +4,8 @@
 
     Tests for nox_session.py.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
 #: Tests are based on:
 #: https://github.com/theacodes/nox/blob/156765c343942233bf6cbfa59391ec63d6fedc29/tests/test_sessions.py  # noqa: E501
@@ -28,7 +28,9 @@ NoneType = type(None)
 def test_poetry_install(session: nox_session.Session, mocker: MockerFixture) -> None:
     """Test argumentless call."""
     run = mocker.patch.object(session, "_run", autospec=True)
-    session.poetry_install()
+
+    session.poetry_install()  # act
+
     run.assert_called_once_with(
         "poetry",
         "install",
@@ -43,7 +45,9 @@ def test_poetry_install_w_extras(
 ) -> None:
     """Test call with extras specified."""
     run = mocker.patch.object(session, "_run", autospec=True)
-    session.poetry_install("extra1 extra2")
+
+    session.poetry_install("extra1 extra2")  # act
+
     run.assert_called_once_with(
         "poetry",
         "install",
@@ -60,7 +64,9 @@ def test_poetry_install_w_nono_flags(
 ) -> None:
     """Test call no_root and no_dev."""
     run = mocker.patch.object(session, "_run", autospec=True)
-    session.poetry_install(no_root=True, no_dev=True)
+
+    session.poetry_install(no_root=True, no_dev=True)  # act
+
     run.assert_called_once_with(
         "poetry",
         "install",
@@ -77,7 +83,9 @@ def test_poetry_install_w_all_install_args(
 ) -> None:
     """Test call extras and no_root and no_dev."""
     run = mocker.patch.object(session, "_run", autospec=True)
-    session.poetry_install("extra1 extra2", no_root=True, no_dev=True)
+
+    session.poetry_install("extra1 extra2", no_root=True, no_dev=True)  # act
+
     run.assert_called_once_with(
         "poetry",
         "install",
@@ -107,7 +115,9 @@ def test_poetry_install_non_default_kwargs(
 ) -> None:
     """Test call of non default kwargs."""
     run = mocker.patch.object(session, "_run", autospec=True)
-    session.poetry_install(silent=False)
+
+    session.poetry_install(silent=False)  # act
+
     run.assert_called_once_with(
         "poetry",
         "install",
@@ -122,7 +132,9 @@ def test_poetry_install_pip_require_venv_false(
 ) -> None:
     """Test call with pip_require_venv False."""
     run = mocker.patch.object(nox.command, "run")
-    session.poetry_install()
+
+    session.poetry_install()  # act
+
     run.assert_called_once_with(
         ("poetry", "install"),
         env={},
@@ -138,7 +150,9 @@ def test_poetry_install_pip_require_venv_true(
 ) -> None:
     """Test call with pip_require_venv False."""
     run = mocker.patch.object(nox.command, "run")
-    session.poetry_install(pip_require_venv=True)
+
+    session.poetry_install(pip_require_venv=True)  # act
+
     run.assert_called_once_with(
         ("poetry", "install"),
         env={"PIP_REQUIRE_VIRTUALENV": "true"},
@@ -154,7 +168,9 @@ def test_poetry_install_pip_require_venv_true_w_env_set(
 ) -> None:
     """Test call with pip_require_venv False and kwarg env set."""
     run = mocker.patch.object(nox.command, "run")
-    session.poetry_install(pip_require_venv=True, env={"TEST": "success"})
+
+    session.poetry_install(pip_require_venv=True, env={"TEST": "success"})  # act
+
     run.assert_called_once_with(
         ("poetry", "install"),
         env={"TEST": "success", "PIP_REQUIRE_VIRTUALENV": "true"},
@@ -170,7 +186,6 @@ def test_poetry_install_install_missing_poetry(
     """Test call with missing poetry executable."""
     mocker.patch.object(nox_session, "where_installed", return_value=(0, None, None))
     run = mocker.patch.object(nox.command, "run")
-    session.poetry_install()
     calls = [
         mocker.call(
             ("python", "-m", "pip", "install", "poetry>=1"),
@@ -187,10 +202,13 @@ def test_poetry_install_install_missing_poetry(
             paths=mocker.ANY,
         ),
     ]
+
+    session.poetry_install()  # act
+
     run.assert_has_calls(calls)
 
 
-@pytest.mark.usefixtures("_poetry_installed")
+@pytest.mark.usefixtures("_poetry_installed")  # noqa: AAA02
 def test_run_install_only_should_install(
     session: nox_session.Session,
     runner: nox.sessions.SessionRunner,
@@ -198,10 +216,10 @@ def test_run_install_only_should_install(
 ) -> None:
     """Test poetry_install run when `install_only` is True."""
     runner.global_config.install_only = True
-
     run = mocker.patch.object(nox.command, "run")
-    session.poetry_install("spam")
-    session.run("spam", "eggs")
+
+    session.poetry_install("spam")  # act
+    session.run("spam", "eggs")  # act
 
     run.assert_called_once_with(
         ("poetry", "install", "--extras", "spam"),
@@ -214,16 +232,19 @@ def test_run_install_only_should_install(
 
 def test_session_w_poetry_decorator_name_overwrite() -> None:
     """Test if decorator takes decorated functions name and docstring."""
+
     def testing_func() -> None:
         """Test docstr."""
-        pass
-    deco_func = nox_session.session_w_poetry(testing_func)
+
+    deco_func = nox_session.session_w_poetry(testing_func)  # act
 
     assert deco_func.__name__ == testing_func.__name__
     assert deco_func.__doc__ == testing_func.__doc__
 
 
-def test_session_w_poetry_decorator_session_change(runner: nox.sessions.SessionRunner, mocker: MockerFixture) -> None:
+def test_session_w_poetry_decorator_session_change(  # noqa: AAA01
+    runner: nox.sessions.SessionRunner, mocker: MockerFixture
+) -> None:
     """Test if decorator changes session class."""
     mocker.patch.object(nox.command, "run")
 

@@ -1,13 +1,13 @@
 Welcome to formelsammlung's documentation!
 ==========================================
 
+.. include:: _badges.rst
+
 **Collection of different multipurpose functions.**
+
 
 This library is a collection of different functions I developed which I use in different
 projects so I put them here.
-
-
-.. include:: badges.rst
 
 
 .. toctree::
@@ -19,7 +19,7 @@ projects so I put them here.
 
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 2
    :caption: API Reference:
 
    api
@@ -29,5 +29,7 @@ projects so I put them here.
    :maxdepth: 2
    :caption: Miscellaneous:
 
+   contribution/index
    changelog
+   authors
    license

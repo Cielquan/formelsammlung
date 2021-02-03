@@ -1,0 +1,32 @@
+#: Workaround for https://github.com/actions/virtual-environments/issues/1281
+#: Dummy tests for pleasing PR merge requirements
+# NOTE: DO NOT FORGET TO UPDATE `test-docs.yml` TOO !!!
+---
+name: Test documentation (Skip)
+
+
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+    branches:
+      - '**'
+    paths-ignore:
+      #: Source changes
+      - 'docs/**'
+      - 'src/**/*.py'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+      #: Dependency changes
+      - 'poetry.lock'
+      - 'pyproject.toml'
+      #: Test config changes
+      - 'tox.ini'
+      - 'noxfile.py'
+      - '.github/workflows/test-docs.yml'
+
+
+jobs:
+  test-docs:
+    name: nox / full_test_docs
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0

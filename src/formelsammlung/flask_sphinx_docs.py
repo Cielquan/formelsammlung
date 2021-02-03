@@ -1,20 +1,19 @@
-# noqa: D205,D208,D400
 """
     formelsammlung.flask_sphinx_docs
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Serve sphinx docs in your flask app.
 
-    :copyright: (c) Christian Riedel
-    :license: GPLv3
-"""
+    :copyright: (c) 2020, Christian Riedel and AUTHORS
+    :license: GPL-3.0-or-later, see LICENSE for details
+"""  # noqa: D205,D208,D400
 from pathlib import Path
 from typing import Optional
 
 from flask import Flask, Response
 
 
-class SphinxDocServer:  # pylint: disable=R0903
+class SphinxDocServer:  # noqa: R0903
     """Serve your sphinx docs under `/docs/` on your own flask app.
 
     .. highlight:: python
@@ -41,10 +40,16 @@ class SphinxDocServer:  # pylint: disable=R0903
     .. highlight:: default
     """
 
-    def __init__(self, app: Optional[Flask] = None, **kwargs) -> None:
+    def __init__(
+        self,
+        app: Optional[Flask] = None,
+        *,
+        doc_dir: Optional[str] = None,
+        index_file: str = "index.html",
+    ) -> None:
         """Init SphinxDocServer."""
         if app is not None:
-            self.init_app(app, **kwargs)
+            self.init_app(app, doc_dir, index_file)
 
     def init_app(
         self, app: Flask, doc_dir: Optional[str] = None, index_file: str = "index.html"
@@ -60,20 +65,23 @@ class SphinxDocServer:  # pylint: disable=R0903
 
         @app.route("/docs/", defaults={"filename": index_file})
         @app.route("/docs/<path:filename>")
-        def web_docs(filename: str) -> Response:  # pylint: disable=W0612
+        def web_docs(filename: str) -> Response:  # noqa: W0612
             """Route the given doc page.
 
             :param filename: File name from URL
             :return: Requested doc page
             """
-            app.static_folder = doc_dir or self._find_build_docs(app.root_path or "")
+            static_folder = app.static_folder
+            app.static_folder = doc_dir or str(
+                self._find_built_docs(app.root_path or "")
+            )
             doc_file = app.send_static_file(filename)
-            app.static_folder = "static"
+            app.static_folder = static_folder
             return doc_file
 
     @staticmethod
-    def _find_build_docs(app_root: str, steps_up_the_tree: int = 3):
-        """Find build sphinx html docs.
+    def _find_built_docs(app_root: str, steps_up_the_tree: int = 3) -> Path:
+        """Find built sphinx html docs.
 
         :param app_root: Root directory of the app.
         :param steps_up_the_tree: Amount of steps to go up the file tree, defaults to 3
