@@ -39,6 +39,7 @@ For a list of all available releases see the
 - added Github templates
 - updated dev tools and repo structure to match my new *standard*
 - revised test suit
+- fixed `where_installed` tests for windows
 
 
 
