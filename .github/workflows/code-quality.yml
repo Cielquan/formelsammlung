@@ -170,7 +170,9 @@ jobs:
         run: |
           repo_dir=${GITHUB_REPOSITORY#${{ github.repository_owner }}/}
           echo "::set-output name=repo-dir::$repo_dir"
-        if: needs.pre-commit.result != 'skipped' && needs.set-git-env-vars.result != 'skipped'
+        if: >
+          needs.pre-commit.result != 'skipped' &&
+          needs.set-git-env-vars.result != 'skipped'
 
       - name: Set status via gihub API
         uses: octokit/request-action@v2.x
