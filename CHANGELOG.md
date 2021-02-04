@@ -16,7 +16,11 @@ For a list of all available releases see the
 
 
 ## Unreleased
-[diff v3.2.0...main](https://github.com/Cielquan/formelsammlung/compare/v3.2.0...main)
+[diff v4.0.0...main](https://github.com/Cielquan/formelsammlung/compare/v4.0.0...main)
+
+
+## [4.0.0](https://github.com/Cielquan/formelsammlung/releases/v4.0.0) (2021-02-04)
+[diff v3.2.0...v4.0.0](https://github.com/Cielquan/formelsammlung/compare/v3.2.0...v4.0.0)
 
 #### BREAKING CHANGES
 - `strcalc.calculate_string` now raises `strcalc.StringCalculatorError` exceptions
