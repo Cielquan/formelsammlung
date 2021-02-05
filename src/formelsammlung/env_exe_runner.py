@@ -21,7 +21,7 @@ EXE = "Scripts/{tool}.exe" if IS_WIN else "bin/{tool}"
 def _check_runner_envs(venv_runner: str, envs: List[str], tool: str) -> Optional[Path]:
     """Check if executable is found in any of the envs for given env runner."""
     for env in envs:
-        path = Path(f".{venv_runner}") / env / EXE.format(tool)
+        path = Path(f".{venv_runner}") / env / EXE.format(tool=tool)
         if path.is_file():
             return path
     return None
@@ -29,7 +29,7 @@ def _check_runner_envs(venv_runner: str, envs: List[str], tool: str) -> Optional
 
 def _check_venv(venv: str, tool: str) -> Optional[Path]:
     """Check if executable is found in venv."""
-    path = Path(venv) / EXE.format(tool)
+    path = Path(venv) / EXE.format(tool=tool)
     if path.is_file():
         return path
     return None
