@@ -8,11 +8,18 @@
     :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
 from decimal import Decimal
+import re
 from typing import Union
 
 import pytest
 
-from formelsammlung.envvar import FALSE_BOOL_VALUES, TRUE_BOOL_VALUES
+from formelsammlung.envvar import (
+    FALSE_BOOL_VALUES,
+    FLOAT_REGEX,
+    INT_REGEX,
+    TRUE_BOOL_VALUES,
+    EnvVarGetter,
+)
 from formelsammlung.envvar import getenv_typed as get
 
 
@@ -160,3 +167,185 @@ def test_raise_wrong_bool_value(monkeypatch: pytest.MonkeyPatch) -> None:
 
     with pytest.raises(KeyError):
         get("TEST_BOOL_ERROR", rv_type=bool)
+
+
+# Test class
+
+
+def test_EnvVarGetter_init() -> None:  # noqa: C0103,N802
+    """Test constructor of EnvVarGetter."""
+    instance = EnvVarGetter()
+
+    result = instance.int_regex_pattern
+
+    assert result == re.compile(INT_REGEX)
+
+
+def test_EnvVarGetter_true_bool_values_getter() -> None:  # noqa: C0103,N802
+    """Test true_bool_values getter of EnvVarGetter."""
+    instance = EnvVarGetter()
+
+    result = instance.true_bool_values
+
+    assert result == set(TRUE_BOOL_VALUES)
+
+
+def test_EnvVarGetter_true_bool_values_setter() -> None:  # noqa: C0103,N802
+    """Test true_bool_values setter of EnvVarGetter."""
+    instance = EnvVarGetter()
+    new_value = {"fake_true"}
+    instance.true_bool_values = new_value
+
+    result = instance.true_bool_values
+
+    assert result == new_value
+
+
+def test_EnvVarGetter_false_bool_values_getter() -> None:  # noqa: C0103,N802
+    """Test false_bool_values getter of EnvVarGetter."""
+    instance = EnvVarGetter()
+
+    result = instance.false_bool_values
+
+    assert result == set(FALSE_BOOL_VALUES)
+
+
+def test_EnvVarGetter_false_bool_values_setter() -> None:  # noqa: C0103,N802
+    """Test false_bool_values setter of EnvVarGetter."""
+    instance = EnvVarGetter()
+    new_value = {"fake_false"}
+    instance.false_bool_values = new_value
+
+    result = instance.false_bool_values
+
+    assert result == new_value
+
+
+def test_EnvVarGetter_int_regex_getter() -> None:  # noqa: C0103,N802
+    """Test int_regex getter of EnvVarGetter."""
+    instance = EnvVarGetter()
+
+    result = instance.int_regex
+
+    assert result == INT_REGEX
+
+
+def test_EnvVarGetter_int_regex_setter() -> None:  # noqa: C0103,N802
+    """Test int_regex setter of EnvVarGetter."""
+    instance = EnvVarGetter()
+    new_value = "int-regex"
+    instance.int_regex = new_value
+
+    result = instance
+
+    assert result.int_regex == new_value
+    assert result.int_regex_pattern == re.compile(new_value)
+
+
+def test_EnvVarGetter_int_regex_pattern_getter() -> None:  # noqa: C0103,N802
+    """Test int_regex_pattern getter of EnvVarGetter."""
+    instance = EnvVarGetter()
+
+    result = instance.int_regex_pattern
+
+    assert result == re.compile(INT_REGEX)
+
+
+def test_EnvVarGetter_int_regex_pattern_setter() -> None:  # noqa: C0103,N802
+    """Test int_regex_pattern setter of EnvVarGetter."""
+    instance = EnvVarGetter()
+
+    with pytest.raises(AttributeError, match="int_regex_pattern"):
+        instance.int_regex_pattern = re.compile("")
+
+
+def test_EnvVarGetter_float_regex_getter() -> None:  # noqa: C0103,N802
+    """Test float_regex getter of EnvVarGetter."""
+    instance = EnvVarGetter()
+
+    result = instance.float_regex
+
+    assert result == FLOAT_REGEX
+
+
+def test_EnvVarGetter_float_regex_setter() -> None:  # noqa: C0103,N802
+    """Test float_regex setter of EnvVarGetter."""
+    instance = EnvVarGetter()
+    new_value = "int-regex"
+    instance.float_regex = new_value
+
+    result = instance
+
+    assert result.float_regex == new_value
+    assert result.float_regex_pattern == re.compile(new_value)
+
+
+def test_EnvVarGetter_float_regex_pattern_getter() -> None:  # noqa: C0103,N802
+    """Test float_regex_pattern getter of EnvVarGetter."""
+    instance = EnvVarGetter()
+
+    result = instance.float_regex_pattern
+
+    assert result == re.compile(FLOAT_REGEX)
+
+
+def test_EnvVarGetter_float_regex_pattern_setter() -> None:  # noqa: C0103,N802
+    """Test float_regex_pattern setter of EnvVarGetter."""
+    instance = EnvVarGetter()
+
+    with pytest.raises(AttributeError, match="float_regex_pattern"):
+        instance.float_regex_pattern = re.compile("")
+
+
+def test_EnvVarGetter__guess_bool_true() -> None:  # noqa: C0103,N802
+    """Test _guess_bool of EnvVarGetter for True."""
+    instance = EnvVarGetter()
+
+    result = instance._guess_bool("yes")
+
+    assert result is True
+
+
+def test_EnvVarGetter__guess_bool_false() -> None:  # noqa: C0103,N802
+    """Test _guess_bool of EnvVarGetter for False."""
+    instance = EnvVarGetter()
+
+    result = instance._guess_bool("no")
+
+    assert result is False
+
+
+def test_EnvVarGetter__guess_bool_none() -> None:  # noqa: C0103,N802
+    """Test _guess_bool of EnvVarGetter for None."""
+    instance = EnvVarGetter()
+
+    result = instance._guess_bool("no-bool")
+
+    assert result is None
+
+
+def test_EnvVarGetter__guess_num_int() -> None:  # noqa: C0103,N802
+    """Test _guess_num of EnvVarGetter for int."""
+    instance = EnvVarGetter()
+
+    result = instance._guess_num("32")
+
+    assert result == 32
+
+
+def test_EnvVarGetter__guess_num_float() -> None:  # noqa: C0103,N802
+    """Test _guess_num of EnvVarGetter for float."""
+    instance = EnvVarGetter()
+
+    result = instance._guess_num("32.69")
+
+    assert result == 32.69
+
+
+def test_EnvVarGetter__guess_num_none() -> None:  # noqa: C0103,N802
+    """Test _guess_num of EnvVarGetter for none."""
+    instance = EnvVarGetter()
+
+    result = instance._guess_num("no-number")
+
+    assert result is None
