@@ -26,6 +26,7 @@ For a list of all available releases see the
 
 #### Documentation
 - improved docs for `envvar.py`
+- improved docs for `flask_sphinx_docs.py`
 
 #### Miscellaneous
 - updated code-climate config for maintainability checks
@@ -33,6 +34,8 @@ For a list of all available releases see the
 - refactored `env_var_runner.py` to reduce cognitive complexity and added tests for new
   code
 - refactored `envvar.py` to reduce cognitive complexity and added tests for new code
+- refactored `flask_sphinx_docs.py` to reduce cognitive complexity and added tests for
+  new code
 
 
 

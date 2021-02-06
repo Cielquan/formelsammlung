@@ -85,13 +85,13 @@ def test_no_app_root() -> None:
 @pytest.mark.parametrize(
     ("doc_dir_name", "build_dir_name"), [("doc", "_build"), ("docs", "build")]
 )
-def test_doc_dir_guessing_option_1(
+def test_doc_dir_guessing_option(
     doc_dir_name: str,
     build_dir_name: str,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Test guessing of doc dir with 'doc/_build'."""
+    """Test guessing of doc dir."""
     test_repo = tmp_path / "testrepo"
     test_repo.mkdir()
     py_code_dir = test_repo / "src" / "testrepo"
@@ -112,3 +112,27 @@ def test_doc_dir_guessing_option_1(
     html_dir = build_dir / "html"
     html_dir.mkdir()
     assert SphinxDocServer._find_built_docs("fake_app_root") == html_dir
+
+
+@pytest.mark.parametrize("build_dir_name", ["_build", "build"])
+def test__find_build_dir(build_dir_name: str, tmp_path: Path) -> None:
+    """Test finding of build dir with _find_build_dir."""
+    doc_dir = tmp_path / "docdir"
+    doc_dir.mkdir()
+    build_dir = doc_dir / build_dir_name
+    build_dir.mkdir()
+
+    result = SphinxDocServer._find_build_dir(doc_dir)
+
+    assert result == build_dir
+
+
+def test__find_build_dir_error(tmp_path: Path) -> None:
+    """Test error when not finding build dir with _find_build_dir."""
+    doc_dir = tmp_path / "docdir"
+    doc_dir.mkdir()
+    build_dir = doc_dir / "fake_build"
+    build_dir.mkdir()
+
+    with pytest.raises(OSError, match="No '_build' or 'build'"):
+        SphinxDocServer._find_build_dir(doc_dir)
