@@ -10,7 +10,7 @@
 import os
 import re
 
-from typing import Any, Iterable, NoReturn, Optional, Set, Union
+from typing import Any, Iterable, NoReturn, Optional, Pattern, Set, Union
 
 
 #: Default values to convert to ``True`` for environment variables.
@@ -116,7 +116,7 @@ class EnvVarGetter:  # noqa: R0903
         self._int_regex_pattern = re.compile(self._int_regex)
 
     @property
-    def int_regex_pattern(self) -> re.Pattern:
+    def int_regex_pattern(self) -> Pattern[str]:
         """Regex pattern of :meth:`EnvVarGetter.int_regex`.
 
         Cannot be set. Set via :meth:`EnvVarGetter.int_regex`.
@@ -147,7 +147,7 @@ class EnvVarGetter:  # noqa: R0903
         self._float_regex_pattern = re.compile(self._float_regex)
 
     @property
-    def float_regex_pattern(self) -> re.Pattern:
+    def float_regex_pattern(self) -> Pattern[str]:
         """Regex pattern of :meth:`EnvVarGetter.float_regex`.
 
         Cannot be set. Set via :meth:`EnvVarGetter.float_regex`.
