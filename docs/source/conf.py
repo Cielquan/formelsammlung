@@ -112,7 +112,7 @@ intersphinx_mapping = {
     "flask": ("https://flask.palletsprojects.com/en/1.1.x/api/", "inv_flask.inv"),
     "nox": ("https://nox.thea.codes/en/stable/", "inv_nox.inv"),
 }
-nitpick_ignore = [('py:class', 'SessionRunner')]
+nitpick_ignore = [("py:class", "SessionRunner")]
 
 extensions.append("sphinx.ext.extlinks")
 extlinks = {
