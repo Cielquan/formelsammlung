@@ -58,7 +58,7 @@
         "Source" = "https://github.com/Cielquan/formelsammlung"
 
     [tool.poetry.dependencies]
-        python = "^3.6.1"
+        python = "^3.6.2"  # NOTE: update min_python_version below also
         importlib-metadata = {version = ">=1.6, <4.0", python = "<3.8"}
         flask = {version = "^1.1.2", optional = true}
         nox = {version = "^2020.12.31", optional = true}
@@ -229,6 +229,7 @@
     max_line_length = 88
     max_complexity = 20
     max_cognitive_complexity = 10
+    min_python_version = "3.6.2"
     pytest_fixture_no_parentheses = true
 
     [tool.flakehell.plugins]
