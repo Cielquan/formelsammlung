@@ -80,13 +80,18 @@ class Session(_Session):  # noqa: R0903
         """Wrap ``poetry install`` command for usage in  ``nox`` sessions.
 
         :param extras: string of space separated extras to install
-        :param no_dev: if ``--no-dev`` should be set; defaults to: False
-        :param no_root: if ``--no-root`` should be set; defaults to: False
+        :param no_dev: if ``--no-dev`` should be set
+
+            Default: ``False``
+        :param no_root: if ``--no-root`` should be set
+
+            Default: ``False``
         :param pip_require_venv: if ``True`` sets environment variable
             ``PIP_REQUIRE_VIRTUALENV`` to ``true`` for this call. ``pip`` then requires
             to be run inside a venv. ``pip`` is used to install ``poetry`` inside the
             venv, if no ``poetry`` executable can be found.
-        :param kwargs: same kwargs as ``Session.install()`` (see ``nox`` docs)
+        :param kwargs: same kwargs as :meth:`nox.sessions.Session.install` (see ``nox``
+            docs)
         """
         #: Safety hurdle copied from nox.sessions.Session.install()
         if not isinstance(self._runner.venv, (CondaEnv, VirtualEnv, PassthroughEnv)):
