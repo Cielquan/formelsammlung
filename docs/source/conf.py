@@ -112,6 +112,7 @@ intersphinx_mapping = {
     "flask": ("https://flask.palletsprojects.com/en/1.1.x/api/", "inv_flask.inv"),
     "nox": ("https://nox.thea.codes/en/stable/", "inv_nox.inv"),
 }
+nitpick_ignore = [("py:class", "SessionRunner")]
 
 extensions.append("sphinx.ext.extlinks")
 extlinks = {
@@ -131,6 +132,7 @@ apidoc_module_first = True
 apidoc_extra_args = []
 if Path("_apidoc_templates").is_dir():
     apidoc_extra_args += ["--templatedir", "apidoc_templates"]
+autoclass_content = "both"
 
 
 if find_spec("sphinxcontrib.apidoc") is not None:

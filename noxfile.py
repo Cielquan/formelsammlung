@@ -234,10 +234,12 @@ def test_code(session: Session) -> None:
         extras = "testing"
         session.poetry_install(
             extras,
-            no_root=(TOX_CALLS or SKIP_INSTALL),
+            no_root=True,
             no_dev=(TOX_CALLS or IN_CI),
             pip_require_venv=poetry_require_venv(session),
         )
+        if not (TOX_CALLS or SKIP_INSTALL):
+            session.install(".")
     else:
         session.log("Skipping install step.")
         #: Remove processed posargs
@@ -470,10 +472,12 @@ def docs(session: Session) -> None:
     if "skip_install" not in session.posargs:
         session.poetry_install(
             extras,
-            no_root=(TOX_CALLS or SKIP_INSTALL),
+            no_root=True,
             no_dev=(TOX_CALLS or IN_CI),
             pip_require_venv=poetry_require_venv(session),
         )
+        if not (TOX_CALLS or SKIP_INSTALL):
+            session.install(".")
     else:
         session.log("Skipping install step.")
 
@@ -500,10 +504,12 @@ def test_docs(session: Session, builder: str) -> None:
         extras = "docs"
         session.poetry_install(
             extras,
-            no_root=(TOX_CALLS or SKIP_INSTALL),
+            no_root=True,
             no_dev=(TOX_CALLS or IN_CI),
             pip_require_venv=poetry_require_venv(session),
         )
+        if not (TOX_CALLS or SKIP_INSTALL):
+            session.install(".")
     else:
         session.log("Skipping install step.")
         #: Remove processed posargs

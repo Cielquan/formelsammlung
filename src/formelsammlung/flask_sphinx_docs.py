@@ -14,31 +14,7 @@ from flask import Flask, Response
 
 
 class SphinxDocServer:  # noqa: R0903
-    """Serve your sphinx docs under `/docs/` on your own flask app.
-
-    .. highlight:: python
-
-    You can invoke it in your app factory::
-
-        sds = SphinxDocServer()
-
-        def create_app():
-            app = Flask(__name__)
-            sds.init_app(app)
-            return app
-
-    or you can include the plugin directly without setting a ``doc_dir``::
-
-        app = Flask(__name__)
-        SphinxDocServer(app)
-
-    or with setting a ``doc_dir``::
-
-        app = Flask(__name__)
-        SphinxDocServer(app, doc_dir="../../docs/build/html")
-
-    .. highlight:: default
-    """
+    """Serve your sphinx docs under `/docs/` on your own flask app."""
 
     def __init__(
         self,
@@ -47,7 +23,38 @@ class SphinxDocServer:  # noqa: R0903
         doc_dir: Optional[str] = None,
         index_file: str = "index.html",
     ) -> None:
-        """Init SphinxDocServer."""
+        """Init SphinxDocServer class.
+
+        .. highlight:: python
+
+        You can invoke it in your app factory::
+
+            sds = SphinxDocServer()
+
+            def create_app():
+                app = Flask(__name__)
+                sds.init_app(app)
+                return app
+
+        or you can include the plugin directly without setting a ``doc_dir``::
+
+            app = Flask(__name__)
+            SphinxDocServer(app)
+
+        or with setting a ``doc_dir``::
+
+            app = Flask(__name__)
+            SphinxDocServer(app, doc_dir="../../docs/build/html")
+
+        .. highlight:: default
+
+        :param app: Same argument as for and gets given to
+            :meth:`SphinxDocServer.init_app`.
+        :param doc_dir: Same argument as for and gets given to
+            :meth:`SphinxDocServer.init_app`.
+        :param index_file: Same argument as for and gets given to
+            :meth:`SphinxDocServer.init_app`.
+        """
         if app is not None:
             self.init_app(app, doc_dir, index_file)
 
@@ -80,6 +87,28 @@ class SphinxDocServer:  # noqa: R0903
             return doc_file
 
     @staticmethod
+    def _find_build_dir(doc_dir: Path) -> Path:
+        """Find build dir in given doc dir.
+
+        :param doc_dir: Path to doc dir
+        :raises IOError: if no '_build' or 'build' directory is found in the
+            doc/docs dir.
+        :return: Path to build dir
+        """
+        build_dir = None
+        if (doc_dir / "_build").is_dir():
+            build_dir = doc_dir / "_build"
+        if (doc_dir / "build").is_dir():
+            build_dir = doc_dir / "build"
+
+        if not build_dir:
+            raise OSError(
+                f"No '_build' or 'build' directory found in {doc_dir}. "
+                "Maybe you forgot to build the docs."
+            )
+        return build_dir
+
+    @staticmethod
     def _find_built_docs(app_root: str, steps_up_the_tree: int = 3) -> Path:
         """Find built sphinx html docs.
 
@@ -87,8 +116,6 @@ class SphinxDocServer:  # noqa: R0903
         :param steps_up_the_tree: Amount of steps to go up the file tree, defaults to 3
         :raises IOError: if no root dir path for the app is given.
         :raises IOError: if no 'doc' or 'docs' directory is found.
-        :raises IOError: if no '_build' or 'build' directory is found in the
-            doc/docs dir.
         :raises IOError: if no 'html' directory is found in the _build/build dir.
         :return: Path to directory holding the build sphinx docs.
         """
@@ -114,17 +141,7 @@ class SphinxDocServer:  # noqa: R0903
             raise OSError("No 'doc' or 'docs' directory found.")
 
         #: search for (_)build dir
-        build_dir = None
-        if (doc_dir / "_build").is_dir():
-            build_dir = doc_dir / "_build"
-        if (doc_dir / "build").is_dir():
-            build_dir = doc_dir / "build"
-
-        if not build_dir:
-            raise OSError(
-                f"No '_build' or 'build' directory found in {doc_dir}. "
-                "Maybe you forgot to build the docs."
-            )
+        build_dir = SphinxDocServer._find_build_dir(doc_dir)
 
         #: check for html dir
         if (build_dir / "html").is_dir():

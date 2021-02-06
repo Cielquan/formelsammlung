@@ -16,7 +16,7 @@ from typing import Optional
 
 import pytest
 
-import formelsammlung.venv_utils as vu
+from formelsammlung import venv_utils
 
 
 #: Test get_venv_path()
@@ -25,7 +25,7 @@ def test_get_venv_path_w_real_prefix(monkeypatch: pytest.MonkeyPatch) -> None:
     sys.real_prefix = ""  # type: ignore[attr-defined]
     monkeypatch.setattr(sys, "real_prefix", "path-to-venv-via-real_prefix")
 
-    result = vu.get_venv_path()
+    result = venv_utils.get_venv_path()
 
     assert result == Path("path-to-venv-via-real_prefix")
 
@@ -35,7 +35,7 @@ def test_get_venv_path_w_prefix(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delattr(sys, "real_prefix", raising=False)
     monkeypatch.setattr(sys, "prefix", "path-to-venv-via-prefix")
 
-    result = vu.get_venv_path()
+    result = venv_utils.get_venv_path()
 
     assert result == Path("path-to-venv-via-prefix")
 
@@ -46,7 +46,7 @@ def test_get_venv_path_raise(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(sys, "prefix", sys.base_prefix)
 
     with pytest.raises(FileNotFoundError) as excinfo:
-        vu.get_venv_path()
+        venv_utils.get_venv_path()
 
     assert "No calling venv could" in str(excinfo.value)
 
@@ -55,10 +55,10 @@ def test_get_venv_path_raise(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_get_venv_bin_dir(tmp_path: Path) -> None:
     """Test get_venv_bin_dir return a venv's bin/Scripts dir."""
     fake_venv = tmp_path / ".venv"
-    bin_dir = fake_venv / vu.OS_BIN
+    bin_dir = fake_venv / venv_utils.OS_BIN
     bin_dir.mkdir(parents=True)
 
-    result = vu.get_venv_bin_dir(fake_venv)
+    result = venv_utils.get_venv_bin_dir(fake_venv)
 
     assert result == bin_dir
 
@@ -69,7 +69,7 @@ def test_get_venv_bin_dir_raise(tmp_path: Path) -> None:
     fake_venv.mkdir(parents=True)
 
     with pytest.raises(FileNotFoundError) as excinfo:
-        vu.get_venv_bin_dir(fake_venv)
+        venv_utils.get_venv_bin_dir(fake_venv)
 
     assert "Given venv has no" in str(excinfo.value)
 
@@ -82,7 +82,7 @@ def test_get_venv_tmp_dir(tmp_dir_name: str, tmp_path: Path) -> None:
     tmp_dir = fake_venv / tmp_dir_name
     tmp_dir.mkdir(parents=True)
 
-    result = vu.get_venv_tmp_dir(fake_venv)
+    result = venv_utils.get_venv_tmp_dir(fake_venv)
 
     assert result == tmp_dir
 
@@ -93,7 +93,7 @@ def test_get_venv_tmp_dir_custom_search(tmp_path: Path) -> None:
     tmp_dir = fake_venv / "custom_tmp"
     tmp_dir.mkdir(parents=True)
 
-    result = vu.get_venv_tmp_dir(fake_venv, search_tmp_dirs=("custom_tmp",))
+    result = venv_utils.get_venv_tmp_dir(fake_venv, search_tmp_dirs=("custom_tmp",))
 
     assert result == tmp_dir
 
@@ -109,7 +109,7 @@ def test_get_venv_tmp_dir_create_if_missing(
     fake_venv.mkdir(parents=True)
     tmp_dir = fake_venv / tmp_dir_name
 
-    result = vu.get_venv_tmp_dir(
+    result = venv_utils.get_venv_tmp_dir(
         fake_venv, create_if_missing=True, create_dir_name=create_dir_name
     )
 
@@ -122,7 +122,7 @@ def test_get_venv_tmp_dir_raise(tmp_path: Path) -> None:
     fake_venv.mkdir(parents=True)
 
     with pytest.raises(FileNotFoundError) as excinfo:
-        vu.get_venv_tmp_dir(fake_venv)
+        venv_utils.get_venv_tmp_dir(fake_venv)
 
     assert "Given venv has no" in str(excinfo.value)
 
@@ -134,7 +134,7 @@ def test_get_venv_site_packages_dir(tmp_path: Path) -> None:
     site_pkg_dir = fake_venv / "lib" / "pythonX.Y" / "site-packages"
     site_pkg_dir.mkdir(parents=True)
 
-    result = vu.get_venv_site_packages_dir(fake_venv)
+    result = venv_utils.get_venv_site_packages_dir(fake_venv)
 
     assert result == site_pkg_dir
 
@@ -145,7 +145,7 @@ def test_get_venv_site_packages_dir_raise(tmp_path: Path) -> None:
     fake_venv.mkdir(parents=True)
 
     with pytest.raises(FileNotFoundError) as excinfo:
-        vu.get_venv_site_packages_dir(fake_venv)
+        venv_utils.get_venv_site_packages_dir(fake_venv)
 
     assert "Given venv has no" in str(excinfo.value)
 
@@ -155,7 +155,7 @@ def test_where_installed_nowhere(monkeypatch: pytest.MonkeyPatch) -> None:
     """Test where_installed with not existing program."""
     monkeypatch.setattr(shutil, "which", lambda _: None)
 
-    result = vu.where_installed("no_existing_program")
+    result = venv_utils.where_installed("no_existing_program")
 
     assert result == (0, None, None)
 
@@ -167,17 +167,17 @@ def test_where_installed_only_venv(
     fake_glob_bin = tmp_path / "bin"
     #: create fake venv dir
     fake_venv = tmp_path / ".venv"
-    monkeypatch.setattr(vu, "get_venv_path", lambda: fake_venv)
+    monkeypatch.setattr(venv_utils, "get_venv_path", lambda: fake_venv)
     #: create fake exe file
-    fake_venv_bin = fake_venv / vu.OS_BIN
+    fake_venv_bin = fake_venv / venv_utils.OS_BIN
     fake_exe = fake_venv_bin / "venv_program"
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
     monkeypatch.setattr(
-        vu.shutil, "which", lambda _, path=None: None if path else str(fake_exe)
+        venv_utils.shutil, "which", lambda _, path=None: None if path else str(fake_exe)
     )
 
-    result = vu.where_installed("venv_program")
+    result = venv_utils.where_installed("venv_program")
 
     assert result == (1, str(fake_exe), None)
 
@@ -188,9 +188,9 @@ def test_integr_where_installed_only_venv(
     """Test where_installed with only global existing program and with venv."""
     #: create fake venv dir
     fake_venv = tmp_path / ".venv"
-    monkeypatch.setattr(vu, "get_venv_path", lambda: fake_venv)
+    monkeypatch.setattr(venv_utils, "get_venv_path", lambda: fake_venv)
     #: create fake venv bin dir
-    fake_venv_bin = fake_venv / vu.OS_BIN
+    fake_venv_bin = fake_venv / venv_utils.OS_BIN
     fake_venv_bin.mkdir(parents=True)
     #: create fake global bin dir
     fake_glob_bin = tmp_path / "bin"
@@ -203,7 +203,7 @@ def test_integr_where_installed_only_venv(
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
 
-    result = vu.where_installed("venv_program")
+    result = venv_utils.where_installed("venv_program")
 
     assert result == (1, str(fake_exe), None)
 
@@ -212,16 +212,16 @@ def test_where_installed_only_global_no_venv(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Test where_installed with only global existing program and no venv."""
-    monkeypatch.setattr(vu, "get_venv_path", lambda: None)
+    monkeypatch.setattr(venv_utils, "get_venv_path", lambda: None)
     #: create fake global bin dir
     fake_glob_bin = tmp_path / "bin"
     #: create fake exe file
     fake_exe = fake_glob_bin / "global_program"
     #: adjust PATH
     os.environ["PATH"] = str(fake_glob_bin)
-    monkeypatch.setattr(vu.shutil, "which", lambda _, path=None: str(fake_exe))
+    monkeypatch.setattr(venv_utils.shutil, "which", lambda _, path=None: str(fake_exe))
 
-    result = vu.where_installed("global_program")
+    result = venv_utils.where_installed("global_program")
 
     assert result == (2, None, str(fake_exe))
 
@@ -230,7 +230,7 @@ def test_integr_where_installed_only_global_no_venv(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Test where_installed with only global existing program and no venv."""
-    monkeypatch.setattr(vu, "get_venv_path", lambda: None)
+    monkeypatch.setattr(venv_utils, "get_venv_path", lambda: None)
     #: create fake global bin dir
     fake_glob_bin = tmp_path / "bin"
     fake_glob_bin.mkdir()
@@ -242,7 +242,7 @@ def test_integr_where_installed_only_global_no_venv(
     #: adjust PATH
     os.environ["PATH"] = str(fake_glob_bin)
 
-    result = vu.where_installed("global_program")
+    result = venv_utils.where_installed("global_program")
 
     assert result == (2, None, str(fake_exe))
 
@@ -253,18 +253,18 @@ def test_where_installed_only_global_with_venv(
     """Test where_installed with only global existing program and with venv."""
     #: create fake venv dir
     fake_venv = tmp_path / ".venv"
-    monkeypatch.setattr(vu, "get_venv_path", lambda: fake_venv)
+    monkeypatch.setattr(venv_utils, "get_venv_path", lambda: fake_venv)
     #: create fake venv bin dir
-    fake_venv_bin = fake_venv / vu.OS_BIN
+    fake_venv_bin = fake_venv / venv_utils.OS_BIN
     #: create fake global bin dir
     fake_glob_bin = tmp_path / "bin"
     #: create fake exe file
     fake_exe = fake_glob_bin / "global_program"
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
-    monkeypatch.setattr(vu.shutil, "which", lambda _, path=None: str(fake_exe))
+    monkeypatch.setattr(venv_utils.shutil, "which", lambda _, path=None: str(fake_exe))
 
-    result = vu.where_installed("global_program")
+    result = venv_utils.where_installed("global_program")
 
     assert result == (2, None, str(fake_exe))
 
@@ -275,9 +275,9 @@ def test_integr_where_installed_only_global_with_venv(
     """Test where_installed with only global existing program and with venv."""
     #: create fake venv dir
     fake_venv = tmp_path / ".venv"
-    monkeypatch.setattr(vu, "get_venv_path", lambda: fake_venv)
+    monkeypatch.setattr(venv_utils, "get_venv_path", lambda: fake_venv)
     #: create fake venv bin dir
-    fake_venv_bin = fake_venv / vu.OS_BIN
+    fake_venv_bin = fake_venv / venv_utils.OS_BIN
     fake_venv_bin.mkdir(parents=True)
     #: create fake global bin dir
     fake_glob_bin = tmp_path / "bin"
@@ -290,7 +290,7 @@ def test_integr_where_installed_only_global_with_venv(
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
 
-    result = vu.where_installed("global_program")
+    result = venv_utils.where_installed("global_program")
 
     assert result == (2, None, str(fake_exe))
 
@@ -299,9 +299,9 @@ def test_where_installed_both(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
     """Test where_installed with only global existing program and with venv."""
     #: create fake venv dir
     fake_venv = tmp_path / ".venv"
-    monkeypatch.setattr(vu, "get_venv_path", lambda: fake_venv)
+    monkeypatch.setattr(venv_utils, "get_venv_path", lambda: fake_venv)
     #: create fake venv bin dir
-    fake_venv_bin = fake_venv / vu.OS_BIN
+    fake_venv_bin = fake_venv / venv_utils.OS_BIN
     #: create fake exe file in venv bin dir
     venv_fake_exe = fake_venv_bin / "program"
     #: create fake global bin dir
@@ -311,12 +311,12 @@ def test_where_installed_both(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
     monkeypatch.setattr(
-        vu.shutil,
+        venv_utils.shutil,
         "which",
         lambda _, path=None: str(glob_fake_exe) if path else str(venv_fake_exe),
     )
 
-    result = vu.where_installed("program")
+    result = venv_utils.where_installed("program")
 
     assert result == (3, str(venv_fake_exe), str(glob_fake_exe))
 
@@ -327,9 +327,9 @@ def test_integr_where_installed_both(
     """Test where_installed with only global existing program and with venv."""
     #: create fake venv dir
     fake_venv = tmp_path / ".venv"
-    monkeypatch.setattr(vu, "get_venv_path", lambda: fake_venv)
+    monkeypatch.setattr(venv_utils, "get_venv_path", lambda: fake_venv)
     #: create fake venv bin dir
-    fake_venv_bin = fake_venv / vu.OS_BIN
+    fake_venv_bin = fake_venv / venv_utils.OS_BIN
     fake_venv_bin.mkdir(parents=True)
     #: create fake exe file in venv bin dir
     program = "program" if sys.platform != "win32" else "program.EXE"
@@ -346,6 +346,6 @@ def test_integr_where_installed_both(
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
 
-    result = vu.where_installed("program")
+    result = venv_utils.where_installed("program")
 
     assert result == (3, str(venv_fake_exe), str(glob_fake_exe))

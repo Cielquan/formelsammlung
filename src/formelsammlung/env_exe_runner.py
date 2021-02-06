@@ -14,6 +14,27 @@ from pathlib import Path
 from typing import List, Optional
 
 
+IS_WIN = sys.platform == "win32"
+EXE = "Scripts/{tool}.exe" if IS_WIN else "bin/{tool}"
+
+
+def _check_runner_envs(venv_runner: str, envs: List[str], tool: str) -> Optional[Path]:
+    """Check if executable is found in any of the envs for given env runner."""
+    for env in envs:
+        path = Path(f".{venv_runner}") / env / EXE.format(tool=tool)
+        if path.is_file():
+            return path
+    return None
+
+
+def _check_venv(venv: str, tool: str) -> Optional[Path]:
+    """Check if executable is found in venv."""
+    path = Path(venv) / EXE.format(tool=tool)
+    if path.is_file():
+        return path
+    return None
+
+
 def env_exe_runner(
     venv_runner: List[str],
     envs: List[str],
@@ -31,42 +52,28 @@ def env_exe_runner(
     :param tool_args: Arguments to give to the ``tool``.
     :return: Exit code 127 if no executable is found or the exit code of the called cmd.
     """
-    is_win = sys.platform == "win32"
-
-    exe = Path(f"Scripts/{tool}.exe") if is_win else Path(f"bin/{tool}")
-    cmd = None
-
-    if not tool_args:
-        tool_args = []
-
+    cmd_path = None
     error_msgs = []
 
     for runner in venv_runner:
 
         if runner in ("tox", "nox"):
             error_msgs.append(f"- '{runner}' envs: {envs}")
-
-            for env in envs:
-                path = Path(f".{runner}") / env / exe
-                if path.is_file():
-                    cmd = (str(path), *tool_args)
-                    break
-
+            cmd_path = _check_runner_envs(runner, envs, tool)
         else:
             error_msgs.append(f"- virtual env: ['{runner}']")
+            cmd_path = _check_venv(runner, tool)
 
-            path = Path(runner) / exe
-            if path.is_file():
-                cmd = (str(path), *tool_args)
-                break
+        if cmd_path is not None:
+            break
 
-    if cmd is None:
+    if cmd_path is None:
         print(f"No '{tool}' executable found. Searched in:")
         for msg in error_msgs:
             print(msg)
         return 127
 
-    return subprocess.call(cmd)  # noqa: S603
+    return subprocess.call([str(cmd_path), *(tool_args or [])])  # noqa: S603
 
 
 def cli_caller() -> int:
