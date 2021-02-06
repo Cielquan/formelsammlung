@@ -27,7 +27,7 @@
 #: -- POETRY CONFIG --------------------------------------------------------------------
 [tool.poetry]
     name = "formelsammlung"
-    version = "4.0.0"
+    version = "5.0.0"
     description = "Collection of different functions"
     authors = ["Christian Riedel <cielquan@protonmail.com>"]
     license = "GPL-3.0-or-later"
