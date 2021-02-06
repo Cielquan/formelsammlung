@@ -7,8 +7,9 @@
     :copyright: (c) 2020, Christian Riedel and AUTHORS
     :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
-from decimal import Decimal
 import re
+
+from decimal import Decimal
 from typing import Union
 
 import pytest

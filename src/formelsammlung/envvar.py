@@ -35,7 +35,7 @@ class EnvVarGetter:  # noqa: R0903
         int_regex: Optional[str] = None,
         float_regex: Optional[str] = None,
     ) -> None:
-        """Intitialize :class:`EnvVarGetter` with config values.
+        """Initialize :class:`EnvVarGetter` with config values.
 
         Use the :class:`EnvVarGetter` instance to call :meth:`EnvVarGetter.getenv_typed`
         with the set config.
@@ -74,7 +74,7 @@ class EnvVarGetter:  # noqa: R0903
 
     @property
     def true_bool_values(self) -> Set[str]:
-        """Set of objects to identify ``True`` booleans.
+        """Set of objects to identify a ``True`` boolean.
 
         See parameters of :class:`EnvVarGetter`.
         """
@@ -88,7 +88,7 @@ class EnvVarGetter:  # noqa: R0903
 
     @property
     def false_bool_values(self) -> Set[str]:
-        """Set of objects to identify ``False`` booleans.
+        """Set of objects to identify a ``False`` boolean.
 
         See parameters of :class:`EnvVarGetter`.
         """
