@@ -18,6 +18,23 @@ For a list of all available releases see the
 ## Unreleased
 [diff v4.0.0...main](https://github.com/Cielquan/formelsammlung/compare/v4.0.0...main)
 
+#### BREAKING CHANGES
+- change min python version from `3.6.1` to `3.6.2`
+
+#### New features
+- refactored `getenv_typed()` *backend* into `EnvVarGetter` class which holds the config
+
+#### Documentation
+- improved docs for `envvar.py`
+
+#### Miscellaneous
+- updated code-climate config for maintainability checks
+  [#26](https://github.com/Cielquan/formelsammlung/issues/26)
+- refactored `env_var_runner.py` to reduce cognitive complexity and added tests for new
+  code
+- refactored `envvar.py` to reduce cognitive complexity and added tests for new code
+
+
 
 ## [4.0.0](https://github.com/Cielquan/formelsammlung/releases/v4.0.0) (2021-02-04)
 [diff v3.2.0...v4.0.0](https://github.com/Cielquan/formelsammlung/compare/v3.2.0...v4.0.0)
