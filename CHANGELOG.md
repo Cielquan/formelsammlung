@@ -16,7 +16,11 @@ For a list of all available releases see the
 
 
 ## Unreleased
-[diff v4.0.0...main](https://github.com/Cielquan/formelsammlung/compare/v4.0.0...main)
+[diff v5.0.0...main](https://github.com/Cielquan/formelsammlung/compare/v5.0.0...main)
+
+
+## [5.0.0](https://github.com/Cielquan/formelsammlung/releases/v5.0.0) (2021-02-06)
+[diff v4.0.0...v5.0.0](https://github.com/Cielquan/formelsammlung/compare/v4.0.0...v5.0.0)
 
 #### BREAKING CHANGES
 - change min python version from `3.6.1` to `3.6.2`
