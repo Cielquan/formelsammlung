@@ -27,6 +27,7 @@ For a list of all available releases see the
 #### Documentation
 - improved docs for `envvar.py`
 - improved docs for `flask_sphinx_docs.py`
+- improved docs for `nox_session.py`
 
 #### Miscellaneous
 - updated code-climate config for maintainability checks
