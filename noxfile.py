@@ -32,14 +32,17 @@ from typing import (
     Sequence,
     Tuple,
     Union,
+    cast,
 )
 
 import nox
 import nox.command  # TODO:#i# remove after bugfix (see below)
-import tomlkit  # type: ignore[import]
+import tomlkit
 
 from nox.command import CommandFailed
 from nox.logger import logger as nox_logger
+from tomlkit.container import Container
+from tomlkit.exceptions import NonExistentKey
 
 from formelsammlung.nox_session import Session, session_w_poetry
 from formelsammlung.venv_utils import get_venv_bin_dir, get_venv_path, get_venv_tmp_dir
@@ -101,10 +104,16 @@ COV_CACHE_DIR = NOXFILE_DIR / ".coverage_cache"
 #: -- CONFIG FROM PYPROJECT.TOML -------------------------------------------------------
 with open(NOXFILE_DIR / "pyproject.toml") as pyproject_file:
     PYPROJECT = tomlkit.parse(pyproject_file.read())
-PACKAGE_NAME = PYPROJECT["tool"]["poetry"]["name"]
-SKIP_INSTALL = PYPROJECT["tool"]["_testing"]["skip_install"]
-TOXENV_PYTHON_VERSIONS = PYPROJECT["tool"]["_testing"][f"toxenv_python_versions_{OS}"]
-TOXENV_DOCS_BUILDERS = PYPROJECT["tool"]["_testing"]["toxenv_docs_builders"]
+_POETRY_TABLE = cast(
+    Container, cast(Container, cast(Container, PYPROJECT)["tool"])["poetry"]
+)
+PACKAGE_NAME = cast(str, _POETRY_TABLE["name"])
+_TESTING_TABLE = cast(
+    Container, cast(Container, cast(Container, PYPROJECT)["tool"])["_testing"]
+)
+SKIP_INSTALL = cast(bool, _TESTING_TABLE["skip_install"])
+TOXENV_PYTHON_VERSIONS = cast(str, _TESTING_TABLE[f"toxenv_python_versions_{OS}"])
+TOXENV_DOCS_BUILDERS = cast(str, _TESTING_TABLE["toxenv_docs_builders"])
 
 
 def poetry_require_venv(session: Session) -> bool:
@@ -530,7 +539,9 @@ def test_docs(session: Session, builder: str) -> None:
 @session_w_poetry
 def install_extras(session: Session) -> None:
     """Install all specified extras."""
-    extras = PYPROJECT["tool"]["poetry"].get("extras")
+    extras = None
+    with contextlib.suppress(NonExistentKey):
+        extras = cast(list, _POETRY_TABLE["extras"])
 
     if not extras:
         session.skip("No extras found to be installed.")
