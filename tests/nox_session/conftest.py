@@ -27,6 +27,7 @@ def runner(mocker: MockerFixture) -> nox.sessions.SessionRunner:
     """Create mocked session runner for testing."""
     curr_py_ver = ".".join([str(v) for v in sys.version_info[0:2]])
     func = mocker.Mock(spec=["python"], python=curr_py_ver)
+    mocker.sentinel.posargs = []
     _runner = nox.sessions.SessionRunner(
         name="test",
         signatures=["test"],
