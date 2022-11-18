@@ -18,9 +18,9 @@
     ci_test_os = ["ubuntu", "macos", "windows"]
     cc_test_reporter_version = "latest-linux-amd64"
     skip_install = false  #: Application -> true || Library -> false
-    toxenv_python_versions_win32 = "py{39,38,37,36}"
-    toxenv_python_versions_darwin = "py{py3,39,38,37,36}"
-    toxenv_python_versions_linux = "py{py3,39,38,37,36}"
+    toxenv_python_versions_win32 = "py{311,310,39,38,37}"
+    toxenv_python_versions_darwin = "py{py3,311,310,39,38,37}"
+    toxenv_python_versions_linux = "py{py3,311,310,39,38,37}"
     toxenv_docs_builders = "test_docs-{html,linkcheck,coverage,doctest,spelling}"
 
 
