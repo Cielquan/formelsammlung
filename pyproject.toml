@@ -77,7 +77,7 @@
         sphinx = {version = ">=3.1,<5.0", optional = true}
         m2r2 = {version = "^0.3", optional = true}
         sphinx-autobuild = {version = "2021.3.14", optional = true}
-        python-dotenv = {version = ">=0.15,<0.19", optional = true}
+        python-dotenv = {version = ">=0.15,<0.22", optional = true}
         sphinx-rtd-theme = {version = "^0.5.1", optional = true}
         sphinx-autodoc-typehints = {version = "^1.11", optional = true}
         sphinxcontrib-apidoc = {version = "^0.3", optional = true}
