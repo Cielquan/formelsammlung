@@ -11,9 +11,9 @@
     # https://github.com/actions/setup-python/issues/98
     ci_test_python_versions = [
         #: pypy
-        "pypy-3.6", "pypy-3.7",
+        "pypy-3.7",
         #: cpython
-        "3.6", "3.7", "3.8", "3.9"
+        "3.7", "3.8", "3.9", "3.10", "3.11"
     ]
     ci_test_os = ["ubuntu", "macos", "windows"]
     cc_test_reporter_version = "latest-linux-amd64"
@@ -40,10 +40,6 @@
         "Operating System :: MacOS",
         "Operating System :: Microsoft :: Windows :: Windows 10",
         "Operating System :: POSIX :: Linux",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Software Development",
@@ -57,7 +53,7 @@
         "Source" = "https://github.com/Cielquan/formelsammlung"
 
     [tool.poetry.dependencies]
-        python = "^3.6.2"  # NOTE: update min_python_version below also
+        python = "^3.7"  # NOTE: update min_python_version below also
         importlib-metadata = {version = ">=1.6, <4.0", python = "<3.8"}
         flask = {version = ">=1.1.2,<3.0.0", optional = true}
         nox = {version = ">=2021.6.6,<2022.0.0", optional = true}
@@ -228,7 +224,7 @@
     max_line_length = 88
     max_complexity = 20
     max_cognitive_complexity = 10
-    min_python_version = "3.6.2"
+    min_python_version = "3.7"
     pytest_fixture_no_parentheses = true
 
     [tool.flakehell.plugins]
