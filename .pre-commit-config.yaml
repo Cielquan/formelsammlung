@@ -135,11 +135,9 @@ repos:
 #: -------------------------------------------------------------------------------------
 #: Poetry hooks
 #: -------------------------------------------------------------------------------------
-  # TODO:#i# wait for new release and change back to original repo
-  # TODO:#i# https://github.com/python-poetry/poetry/pull/2511
-  # - repo: https://github.com/python-poetry/poetry
+  # poetry - python dependency management
   - repo: https://github.com/Cielquan/mirrors-poetry
-    rev: 028e18fbe668509954227aba99158434dab1c713  # frozen: 1.1.4
+    rev: de20845626cb378ff59a7b009825b76ebadaca59 # frozen: 1.2.2
     hooks:
       - id: poetry-check
 
