@@ -1,12 +1,4 @@
-"""
-    tests.nox_session.test__nox_session
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Tests for nox_session.py.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Tests for `nox_session` module."""
 #: Tests are based on:
 #: https://github.com/theacodes/nox/blob/156765c343942233bf6cbfa59391ec63d6fedc29/tests/test_sessions.py  # noqa: E501
 import nox.command

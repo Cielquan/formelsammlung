@@ -1,12 +1,4 @@
-"""
-    formelsammlung.tox_env_exe_runner
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Call tools from tox environments.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Call tools from tox environments."""
 import subprocess  # noqa: S404
 import sys
 from pathlib import Path

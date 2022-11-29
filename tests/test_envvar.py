@@ -1,12 +1,4 @@
-"""
-    tests.test_envvar
-    ~~~~~~~~~~~~~~~~~
-
-    Tests for envvar.py.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Tests for `envvar` module."""
 import re
 from decimal import Decimal
 from typing import Union

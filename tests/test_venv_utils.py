@@ -1,12 +1,4 @@
-"""
-    tests.test_venv_utils
-    ~~~~~~~~~~~~~~~~~~~~~
-
-    Tests for venv_utils.py.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Tests for `venv_utils` module."""
 import os
 import shutil
 import sys

@@ -1,12 +1,4 @@
-"""
-    formelsammlung.nox_session
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Monkypatched ``nox`` session object.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Monkypatched ``nox`` session object."""
 from typing import Any, Callable, Dict, Optional
 
 from nox.sessions import CondaEnv, PassthroughEnv, Session as _Session, VirtualEnv

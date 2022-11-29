@@ -1,12 +1,4 @@
-"""
-    formelsammlung.envvar
-    ~~~~~~~~~~~~~~~~~~~~~
-
-    Get environment variables and transform their type.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Get environment variables and transform their type."""
 import os
 import re
 from typing import Any, Iterable, NoReturn, Optional, Pattern, Set, Union

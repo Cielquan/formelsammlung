@@ -1,12 +1,4 @@
-"""
-    formelsammlung.venv_utils
-    ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Utility function for working with virtual environments.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Utility function for working with virtual environments."""
 import contextlib
 import os
 import shutil

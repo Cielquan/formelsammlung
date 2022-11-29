@@ -1,12 +1,4 @@
-"""
-    formelsammlung.flask_sphinx_docs
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Serve sphinx docs in your flask app.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Serve sphinx docs in your flask app."""
 from pathlib import Path
 from typing import Optional
 
