@@ -88,5 +88,6 @@ txt
 venv
 venv's
 venv_runner
+virtualenv
 xml
 yaml
