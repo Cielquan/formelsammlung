@@ -162,9 +162,7 @@ def test_where_installed_only_venv(tmp_path: Path, monkeypatch: pytest.MonkeyPat
     fake_exe = fake_venv_bin / "venv_program"
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
-    monkeypatch.setattr(
-        venv_utils.shutil, "which", lambda _, path=None: None if path else str(fake_exe)
-    )
+    monkeypatch.setattr(shutil, "which", lambda _, path=None: None if path else str(fake_exe))
 
     result = venv_utils.where_installed("venv_program")
 
@@ -206,7 +204,7 @@ def test_where_installed_only_global_no_venv(
     fake_exe = fake_glob_bin / "global_program"
     #: adjust PATH
     os.environ["PATH"] = str(fake_glob_bin)
-    monkeypatch.setattr(venv_utils.shutil, "which", lambda _, path=None: str(fake_exe))
+    monkeypatch.setattr(shutil, "which", lambda _, path=None: str(fake_exe))
 
     result = venv_utils.where_installed("global_program")
 
@@ -249,7 +247,7 @@ def test_where_installed_only_global_with_venv(
     fake_exe = fake_glob_bin / "global_program"
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
-    monkeypatch.setattr(venv_utils.shutil, "which", lambda _, path=None: str(fake_exe))
+    monkeypatch.setattr(shutil, "which", lambda _, path=None: str(fake_exe))
 
     result = venv_utils.where_installed("global_program")
 
@@ -298,7 +296,7 @@ def test_where_installed_both(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
     #: adjust PATH
     os.environ["PATH"] = str(fake_venv_bin) + os.pathsep + str(fake_glob_bin)
     monkeypatch.setattr(
-        venv_utils.shutil,
+        shutil,
         "which",
         lambda _, path=None: str(glob_fake_exe) if path else str(venv_fake_exe),
     )

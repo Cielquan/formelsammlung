@@ -6,11 +6,11 @@ For a list of all available releases see the
 [release section on Github](https://github.com/Cielquan/formelsammlung/releases).
 
 <!-- Valid subcategories
-#### BREAKING CHANGES
-#### New features
-#### Bugfixes
-#### Documentation
-#### Miscellaneous
+### BREAKING CHANGES
+### New features
+### Bugfixes
+### Documentation
+### Miscellaneous
 -->
 
 ## Unreleased
@@ -21,21 +21,21 @@ For a list of all available releases see the
 
 [diff v4.0.0...v5.0.0](https://github.com/Cielquan/formelsammlung/compare/v4.0.0...v5.0.0)
 
-#### BREAKING CHANGES
+### BREAKING CHANGES
 
 - change min python version from `3.6.1` to `3.6.2`
 
-#### New features
+### New features
 
 - refactored `getenv_typed()` _backend_ into `EnvVarGetter` class which holds the config
 
-#### Documentation
+### Documentation
 
 - improved docs for `envvar.py`
 - improved docs for `flask_sphinx_docs.py`
 - improved docs for `nox_session.py`
 
-#### Miscellaneous
+### Miscellaneous
 
 - updated code-climate config for maintainability checks
   [#26](https://github.com/Cielquan/formelsammlung/issues/26)
@@ -49,23 +49,23 @@ For a list of all available releases see the
 
 [diff v3.2.0...v4.0.0](https://github.com/Cielquan/formelsammlung/compare/v3.2.0...v4.0.0)
 
-#### BREAKING CHANGES
+### BREAKING CHANGES
 
 - `strcalc.calculate_string` now raises `strcalc.StringCalculatorError` exceptions
 
-#### New features
+### New features
 
 - added `nox_session.session_w_poetry` decorator for use in noxfile.py.
 - updated root `__init__.py` to serve more metadata.
 
-#### Bugfixes
+### Bugfixes
 
 - fixed constructor of `flask_sphinx_docs.SphinxDocServer` to take the right arguments
 - fixed type hints in `flask_sphinx_docs`
 - fixed `SphinxDocServer.web_docs`'s (view function) way of patching the
   `app.static_folder`.
 
-#### Miscellaneous
+### Miscellaneous
 
 - moved CI to Github Actions
 - added Github templates
@@ -78,7 +78,7 @@ For a list of all available releases see the
 
 [diff v3.1.0...v3.2.0](https://github.com/Cielquan/formelsammlung/compare/v3.1.0...v3.2.0)
 
-#### New features
+### New features
 
 - `get_venv_tmp_dir` now take a tuple of temp dir names to search (optional).
 - `get_venv_tmp_dir` now can create a temp dir if non is found (opt-in). The name of
@@ -88,11 +88,11 @@ For a list of all available releases see the
 
 [diff 3.0.1...v3.1.0](https://github.com/Cielquan/formelsammlung/compare/3.0.1...v3.1.0)
 
-#### New features
+### New features
 
 - `get_venv_tmp_dir` now also finds dotted tmp directories.
 
-#### Bugfixes:
+### Bugfixes
 
 - `test_exponentiation` no allows 0 for first number, which caused `ZeroDivisionError`.
 
@@ -100,7 +100,7 @@ For a list of all available releases see the
 
 [diff 3.0.0...3.0.1](https://github.com/Cielquan/formelsammlung/compare/3.0.0...3.0.1)
 
-#### Bugfixes:
+### Bugfixes
 
 - `where_installed` no longer fails when no venv is active.
 
@@ -108,7 +108,7 @@ For a list of all available releases see the
 
 [diff 2.0.0...3.0.0](https://github.com/Cielquan/formelsammlung/compare/2.0.0...3.0.0)
 
-#### BREAKING CHANGES
+### BREAKING CHANGES
 
 - `get_venv_path`, `get_venv_bin_dir`, `get_venv_tmp_dir` and
   `get_venv_site_packages_dir` now always raise `FileNotFoundError` when a venv or
@@ -118,11 +118,11 @@ For a list of all available releases see the
 
 [diff 1.2.0...2.0.0](https://github.com/Cielquan/formelsammlung/compare/1.2.0...2.0.0)
 
-#### New features
+### New features
 
 - Added `get_venv_bin_dir` and `get_venv_tmp_dir` functions.
 
-#### BREAKING CHANGES
+### BREAKING CHANGES
 
 - `get_venv_path` now returns a `pathlib.Path` object instead of a string.
 
@@ -130,7 +130,7 @@ For a list of all available releases see the
 
 [diff 1.1.0...1.2.0](https://github.com/Cielquan/formelsammlung/compare/1.1.0...1.2.0)
 
-#### New features
+### New features
 
 - `env_exe_runner` now takes a list of runners which can also be a venv.
 
@@ -138,7 +138,7 @@ For a list of all available releases see the
 
 [diff 1.0.0...1.1.0](https://github.com/Cielquan/formelsammlung/compare/1.0.0...1.1.0)
 
-#### New features
+### New features
 
 - Added `venv_utils` module.
 
@@ -146,7 +146,7 @@ For a list of all available releases see the
 
 [diff 0.4.0...1.0.0](https://github.com/Cielquan/formelsammlung/compare/0.4.0...1.0.0)
 
-#### BREAKING CHANGES
+### BREAKING CHANGES
 
 - Renamed `tox_env_exe_runner` to `env_exe_runner` and added `runner` argument
   on 2nd place, which takes either `tox` or `nox`. With this both runner are supported.
@@ -155,7 +155,7 @@ For a list of all available releases see the
 
 [diff 0.3.2...0.4.0](https://github.com/Cielquan/formelsammlung/compare/0.3.2...0.4.0)
 
-#### New features
+### New features
 
 - Added tox_env_exe_runner with wrapper to call it from cli.
   [#17](https://github.com/Cielquan/formelsammlung/issues/17)
@@ -164,7 +164,7 @@ For a list of all available releases see the
 
 [diff 0.3.1...0.3.2](https://github.com/Cielquan/formelsammlung/compare/0.3.1...0.3.2)
 
-#### Miscellaneous
+### Miscellaneous
 
 - Broaden importlib-metadata version dependency
 
@@ -172,17 +172,17 @@ For a list of all available releases see the
 
 [diff 0.3.0...0.3.1](https://github.com/Cielquan/formelsammlung/compare/0.3.0...0.3.1)
 
-#### Bugfixes:
+### Bugfixes
 
 - Put `pytest-flask` into `testing` extra, put `flask` into `flask` extra.
   [#16](https://github.com/Cielquan/formelsammlung/issues/16)
 
-#### Documentation
+### Documentation
 
 - Removed old "commit mentioning" passage from changelog.
   [#15](https://github.com/Cielquan/formelsammlung/issues/15)
 
-#### Miscellaneous
+### Miscellaneous
 
 - Update `flake8-eradicate` to 1.0 in pre-commit.
   [#6](https://github.com/Cielquan/formelsammlung/issues/6)
@@ -191,7 +191,7 @@ For a list of all available releases see the
 
 [diff 0.2.1...0.3.0](https://github.com/Cielquan/formelsammlung/compare/0.2.1...0.3.0)
 
-#### New features
+### New features
 
 - Added auto detection for sphinx doc dir for `SphinxDocServer`.
   [#14](https://github.com/Cielquan/formelsammlung/issues/14)
@@ -200,12 +200,12 @@ For a list of all available releases see the
 
 [diff 0.2.0...0.2.1](https://github.com/Cielquan/formelsammlung/compare/0.2.0...0.2.1)
 
-#### Bugfixes:
+### Bugfixes
 
 - Removed redundant dependency python-dotenv.
   [#12](https://github.com/Cielquan/formelsammlung/issues/12)
 
-#### Documentation
+### Documentation
 
 - Added instruction for creating a venv to install the package into to `installation` docs.
   [#13](https://github.com/Cielquan/formelsammlung/issues/13)
@@ -214,19 +214,21 @@ For a list of all available releases see the
 
 [diff 0.1.0...0.2.0](https://github.com/Cielquan/formelsammlung/compare/0.1.0...0.2.0)
 
-#### Bugfixes:
+### Bugfixes
 
-- Fix the bugged test `test_strcalc.test_exponentiation` by increasing the base by one for the negative exponent tests.
+- Fix the bugged test `test_strcalc.test_exponentiation` by increasing the base by one for the
+  negative exponent tests.
   [#5](https://github.com/Cielquan/formelsammlung/issues/5)
 - Fixed CI bug with complex numbers.
   [#7](https://github.com/Cielquan/formelsammlung/issues/7)
 
-#### New features
+### New features
 
-- Added SphinxDocServer. A flask plugin which adds a route to the flask app to show your build sphinx docs.
+- Added SphinxDocServer. A flask plugin which adds a route to the flask app to show your build
+  sphinx docs.
   [#4](https://github.com/Cielquan/formelsammlung/issues/4)
 
-#### Documentation
+### Documentation
 
 - Added missing basic information to docs.
   [#2](https://github.com/Cielquan/formelsammlung/issues/2)

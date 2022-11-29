@@ -17,7 +17,7 @@ def get_venv_path() -> Path:
     :return: Return venv path
     """
     if hasattr(sys, "real_prefix"):
-        return Path(sys.real_prefix)  # type: ignore[no-any-return,attr-defined]  # noqa: E1101
+        return Path(sys.real_prefix)
     if sys.base_prefix != sys.prefix:
         return Path(sys.prefix)
     raise FileNotFoundError("No calling venv could be detected.")

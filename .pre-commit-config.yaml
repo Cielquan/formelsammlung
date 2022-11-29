@@ -225,7 +225,8 @@ repos:
     rev: 77751d7a7d81a5d47aa344d802f41809c4d063c0 # frozen: v6.1.1
     hooks:
       - id: rstcheck
-        additional_dependencies: [sphinx]
+        args: ["--config", "pyproject.toml"]
+        additional_dependencies: [tomli, sphinx]
         exclude: testing
 
   # ----------------------------------------------

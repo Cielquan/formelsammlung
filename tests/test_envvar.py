@@ -1,4 +1,5 @@
 """Tests for `envvar` module."""
+# pylint: disable=protected-access
 import re
 from decimal import Decimal
 from typing import Union
@@ -74,8 +75,7 @@ def test_number_guessing_float(monkeypatch: pytest.MonkeyPatch) -> None:
 
 @pytest.mark.parametrize(
     ("bool_alias", "bool_val_default"),
-    [(tbv, True) for tbv in TRUE_BOOL_VALUES]
-    + [("fake_true", "fake_true")],  # type: ignore[list-item]
+    [(tbv, True) for tbv in TRUE_BOOL_VALUES] + [("fake_true", "fake_true")],
 )
 def test_true_bool_guessing(
     bool_alias: str,
@@ -111,8 +111,7 @@ def test_true_bool_guessing_w_true_bool_values(
 
 @pytest.mark.parametrize(
     ("bool_alias", "bool_val_default"),
-    [(fbv, False) for fbv in FALSE_BOOL_VALUES]
-    + [("fake_false", "fake_false")],  # type: ignore[list-item]
+    [(fbv, False) for fbv in FALSE_BOOL_VALUES] + [("fake_false", "fake_false")],
 )
 def test_false_bool_guessing(
     bool_alias: str,

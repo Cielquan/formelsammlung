@@ -1,8 +1,8 @@
 ---
-name: Update AUTHORS
+name: Update AUTHORS.rst
 
 # What this workflow does:
-# 1. Update the AUTHORS file
+# 1. Update the AUTHORS.rst file
 # 2. Git commit and push the file if there are changes.
 
 on: # yamllint disable-line rule:truthy
@@ -13,22 +13,22 @@ on: # yamllint disable-line rule:truthy
       - "!*"
     branches:
       - main
+      - "test-me-*"
 
 jobs:
   update-authors:
     name: Update AUTHORS file
-    if: >
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'push' &&
-      contains(toJson(github.event.head_commit.message), '[skip ci]') == false)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
 
-      - uses: actions/setup-python@v2
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
 
       - name: Set git user
         run: |

@@ -30,8 +30,8 @@ def _rand_float_wo_0() -> float:
 def _rand_complex_w_0() -> complex:
     """Return random positive complex number.
 
-    The number is made of int for real and imag part.
-    The imag part is randomly positive or negative.
+    The number is made of int for real and imaginary part.
+    The imaginary part is randomly positive or negative.
     """
     return complex(f"{_rand_int_w_0()}{random.choice(('+', '-'))}{_rand_int_w_0()}j")  # noqa: S311
 
@@ -39,8 +39,8 @@ def _rand_complex_w_0() -> complex:
 def _rand_complex_wo_0() -> complex:
     """Return random positive complex number without zero.
 
-    The number is made of ints for real and imag part.
-    The imag part is randomly positive or negative.
+    The number is made of integers for real and imaginary part.
+    The imaginary part is randomly positive or negative.
     """
     return complex(
         f"{_rand_int_wo_0()}"  # noqa: S311
@@ -732,12 +732,12 @@ def test_empty_str() -> None:
 
 
 def test_error_not_numbertype() -> None:
-    """Test ValueError ist risen when return type is not NumberType."""
+    """Test ValueError is risen when return type is not NumberType."""
     with pytest.raises(StringCalculatorError, match="could not be calculated due to"):
         calculate_string("True")
 
 
 def test_error_unsupported_operator() -> None:
-    """Test KeyError ist risen when return type is not NumberType."""
+    """Test KeyError is risen when return type is not NumberType."""
     with pytest.raises(StringCalculatorError, match="has unsupported node"):
         calculate_string("1 @ 1")

@@ -5,7 +5,7 @@ from typing import Optional
 from flask import Flask, Response
 
 
-class SphinxDocServer:  # noqa: R0903
+class SphinxDocServer:
     """Serve your sphinx docs under `/docs/` on your own flask app."""
 
     def __init__(
@@ -64,7 +64,7 @@ class SphinxDocServer:  # noqa: R0903
 
         @app.route("/docs/", defaults={"filename": index_file})
         @app.route("/docs/<path:filename>")
-        def web_docs(filename: str) -> Response:  # noqa: W0612
+        def web_docs(filename: str) -> Response:
             """Route the given doc page.
 
             :param filename: File name from URL
