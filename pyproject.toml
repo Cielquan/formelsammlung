@@ -36,8 +36,6 @@ env_exe_runner = 'formelsammlung.env_exe_runner:cli_caller'
 python = "^3.7"
 # EXTRA flask
 flask = {version = ">=1.1.2,<3.0.0", optional = true}
-# EXTRA nox
-nox = {version = ">=2021.6.6,<2022.0.0", optional = true}
 # EXTRA testing
 pytest = { version = ">=7.2.0", optional = true }
 pytest-cov = {version = ">=3.0", optional = true}
@@ -71,7 +69,6 @@ sphinx-rtd-theme = "*"
 
 [tool.poetry.extras]
 flask = ["flask"]
-nox = ["nox"]
 testing = [
   "pytest",
   "pytest-cov",

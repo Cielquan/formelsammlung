@@ -99,7 +99,6 @@ extensions.append("sphinx.ext.intersphinx")
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
     "flask": ("https://flask.palletsprojects.com/en/1.1.x/api/", "inv_flask.inv"),
-    "nox": ("https://nox.thea.codes/en/stable/", "inv_nox.inv"),
 }
 nitpick_ignore = [("py:class", "SessionRunner")]
 
