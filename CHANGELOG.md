@@ -17,6 +17,18 @@ For a list of all available releases see the
 
 [diff v5.0.0...main](https://github.com/Cielquan/formelsammlung/compare/v5.0.0...main)
 
+### BREAKING CHANGES
+
+- Drop support for python 3.6
+- Remove nox_session module
+- Update many dependencies
+
+### Miscellaneous
+
+- Update CI and tooling to new workflow
+- Fix linting and formatting issues
+- Support python 3.11
+
 ## [5.0.0](https://github.com/Cielquan/formelsammlung/releases/v5.0.0) (2021-02-06)
 
 [diff v4.0.0...v5.0.0](https://github.com/Cielquan/formelsammlung/compare/v4.0.0...v5.0.0)
