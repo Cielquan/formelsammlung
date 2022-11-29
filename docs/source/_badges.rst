@@ -92,12 +92,6 @@
     :target: https://github.com/Cielquan/formelsammlung/actions?query=workflow%3A%22Test+documentation%22
     :alt: GitHub Actions - Test docs
 
-.. TODO:#i# readd dependabot badge when https://github.com/dependabot/dependabot-core/issues/1912 is fixed
-
-.. |dependabot| image:: https://api.dependabot.com/badges/status?host=github&repo=Cielquan/formelsammlung
-    :target: https://dependabot.com
-    :alt: Dependabot status
-
 
 .. GitHub
 
