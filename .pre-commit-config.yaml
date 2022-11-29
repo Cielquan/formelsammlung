@@ -227,7 +227,6 @@ repos:
       - id: rstcheck
         additional_dependencies: [sphinx]
         exclude: testing
-        args: ["--config", ".rstcheck.project.cfg"]
 
   # ----------------------------------------------
   # Markdown
