@@ -1,4 +1,4 @@
 Authors
 =======
 
-.. literalinclude:: ../../AUTHORS
+.. include:: ../../AUTHORS.rst
