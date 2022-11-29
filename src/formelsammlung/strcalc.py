@@ -1,16 +1,7 @@
-"""
-    formelsammlung.strcalc
-    ~~~~~~~~~~~~~~~~~~~~~~
-
-    Calculate arithmetic expressions from strings.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Calculate arithmetic expressions from strings."""
 import ast
 import operator
 import sys
-
 from typing import Optional, Union
 
 
@@ -25,7 +16,7 @@ class StringCalculatorError(Exception):
 class _StringCalculator(ast.NodeVisitor):
     """Calculate an arithmetic expression from a string using :mod:`ast`."""
 
-    def visit_BinOp(self, node: ast.BinOp) -> NumberType:  # noqa: N802,C0103
+    def visit_BinOp(self, node: ast.BinOp) -> NumberType:  # noqa: N802
         """Handle `BinOp` nodes."""
         return {  # type: ignore[no-any-return]
             ast.Add: operator.add,  #: a + b
@@ -38,16 +29,16 @@ class _StringCalculator(ast.NodeVisitor):
         }[type(node.op)](self.visit(node.left), self.visit(node.right))
 
     # fmt: off
-    def visit_UnaryOp(self, node: ast.UnaryOp) -> NumberType:  # noqa: N802,C0103
+    def visit_UnaryOp(self, node: ast.UnaryOp) -> NumberType:  # noqa: N802
         """Handle `UnaryOp` nodes."""
-        return {  # type: ignore[no-any-return]
+        return {  # type: ignore[no-any-return, operator]
             ast.UAdd: operator.pos,  #: + a
             ast.USub: operator.neg,  #: - a
         }[type(node.op)](self.visit(node.operand))
     # fmt: on
 
-    @staticmethod
-    def visit_Constant(  # noqa: N802,C0103
+    def visit_Constant(  # noqa: N802
+        self,
         node: ast.Constant,
     ) -> NumberType:  # pragma: py-lt-38
         """Handle `Constant` nodes."""
@@ -57,14 +48,14 @@ class _StringCalculator(ast.NodeVisitor):
         return ret_val
 
     @staticmethod
-    def visit_Num(node: ast.Num) -> NumberType:  # noqa: N802,C0103
+    def visit_Num(node: ast.Num) -> NumberType:  # noqa: N802
         """Handle `Num` nodes.
 
         For backwards compatibility <3.8. Since 3.8 ``visit_Constant`` is used.
         """
         return node.n  # pragma: py-gte-38
 
-    def visit_Expr(self, node: ast.Expr) -> NumberType:  # noqa: N802,C0103
+    def visit_Expr(self, node: ast.Expr) -> NumberType:  # noqa: N802
         """Handle `Expr` nodes."""
         # safety hurdle from visist_Constant for backwards compatibility
         if sys.version_info[0:2] < (3, 8):  # pragma: py-gte-38

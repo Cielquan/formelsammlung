@@ -1,19 +1,11 @@
-"""
-    formelsammlung
-    ~~~~~~~~~~~~~~
-
-    Collection of different multipurpose functions.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Formelsammlung package."""
 from typing import List
 
 
 try:
     from importlib.metadata import metadata as get_md
 except ModuleNotFoundError:  # pragma: py-gte-38
-    from importlib_metadata import metadata as get_md  # type: ignore[import,no-redef]
+    from importlib_metadata import metadata as get_md
 
 
 def _get_gh_repo_link(metadata_list: List[str]) -> str:

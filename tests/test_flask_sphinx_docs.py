@@ -1,17 +1,8 @@
-"""
-    tests.test_flask_sphinx_docs
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Tests for flask_sphinx_docs.py.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Tests for `flask_sphinx_docs` module."""
 # pylint: disable=W0212
 from pathlib import Path
 
 import pytest
-
 from flask import Flask
 
 from formelsammlung.flask_sphinx_docs import SphinxDocServer
@@ -82,9 +73,7 @@ def test_no_app_root() -> None:
         SphinxDocServer._find_built_docs("")
 
 
-@pytest.mark.parametrize(
-    ("doc_dir_name", "build_dir_name"), [("doc", "_build"), ("docs", "build")]
-)
+@pytest.mark.parametrize(("doc_dir_name", "build_dir_name"), [("doc", "_build"), ("docs", "build")])
 def test_doc_dir_guessing_option(
     doc_dir_name: str,
     build_dir_name: str,

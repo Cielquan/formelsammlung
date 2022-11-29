@@ -1,15 +1,6 @@
-"""
-    formelsammlung.envvar
-    ~~~~~~~~~~~~~~~~~~~~~
-
-    Get environment variables and transform their type.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Get environment variables and transform their type."""
 import os
 import re
-
 from typing import Any, Iterable, NoReturn, Optional, Pattern, Set, Union
 
 
@@ -23,15 +14,15 @@ INT_REGEX = r"^[\d]+(_\d+)*$"
 FLOAT_REGEX = r"^[\d]+(_\d+)*\.\d+$"
 
 
-class EnvVarGetter:  # noqa: R0903
+class EnvVarGetter:  # pylint: disable=too-many-instance-attributes
     """Class containing the config for :meth:`EnvVarGetter.getenv_typed`."""
 
-    def __init__(  # noqa: R0913
+    def __init__(
         self,
         *,
         raise_error_if_no_value: bool = False,
-        true_bool_values: Optional[Iterable] = None,
-        false_bool_values: Optional[Iterable] = None,
+        true_bool_values: Optional[Iterable[Any]] = None,  # noqa: ANN401
+        false_bool_values: Optional[Iterable[Any]] = None,  # noqa: ANN401
         int_regex: Optional[str] = None,
         float_regex: Optional[str] = None,
     ) -> None:
@@ -82,7 +73,7 @@ class EnvVarGetter:  # noqa: R0903
         return self._true_bool_values
 
     @true_bool_values.setter
-    def true_bool_values(self, value: Iterable) -> None:
+    def true_bool_values(self, value: Iterable[Any]) -> None:  # noqa: ANN401
         """Set new value for ``_true_bool_values``."""
         self._true_bool_values = set(value)
 
@@ -96,7 +87,7 @@ class EnvVarGetter:  # noqa: R0903
         return self._false_bool_values
 
     @false_bool_values.setter
-    def false_bool_values(self, value: Iterable) -> None:
+    def false_bool_values(self, value: Iterable[Any]) -> None:  # noqa: ANN401
         """Set new value for ``_false_bool_values``."""
         self._false_bool_values = set(value)
 
@@ -124,11 +115,10 @@ class EnvVarGetter:  # noqa: R0903
         return self._int_regex_pattern
 
     @int_regex_pattern.setter
-    def int_regex_pattern(self, value: Any) -> NoReturn:  # noqa: R0201
+    def int_regex_pattern(self, value: Any) -> NoReturn:  # noqa: ANN401
         """Error if called."""
         raise AttributeError(
-            "`int_regex_pattern` cannot be set directly. "
-            "Set as string via `int_regex`."
+            "`int_regex_pattern` cannot be set directly. Set as string via `int_regex`."
         )
 
     @property
@@ -155,11 +145,10 @@ class EnvVarGetter:  # noqa: R0903
         return self._float_regex_pattern
 
     @float_regex_pattern.setter
-    def float_regex_pattern(self, value: Any) -> NoReturn:  # noqa: R0201
+    def float_regex_pattern(self, value: Any) -> NoReturn:  # noqa: ANN401
         """Error if called."""
         raise AttributeError(
-            "`float_regex_pattern` cannot be set directly. "
-            "Set as string via `float_regex`."
+            "`float_regex_pattern` cannot be set directly. Set as string via `float_regex`."
         )
 
     def _guess_bool(self, value: str) -> Optional[bool]:
@@ -185,9 +174,9 @@ class EnvVarGetter:  # noqa: R0903
     def getenv_typed(
         self,
         var_name: str,
-        default: Any = None,
+        default: Any = None,  # noqa: ANN401
         rv_type: Optional[type] = None,
-    ) -> Any:
+    ) -> Any:  # noqa: ANN401
         """Wrap :func:`os.getenv` to adjust the type of the return values.
 
         Instead of returning the environments variable's value as :class:`str` like
@@ -258,8 +247,7 @@ class EnvVarGetter:  # noqa: R0903
         if not env_var and default is None:
             if self.raise_error_if_no_value:
                 raise KeyError(
-                    f"Environment variable '{var_name}' not set "
-                    "or empty and no default."
+                    f"Environment variable '{var_name}' not set " "or empty and no default."
                 ) from None
             return None
 
@@ -290,8 +278,11 @@ class EnvVarGetter:  # noqa: R0903
 
 
 def getenv_typed(
-    var_name: str, default: Any = None, rv_type: Optional[type] = None, **kwargs: Any
-) -> Any:
+    var_name: str,
+    default: Any = None,  # noqa: ANN401
+    rv_type: Optional[type] = None,
+    **kwargs: Any,  # noqa: ANN401
+) -> Any:  # noqa: ANN401
     """Shortcut for ``EnvVarGetter(...).getenv_typed(...)``.
 
     **How to use:**

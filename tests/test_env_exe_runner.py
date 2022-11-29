@@ -1,15 +1,7 @@
-"""
-    tests.test_tox_env_exe_runner
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Tests for tox_env_exe_runner.py.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Tests for `tox_env_exe_runner` module."""
+# pylint: disable=protected-access
 import os
 import subprocess  # noqa: S404
-
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Generator
@@ -20,7 +12,7 @@ from formelsammlung import env_exe_runner
 
 
 @contextmanager
-def change_cwd(target: Path) -> Generator:
+def change_cwd(target: Path) -> Generator[None, None, None]:
     """Change cwd with a contextmanager."""
     cwd = os.getcwd()
     os.chdir(target)
@@ -68,7 +60,7 @@ def test_venv_with_args(monkeypatch: pytest.MonkeyPatch) -> None:
     assert result == 32
 
 
-def test_no_cmd_found(capsys: pytest.CaptureFixture) -> None:
+def test_no_cmd_found(capsys: pytest.CaptureFixture[str]) -> None:
     """Test exit code 127 on missing cmd."""
     result = env_exe_runner.env_exe_runner(
         ["tox", "venv"], ["non_existing_toxenv"], "no_existing_tool"
@@ -132,9 +124,7 @@ def test__check_runner_envs_success(runner_name: str, tmp_path: Path) -> None:
     #: Change cwd to tmp dir
     with change_cwd(tmp_path):
 
-        result = env_exe_runner._check_runner_envs(
-            runner_name, ["env1", "env2"], filename
-        )
+        result = env_exe_runner._check_runner_envs(runner_name, ["env1", "env2"], filename)
 
         assert result is not None
         assert result.absolute() == Path(exe)
@@ -155,8 +145,6 @@ def test__check_runner_envs_fail(runner_name: str, tmp_path: Path) -> None:
     #: Change cwd to tmp dir
     with change_cwd(tmp_path):
 
-        result = env_exe_runner._check_runner_envs(
-            runner_name, ["env1", "env2"], filename
-        )
+        result = env_exe_runner._check_runner_envs(runner_name, ["env1", "env2"], filename)
 
         assert result is None

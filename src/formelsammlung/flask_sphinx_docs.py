@@ -1,19 +1,11 @@
-"""
-    formelsammlung.flask_sphinx_docs
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Serve sphinx docs in your flask app.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Serve sphinx docs in your flask app."""
 from pathlib import Path
 from typing import Optional
 
 from flask import Flask, Response
 
 
-class SphinxDocServer:  # noqa: R0903
+class SphinxDocServer:
     """Serve your sphinx docs under `/docs/` on your own flask app."""
 
     def __init__(
@@ -72,16 +64,14 @@ class SphinxDocServer:  # noqa: R0903
 
         @app.route("/docs/", defaults={"filename": index_file})
         @app.route("/docs/<path:filename>")
-        def web_docs(filename: str) -> Response:  # noqa: W0612
+        def web_docs(filename: str) -> Response:
             """Route the given doc page.
 
             :param filename: File name from URL
             :return: Requested doc page
             """
             static_folder = app.static_folder
-            app.static_folder = doc_dir or str(
-                self._find_built_docs(app.root_path or "")
-            )
+            app.static_folder = doc_dir or str(self._find_built_docs(app.root_path or ""))
             doc_file = app.send_static_file(filename)
             app.static_folder = static_folder
             return doc_file
@@ -147,6 +137,5 @@ class SphinxDocServer:  # noqa: R0903
         if (build_dir / "html").is_dir():
             return build_dir / "html"
         raise OSError(
-            f"No 'html' directory found in {build_dir}. "
-            "Maybe you forgot to build the HTML docs."
+            f"No 'html' directory found in {build_dir}. " "Maybe you forgot to build the HTML docs."
         )

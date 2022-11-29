@@ -1,23 +1,14 @@
-"""
-    docs.source.conf
-    ~~~~~~~~~~~~~~~~
-
-    Configuration file for the Sphinx documentation builder.
-
-    :copyright: (c) 2020, Christian Riedel and AUTHORS
-    :license: GPL-3.0-or-later, see LICENSE for details
-"""  # noqa: D205,D208,D400
+"""Configuration file for the Sphinx documentation builder."""
 import os
 import re
 import shutil
-
+import typing as t
 from datetime import date
 from importlib.util import find_spec
 from pathlib import Path
-from typing import List
 
+import sphinx.ext.autodoc
 import sphinx_rtd_theme  # type: ignore[import]
-
 from sphinx.application import Sphinx
 
 from formelsammlung import __author__, __gh_repository_link__, __project__, __version__
@@ -35,14 +26,12 @@ project = __project__.replace("-", "_")
 author = __author__
 CREATION_YEAR = 2020
 CURRENT_YEAR = f"{date.today().year}"
-copyright = (  # noqa: VNE003,W0622
+copyright = (  # noqa: VNE003 # pylint: disable=redefined-builtin
     f"{CREATION_YEAR}{('-' + CURRENT_YEAR) if CURRENT_YEAR != CREATION_YEAR else ''}, "
     + f"{author} and AUTHORS"
 )
 release = __version__  #: The full version, including alpha/beta/rc tags
-version_parts = re.search(
-    r"^v?(?P<version>\d+\.\d+)\.\d+[-.]?(?P<tag>[a-z]*)[\.]?\d*", release
-)
+version_parts = re.search(r"^v?(?P<version>\d+\.\d+)\.\d+[-.]?(?P<tag>[a-z]*)[\.]?\d*", release)
 #: Major + Minor version like (X.Y)
 version = None if not version_parts else version_parts.group("version")
 #: only tags like alpha/beta/rc
@@ -50,9 +39,9 @@ RELEASE_LEVEL = None if not version_parts else version_parts.group("tag")
 
 
 #: -- GENERAL CONFIG -------------------------------------------------------------------
-extensions: List[str] = []
+extensions: t.List[str] = []
 today_fmt = "%Y-%m-%d"
-exclude_patterns: List[str] = []  #: Files to exclude for source of doc
+exclude_patterns: t.List[str] = []  #: Files to exclude for source of doc
 
 #: Added dirs for static and template files if they exist
 html_static_path = ["_static"] if Path("_static").exists() else []
@@ -110,16 +99,15 @@ extensions.append("sphinx.ext.intersphinx")
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
     "flask": ("https://flask.palletsprojects.com/en/1.1.x/api/", "inv_flask.inv"),
-    "nox": ("https://nox.thea.codes/en/stable/", "inv_nox.inv"),
 }
 nitpick_ignore = [("py:class", "SessionRunner")]
 
 extensions.append("sphinx.ext.extlinks")
 extlinks = {
-    "repo": (f"{__gh_repository_link__}/%s", "Repo's "),
-    "issue": (f"{__gh_repository_link__}/issues/%s", "#"),
-    "pull": (f"{__gh_repository_link__}/pull/%s", "pr"),
-    "user": ("https://github.com/%s", "@"),
+    "repo": (f"{__gh_repository_link__}/%s", "Repo's %s"),
+    "issue": (f"{__gh_repository_link__}/issues/%s", "#%s"),
+    "pull": (f"{__gh_repository_link__}/pull/%s", "pr%s"),
+    "user": ("https://github.com/%s", "@%s"),
 }
 
 
@@ -140,21 +128,24 @@ if find_spec("sphinxcontrib.apidoc") is not None:
     if Path(apidoc_output_dir).is_dir():
         shutil.rmtree(apidoc_output_dir)
 else:
-    NOT_LOADED_MSGS.append(
-        "## 'sphinxcontrib-apidoc' extension not loaded - not installed"
-    )
+    NOT_LOADED_MSGS.append("## 'sphinxcontrib-apidoc' extension not loaded - not installed")
 
 
 #: -- AUTODOC --------------------------------------------------------------------------
 extensions.append("sphinx.ext.autodoc")
 autodoc_typehints = "description"
 autodoc_member_order = "bysource"
-autodoc_mock_imports: List[str] = []
+autodoc_mock_imports: t.List[str] = []
 autodoc_default_options = {"members": True}
 
 
-def _remove_module_docstring(  # noqa: R0913
-    app, what, name, obj, options, lines  # noqa: ANN001,W0613
+def _remove_module_docstring(  # pylint: disable=R0913
+    app: Sphinx,  # pylint: disable=W0613
+    what: str,
+    name: str,  # pylint: disable=W0613
+    obj: t.Any,  # pylint: disable=W0613 # noqa: ANN401
+    options: sphinx.ext.autodoc.Options,  # pylint: disable=W0613
+    lines: t.List[str],
 ) -> None:
     """Remove module docstring."""
     if what == "module":
@@ -164,9 +155,7 @@ def _remove_module_docstring(  # noqa: R0913
 if find_spec("sphinx_autodoc_typehints") is not None:
     extensions.append("sphinx_autodoc_typehints")
 else:
-    NOT_LOADED_MSGS.append(
-        "## 'sphinx-autodoc-typehints' extension not loaded - not installed"
-    )
+    NOT_LOADED_MSGS.append("## 'sphinx-autodoc-typehints' extension not loaded - not installed")
 
 
 #: -- SPELLING -------------------------------------------------------------------------
@@ -177,9 +166,7 @@ spelling_exclude_patterns = ["autoapi/**", "autoapidoc/**"]
 if find_spec("sphinxcontrib.spelling") is not None:
     extensions.append("sphinxcontrib.spelling")
 else:
-    NOT_LOADED_MSGS.append(
-        "## 'sphinxcontrib-spelling' extension not loaded - not installed"
-    )
+    NOT_LOADED_MSGS.append("## 'sphinxcontrib-spelling' extension not loaded - not installed")
 
 
 #: -- HTML THEME -----------------------------------------------------------------------

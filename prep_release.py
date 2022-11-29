@@ -1,24 +1,8 @@
-"""Script for preparing the repo for a new release.
-
-This script needs `tomlkit` installed as dependency.
-
-This script does:
-1) Bump version
-2) Finish CHANGELOG.md
-3) git commit and tag
-
-Call this for more information on usage::
-
-    $ python prep_release.py --help
-
-:copyright: (c) 2020, Christian Riedel and AUTHORS
-:license: GPL-3.0-or-later, see LICENSE for details
-"""
+"""Script for preparing the repo for a new release."""
 import argparse
 import re
 import subprocess  # noqa: S404
 import sys
-
 from datetime import date
 
 
@@ -29,6 +13,8 @@ if sys.version_info[0:2] <= (3, 6):
 PATCH = ("patch", "bugfix")
 MINOR = ("minor", "feature")
 MAJOR = ("major", "breaking")
+
+REPO_URL = "https://github.com/rstcheck/rstcheck-core"
 
 
 #: -- UTILS ----------------------------------------------------------------------------
@@ -41,7 +27,7 @@ def _get_config_value(section: str, key: str) -> str:  # noqa: CCR001
 
     :return: config value
     """
-    with open("pyproject.toml") as pyproject_file:
+    with open("pyproject.toml", encoding="utf8") as pyproject_file:
         pyproject = pyproject_file.read().split("\n")
 
     start = False
@@ -54,9 +40,7 @@ def _get_config_value(section: str, key: str) -> str:  # noqa: CCR001
             break
 
         if start and line.strip().startswith(key):
-            match = re.match(
-                r"\s*" + key + r"""\s?=\s?["']{1}([^"']*)["']{1}.*""", line
-            )
+            match = re.match(r"\s*" + key + r"""\s?=\s?["']{1}([^"']*)["']{1}.*""", line)
             if match:
                 return match.group(1)
             raise PyprojectError(
@@ -68,7 +52,7 @@ def _get_config_value(section: str, key: str) -> str:  # noqa: CCR001
 
 def _set_config_value(section: str, key: str, value: str) -> None:
     """Set a config value in pyproject.toml file."""
-    with open("pyproject.toml") as pyproject_file:
+    with open("pyproject.toml", encoding="utf8") as pyproject_file:
         pyproject = pyproject_file.read().split("\n")
 
     start = False
@@ -89,7 +73,7 @@ def _set_config_value(section: str, key: str, value: str) -> None:
             pyproject[idx] = match
             break
 
-    with open("pyproject.toml", "w") as pyproject_file:
+    with open("pyproject.toml", "w", encoding="utf8") as pyproject_file:
         pyproject_file.write("\n".join(pyproject))
 
 
@@ -109,19 +93,14 @@ def bump_version(release_type: str = "patch") -> str:
 
     current_version = _get_config_value("[tool.poetry]", "version")
 
-    version_parts = re.match(
-        r"(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)", current_version
-    )
+    version_parts = re.match(r"(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)", current_version)
     if not version_parts:
         raise ValueError(f"Unparsable version: {current_version}")
 
     if release_type in MAJOR:
         version = f"{int(version_parts.group('major')) + 1}.0.0"
     elif release_type in MINOR:
-        version = (
-            f"{version_parts.group('major')}"
-            f".{int(version_parts.group('minor')) + 1}.0"
-        )
+        version = f"{version_parts.group('major')}" f".{int(version_parts.group('minor')) + 1}.0"
     elif release_type in PATCH:
         version = (
             f"{version_parts.group('major')}"
@@ -136,17 +115,14 @@ def bump_version(release_type: str = "patch") -> str:
     return version
 
 
-def update_changelog(
-    new_version: str, last_version: str, repo_url: str, first_release: bool
-) -> None:
+def update_changelog(new_version: str, last_version: str, first_release: bool) -> None:
     """Update CHANGELOG.md to be release ready.
 
     :param new_version: new version string
     :param last_version: current version string
-    :param repo_url: URL to source code at GitHub
     :first_release: if this is the first release
     """
-    with open("CHANGELOG.md") as changelog_file:
+    with open("CHANGELOG.md", encoding="utf8") as changelog_file:
         changelog_lines = changelog_file.read().split("\n")
 
     release_line = 0
@@ -160,19 +136,20 @@ def update_changelog(
         compare = f"{'' if first_release else 'v'}{last_version}...v{new_version}"
         changelog_lines[release_line] = (
             "## Unreleased\n"
+            "\n"
             f"[diff v{new_version}...main]"
-            f"({repo_url}/compare/v{new_version}...main)\n"
+            f"({REPO_URL}/compare/v{new_version}...main)\n"
             "\n"
+            f"## [{new_version} ({today})]({REPO_URL}/releases/v{new_version})\n"
             "\n"
-            f"## [{new_version}]({repo_url}/releases/v{new_version}) ({today})\n"
-            f"[diff {compare}]({repo_url}/compare/{compare})"
+            f"[diff {compare}]({REPO_URL}/compare/{compare})"
         )
 
-    #: Remove [diff ...] link line
-    if len(changelog_lines) - 1 >= release_line + 1:
-        changelog_lines.pop(release_line + 1)
+    if len(changelog_lines) - 1 >= release_line + 2:
+        changelog_lines.pop(release_line + 1)  # Remove blank line
+        changelog_lines.pop(release_line + 1)  # Remove [diff ...] link line
 
-    with open("CHANGELOG.md", "w") as changelog_file:
+    with open("CHANGELOG.md", "w", encoding="utf8") as changelog_file:
         changelog_file.write("\n".join(changelog_lines))
 
 
@@ -204,7 +181,7 @@ def _parser() -> argparse.Namespace:
         default="patch",
         nargs="?",
         help=(
-            "Release type: patch | minor/feature | major/breaking; "
+            "Release type: patch/bugfix | minor/feature | major/breaking; "
             "gets ignored on `--first-release`; "
             "defaults to patch"
         ),
@@ -235,7 +212,6 @@ def _main() -> int:
     update_changelog(
         release_version,
         current_version,
-        _get_config_value("[tool.poetry.urls]", '"Source"'),
         args.first_release,
     )
     commit_and_tag(release_version)
