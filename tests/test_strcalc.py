@@ -51,7 +51,7 @@ def _rand_complex_wo_0() -> complex:
     The imag part is randomly positive or negative.
     """
     return complex(
-        f"{_rand_int_wo_0()}"  # noqa; S311
+        f"{_rand_int_wo_0()}"  # noqa: S311
         f"{random.choice(('+', '-'))}{_rand_int_wo_0()}j"  # noqa: S311
     )
 
