@@ -9,7 +9,6 @@
 """  # noqa: D205,D208,D400
 import os
 import re
-
 from typing import Any, Iterable, NoReturn, Optional, Pattern, Set, Union
 
 
@@ -127,8 +126,7 @@ class EnvVarGetter:  # noqa: R0903
     def int_regex_pattern(self, value: Any) -> NoReturn:  # noqa: R0201
         """Error if called."""
         raise AttributeError(
-            "`int_regex_pattern` cannot be set directly. "
-            "Set as string via `int_regex`."
+            "`int_regex_pattern` cannot be set directly. " "Set as string via `int_regex`."
         )
 
     @property
@@ -158,8 +156,7 @@ class EnvVarGetter:  # noqa: R0903
     def float_regex_pattern(self, value: Any) -> NoReturn:  # noqa: R0201
         """Error if called."""
         raise AttributeError(
-            "`float_regex_pattern` cannot be set directly. "
-            "Set as string via `float_regex`."
+            "`float_regex_pattern` cannot be set directly. " "Set as string via `float_regex`."
         )
 
     def _guess_bool(self, value: str) -> Optional[bool]:
@@ -258,8 +255,7 @@ class EnvVarGetter:  # noqa: R0903
         if not env_var and default is None:
             if self.raise_error_if_no_value:
                 raise KeyError(
-                    f"Environment variable '{var_name}' not set "
-                    "or empty and no default."
+                    f"Environment variable '{var_name}' not set " "or empty and no default."
                 ) from None
             return None
 

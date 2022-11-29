@@ -79,9 +79,7 @@ class SphinxDocServer:  # noqa: R0903
             :return: Requested doc page
             """
             static_folder = app.static_folder
-            app.static_folder = doc_dir or str(
-                self._find_built_docs(app.root_path or "")
-            )
+            app.static_folder = doc_dir or str(self._find_built_docs(app.root_path or ""))
             doc_file = app.send_static_file(filename)
             app.static_folder = static_folder
             return doc_file
@@ -147,6 +145,5 @@ class SphinxDocServer:  # noqa: R0903
         if (build_dir / "html").is_dir():
             return build_dir / "html"
         raise OSError(
-            f"No 'html' directory found in {build_dir}. "
-            "Maybe you forgot to build the HTML docs."
+            f"No 'html' directory found in {build_dir}. " "Maybe you forgot to build the HTML docs."
         )

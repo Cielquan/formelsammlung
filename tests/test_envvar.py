@@ -8,7 +8,6 @@
     :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
 import re
-
 from decimal import Decimal
 from typing import Union
 
@@ -20,8 +19,8 @@ from formelsammlung.envvar import (
     INT_REGEX,
     TRUE_BOOL_VALUES,
     EnvVarGetter,
+    getenv_typed as get,
 )
-from formelsammlung.envvar import getenv_typed as get
 
 
 def test_default() -> None:
@@ -102,8 +101,7 @@ def test_true_bool_guessing(
 
 @pytest.mark.parametrize(
     ("bool_alias", "bool_val_altered"),
-    [(tbv, int(tbv) if tbv.isdigit() else tbv) for tbv in TRUE_BOOL_VALUES]
-    + [("fake_true", True)],
+    [(tbv, int(tbv) if tbv.isdigit() else tbv) for tbv in TRUE_BOOL_VALUES] + [("fake_true", True)],
 )
 def test_true_bool_guessing_w_true_bool_values(
     bool_alias: str,

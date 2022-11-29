@@ -9,7 +9,6 @@
 """  # noqa: D205,D208,D400
 import os
 import subprocess  # noqa: S404
-
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Generator
@@ -132,9 +131,7 @@ def test__check_runner_envs_success(runner_name: str, tmp_path: Path) -> None:
     #: Change cwd to tmp dir
     with change_cwd(tmp_path):
 
-        result = env_exe_runner._check_runner_envs(
-            runner_name, ["env1", "env2"], filename
-        )
+        result = env_exe_runner._check_runner_envs(runner_name, ["env1", "env2"], filename)
 
         assert result is not None
         assert result.absolute() == Path(exe)
@@ -155,8 +152,6 @@ def test__check_runner_envs_fail(runner_name: str, tmp_path: Path) -> None:
     #: Change cwd to tmp dir
     with change_cwd(tmp_path):
 
-        result = env_exe_runner._check_runner_envs(
-            runner_name, ["env1", "env2"], filename
-        )
+        result = env_exe_runner._check_runner_envs(runner_name, ["env1", "env2"], filename)
 
         assert result is None

@@ -15,7 +15,6 @@ import nox.registry
 import nox.sessions
 import nox.virtualenv
 import pytest
-
 from pytest_mock import MockerFixture
 
 from formelsammlung import nox_session
@@ -40,9 +39,7 @@ def test_poetry_install(session: nox_session.Session, mocker: MockerFixture) -> 
 
 
 @pytest.mark.usefixtures("_poetry_installed")
-def test_poetry_install_w_extras(
-    session: nox_session.Session, mocker: MockerFixture
-) -> None:
+def test_poetry_install_w_extras(session: nox_session.Session, mocker: MockerFixture) -> None:
     """Test call with extras specified."""
     run = mocker.patch.object(session, "_run", autospec=True)
 
@@ -59,9 +56,7 @@ def test_poetry_install_w_extras(
 
 
 @pytest.mark.usefixtures("_poetry_installed")
-def test_poetry_install_w_nono_flags(
-    session: nox_session.Session, mocker: MockerFixture
-) -> None:
+def test_poetry_install_w_nono_flags(session: nox_session.Session, mocker: MockerFixture) -> None:
     """Test call no_root and no_dev."""
     run = mocker.patch.object(session, "_run", autospec=True)
 

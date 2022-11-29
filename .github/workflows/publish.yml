@@ -15,20 +15,17 @@ name: Release new version
 #   d) Build and publish via poetry
 #   e) Create GH release with build artifacts
 
-
 env:
   _NOX_IN_CI: true
   _NOX_FORCE_COLOR: true
 
-
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   workflow_dispatch:
     inputs:
       releaseStep:
         description: >
           Version increase type: major/breaking | minor/feature | patch/bugfix
         required: true
-
 
 jobs:
   check-input:
@@ -83,7 +80,6 @@ jobs:
           args_str = ' '.join(args)
           print(args_str)
           print(f"::set-output name=args::{args_str}")
-
 
   pyproject-config:
     name: Get config from pyproject.toml
@@ -168,7 +164,6 @@ jobs:
           if len(test_ver) >= 10:
               print(f"::set-output name=test_python_version_10::{test_ver[9]}")
 
-
   check-ci-status:
     name: Check CI status on commit
     needs: [pyproject-config]
@@ -225,7 +220,6 @@ jobs:
 
           if do_exit_1:
               sys.exit(1)
-
 
   old-test-code:
     name: (old tests) nox / test_code / ${{ matrix.os }}
@@ -350,7 +344,6 @@ jobs:
           MIN_COVERAGE: 0
         if: needs.check-input.outputs.first_release != 'False'
 
-
   check-breaking-change-notes:
     name: Check for missing BREAKING CHANGES release notes
     needs: [old-test-code, check-input, pyproject-config]
@@ -466,7 +459,6 @@ jobs:
       - name: Exit if comment was set
         run: exit 1
         if: steps.set-comment.outcome == 'success'
-
 
   publish:
     needs: [check-breaking-change-notes, check-input, pyproject-config]

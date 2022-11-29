@@ -9,7 +9,6 @@
 """  # noqa: D205,D208,D400
 import subprocess  # noqa: S404
 import sys
-
 from pathlib import Path
 from typing import List, Optional
 

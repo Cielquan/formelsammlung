@@ -15,7 +15,6 @@ import nox.registry
 import nox.sessions
 import nox.virtualenv
 import pytest
-
 from nox import _options
 from pytest_mock import MockerFixture
 

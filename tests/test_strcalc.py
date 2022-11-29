@@ -8,7 +8,6 @@
     :license: GPL-3.0-or-later, see LICENSE for details
 """  # noqa: D205,D208,D400
 import random
-
 from typing import Union
 
 import pytest
@@ -42,9 +41,7 @@ def _rand_complex_w_0() -> complex:
     The number is made of int for real and imag part.
     The imag part is randomly positive or negative.
     """
-    return complex(
-        f"{_rand_int_w_0()}{random.choice(('+', '-'))}{_rand_int_w_0()}j"  # noqa: S311
-    )
+    return complex(f"{_rand_int_w_0()}{random.choice(('+', '-'))}{_rand_int_w_0()}j")  # noqa: S311
 
 
 def _rand_complex_wo_0() -> complex:
@@ -450,7 +447,7 @@ def test_exponentiation(num_l: NumberType, num_r: NumberType) -> None:
     """Test exponentiation with calculate_string w/o signs."""
     result = calculate_string(f"{num_l}**{num_r}")
 
-    assert result == num_l ** num_r
+    assert result == num_l**num_r
 
 
 @pytest.mark.parametrize(
@@ -469,7 +466,7 @@ def test_exponentiation_minus_plus(num_l: NumberType, num_r: NumberType) -> None
     """
     result = calculate_string(f"-{num_l}**+{num_r}")
 
-    assert result == -(num_l ** +num_r)
+    assert result == -(num_l**+num_r)
 
 
 @pytest.mark.parametrize(
@@ -488,7 +485,7 @@ def test_exponentiation_plus_minus(num_l: NumberType, num_r: NumberType) -> None
     """
     result = calculate_string(f"+{num_l}**-{num_r}")
 
-    assert result == +(num_l ** -num_r)
+    assert result == +(num_l**-num_r)
 
 
 @pytest.mark.parametrize(
@@ -507,7 +504,7 @@ def test_exponentiation_minus_minus(num_l: NumberType, num_r: NumberType) -> Non
     """
     result = calculate_string(f"-{num_l}**-{num_r}")
 
-    assert result == -(num_l ** -num_r)
+    assert result == -(num_l**-num_r)
 
 
 @pytest.mark.parametrize(
@@ -526,7 +523,7 @@ def test_exponentiation_plus_plus(num_l: NumberType, num_r: NumberType) -> None:
     """
     result = calculate_string(f"+{num_l}**+{num_r}")
 
-    assert result == +(num_l ** +num_r)
+    assert result == +(num_l**+num_r)
 
 
 # Floor-division
@@ -553,9 +550,7 @@ def test_floor_division(num_l: Union[int, float], num_r: Union[int, float]) -> N
         (_rand_float_w_0(), _rand_float_wo_0()),
     ],
 )
-def test_floor_division_minus_plus(
-    num_l: Union[int, float], num_r: Union[int, float]
-) -> None:
+def test_floor_division_minus_plus(num_l: Union[int, float], num_r: Union[int, float]) -> None:
     """Test floor-division with calculate_string.
 
     Sign left number: minus
@@ -573,9 +568,7 @@ def test_floor_division_minus_plus(
         (_rand_float_w_0(), _rand_float_wo_0()),
     ],
 )
-def test_floor_division_plus_minus(
-    num_l: Union[int, float], num_r: Union[int, float]
-) -> None:
+def test_floor_division_plus_minus(num_l: Union[int, float], num_r: Union[int, float]) -> None:
     """Test floor-division with calculate_string.
 
     Sign left number: plus
@@ -593,9 +586,7 @@ def test_floor_division_plus_minus(
         (_rand_float_w_0(), _rand_float_wo_0()),
     ],
 )
-def test_floor_division_minus_minus(
-    num_l: Union[int, float], num_r: Union[int, float]
-) -> None:
+def test_floor_division_minus_minus(num_l: Union[int, float], num_r: Union[int, float]) -> None:
     """Test floor-division with calculate_string.
 
     Sign left number: minus
@@ -613,9 +604,7 @@ def test_floor_division_minus_minus(
         (_rand_float_w_0(), _rand_float_wo_0()),
     ],
 )
-def test_floor_division_plus_plus(
-    num_l: Union[int, float], num_r: Union[int, float]
-) -> None:
+def test_floor_division_plus_plus(num_l: Union[int, float], num_r: Union[int, float]) -> None:
     """Test floor-division with calculate_string.
 
     Sign left number: plus

@@ -10,14 +10,12 @@
 import os
 import re
 import shutil
-
 from datetime import date
 from importlib.util import find_spec
 from pathlib import Path
 from typing import List
 
 import sphinx_rtd_theme  # type: ignore[import]
-
 from sphinx.application import Sphinx
 
 from formelsammlung import __author__, __gh_repository_link__, __project__, __version__
@@ -40,9 +38,7 @@ copyright = (  # noqa: VNE003,W0622
     + f"{author} and AUTHORS"
 )
 release = __version__  #: The full version, including alpha/beta/rc tags
-version_parts = re.search(
-    r"^v?(?P<version>\d+\.\d+)\.\d+[-.]?(?P<tag>[a-z]*)[\.]?\d*", release
-)
+version_parts = re.search(r"^v?(?P<version>\d+\.\d+)\.\d+[-.]?(?P<tag>[a-z]*)[\.]?\d*", release)
 #: Major + Minor version like (X.Y)
 version = None if not version_parts else version_parts.group("version")
 #: only tags like alpha/beta/rc
@@ -140,9 +136,7 @@ if find_spec("sphinxcontrib.apidoc") is not None:
     if Path(apidoc_output_dir).is_dir():
         shutil.rmtree(apidoc_output_dir)
 else:
-    NOT_LOADED_MSGS.append(
-        "## 'sphinxcontrib-apidoc' extension not loaded - not installed"
-    )
+    NOT_LOADED_MSGS.append("## 'sphinxcontrib-apidoc' extension not loaded - not installed")
 
 
 #: -- AUTODOC --------------------------------------------------------------------------
@@ -164,9 +158,7 @@ def _remove_module_docstring(  # noqa: R0913
 if find_spec("sphinx_autodoc_typehints") is not None:
     extensions.append("sphinx_autodoc_typehints")
 else:
-    NOT_LOADED_MSGS.append(
-        "## 'sphinx-autodoc-typehints' extension not loaded - not installed"
-    )
+    NOT_LOADED_MSGS.append("## 'sphinx-autodoc-typehints' extension not loaded - not installed")
 
 
 #: -- SPELLING -------------------------------------------------------------------------
@@ -177,9 +169,7 @@ spelling_exclude_patterns = ["autoapi/**", "autoapidoc/**"]
 if find_spec("sphinxcontrib.spelling") is not None:
     extensions.append("sphinxcontrib.spelling")
 else:
-    NOT_LOADED_MSGS.append(
-        "## 'sphinxcontrib-spelling' extension not loaded - not installed"
-    )
+    NOT_LOADED_MSGS.append("## 'sphinxcontrib-spelling' extension not loaded - not installed")
 
 
 #: -- HTML THEME -----------------------------------------------------------------------

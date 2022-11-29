@@ -9,9 +9,7 @@
 """  # noqa: D205,D208,D400
 from typing import Any, Callable, Dict, Optional
 
-from nox.sessions import CondaEnv, PassthroughEnv
-from nox.sessions import Session as _Session
-from nox.sessions import VirtualEnv
+from nox.sessions import CondaEnv, PassthroughEnv, Session as _Session, VirtualEnv
 
 from formelsammlung.venv_utils import where_installed
 

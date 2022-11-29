@@ -11,7 +11,6 @@ import contextlib
 import os
 import shutil
 import sys
-
 from pathlib import Path
 from typing import Optional, Tuple, Union
 
@@ -26,9 +25,7 @@ def get_venv_path() -> Path:
     :return: Return venv path
     """
     if hasattr(sys, "real_prefix"):
-        return Path(
-            sys.real_prefix  # type: ignore[no-any-return,attr-defined]  # noqa: E1101
-        )
+        return Path(sys.real_prefix)  # type: ignore[no-any-return,attr-defined]  # noqa: E1101
     if sys.base_prefix != sys.prefix:
         return Path(sys.prefix)
     raise FileNotFoundError("No calling venv could be detected.")
@@ -121,9 +118,7 @@ def where_installed(program: str) -> Tuple[int, Optional[str], Optional[str]]:
 
     if venv_path is not None:
         path = os.pathsep.join(
-            p
-            for p in os.environ["PATH"].split(os.pathsep)
-            if Path(p) != venv_path / OS_BIN
+            p for p in os.environ["PATH"].split(os.pathsep) if Path(p) != venv_path / OS_BIN
         )
         glob_exe = shutil.which(program, path=path)
 

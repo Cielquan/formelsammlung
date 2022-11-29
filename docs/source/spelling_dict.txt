@@ -1,3 +1,4 @@
+
 api
 arg
 args
@@ -30,6 +31,7 @@ executable
 executables
 expr
 fmt
+formelsammlung
 func
 getter
 github
@@ -60,8 +62,10 @@ repo
 riedel
 rst
 sdist
+sds
 setter
 st
+strcalc
 submodule
 submodules
 temp
@@ -73,9 +77,5 @@ tokenize
 tox
 txt
 venv
-xml
-
-formelsammlung
-sds
-strcalc
 venv_runner
+xml
