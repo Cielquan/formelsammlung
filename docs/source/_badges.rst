@@ -7,11 +7,11 @@
 |                   +---------------------------------------------------------------------------------------------+
 |                   | |pypi_status| |pypi_format| |pypi_downloads|                                                |
 +-------------------+---------------------------------------------------------------------------------------------+
-| **Pipeline**      | |gha_test_code| |codeclimate_cov|                                                           |
+| **Pipeline**      | |gha_test_code|                                                                             |
 |                   +---------------------------------------------------------------------------------------------+
-|                   | |gha_code_quality| |codeclimate_maintain|                                                   |
+|                   | |gha_code_quality|                                                                          |
 |                   +---------------------------------------------------------------------------------------------+
-|                   | |gha_test_docs| |gha_dep_safety|                                                            |
+|                   | |gha_test_docs|                                                                             |
 +-------------------+---------------------------------------------------------------------------------------------+
 | **Github**        | |gh_release| |gh_commits_since| |gh_last_commit|                                            |
 |                   +---------------------------------------------------------------------------------------------+
@@ -79,10 +79,6 @@
     :target: https://github.com/Cielquan/formelsammlung/actions?query=workflow%3A%22Test+code%22
     :alt: GitHub Actions - Test code
 
-.. |codeclimate_cov| image:: https://img.shields.io/codeclimate/coverage/Cielquan/formelsammlung?style=flat-square&logo=code-climate
-    :target: https://codeclimate.com/github/Cielquan/formelsammlung
-    :alt: Code Climate - Coverage
-
 .. |gha_code_quality| image:: https://img.shields.io/github/workflow/status/Cielquan/formelsammlung/Code%20qualitiy/main?style=flat-square&logo=github&label=Code%20qualitiy
     :target: https://github.com/Cielquan/formelsammlung/actions?query=workflow%3A%22Code+qualitiy%22
     :alt: GitHub Actions - Code qualitiy
@@ -92,17 +88,9 @@
 ..    :target: https://results.pre-commit.ci/latest/github/Cielquan/formelsammlung/main
 ..    :alt: pre-commit.ci status
 
-.. |codeclimate_maintain| image:: https://img.shields.io/codeclimate/maintainability/Cielquan/formelsammlung?style=flat-square&logo=code-climate
-    :target: https://codeclimate.com/github/Cielquan/formelsammlung
-    :alt: Code Climate - Maintainability
-
 .. |gha_test_docs| image:: https://img.shields.io/github/workflow/status/Cielquan/formelsammlung/Test%20documentation/main?style=flat-square&logo=github&label=Test%20documentation
     :target: https://github.com/Cielquan/formelsammlung/actions?query=workflow%3A%22Test+documentation%22
     :alt: GitHub Actions - Test docs
-
-.. |gha_dep_safety| image:: https://img.shields.io/github/workflow/status/Cielquan/formelsammlung/Dependency%20safety/main?style=flat-square&logo=github&label=Dependency%20safety
-    :target: https://github.com/Cielquan/formelsammlung/actions?query=workflow%3A%22Dependency+safety%22
-    :alt: GitHub Actions - Dependency safety
 
 .. TODO:#i# readd dependabot badge when https://github.com/dependabot/dependabot-core/issues/1912 is fixed
 
