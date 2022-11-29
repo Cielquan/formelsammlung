@@ -19,7 +19,7 @@ repos:
 
   #: code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 6e2418c5521b7d606e72914dced3253f9ace1205  # frozen: v3.4.0
+    rev: f71fa2c1f9cf5cb705f73dffe4b21f7c61470ba9  # frozen: v4.4.0
     hooks:
       - id: check-case-conflict
       - id: check-json
@@ -42,14 +42,14 @@ repos:
 
   #: several python code regex hooks
   - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: 4f4c0a4cda27980be153cca2cb7710c9fec57ba3  # frozen: v1.7.0
+    rev: 6f51a66bba59954917140ec2eeeaa4d5e630e6ce  # frozen: v1.9.0
     hooks:
       - id: python-no-log-warn
       - id: python-no-eval
 
   #: pyupgrade - upgrade old python syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: 928901205243fe52292052b8b0757d93f174d5e8  # frozen: v2.7.4
+    rev: c1b1c5380dbb12b30ec0d0652df204d21ae003b8  # frozen: v3.2.2
     hooks:
       - id: pyupgrade
         args: [--py36-plus]
@@ -57,14 +57,14 @@ repos:
   #: isort - sort imports
   #: Inline skip: `# isort: skip`
   - repo: https://github.com/PyCQA/isort
-    rev: 473d150c1db60f4614a574e30993e9e0d3ca0cce  # frozen: 5.7.0
+    rev: c5e8fa75dda5f764d20f66a215d71c21cfa198e1  # frozen: 5.10.1
     hooks:
       - id: isort
 
   #: black - python formatter
   #: Inline skip: mark block with `# fmt: off` and `# fmt: on` (same indent)
   - repo: https://github.com/psf/black
-    rev: e66be67b9b6811913470f70c28b4d50f94d05b22  # frozen: 20.8b1
+    rev: 27d20144a7517594e24a1649451177b2a11284be  # frozen: 22.10.0
     hooks:
       - id: black
         args: [--safe]
@@ -99,7 +99,7 @@ repos:
   #: File skip: `# pylint: skip-file`
   #: Inline change: `# pylint: disable|enable=CODE|NAME`
   - repo: https://github.com/PyCQA/pylint/
-    rev: 44ba1fa97061f30764246ca087151f3fa9d47a08  # frozen: pylint-2.6.0
+    rev: b2af2b299c1206e035f44db90b1569b3e3b13511  # frozen: v2.15.6
     hooks:
       - id: pylint
         name: spell-check (pylint+pyenchant)
@@ -115,17 +115,14 @@ repos:
 #: -------------------------------------------------------------------------------------
   #: blacken-docs - black for python code in docs
   - repo: https://github.com/asottile/blacken-docs
-    rev: e42b7658515d5178d286a457d35cbecc130bdad8  # frozen: v1.9.1
+    rev: 7ae9389351f4090e3993de28015a05a18ca6b8a7  # frozen: v1.12.1
     hooks:
       - id: blacken-docs
         additional_dependencies: [black==20.8b1]
 
-  # TODO:#i# wait for new release and change back to original repo
-  # TODO:#i# https://github.com/myint/rstcheck/issues/69
   #: rstcheck - rst file checker
-  # - repo: https://github.com/myint/rstcheck
-  - repo: https://github.com/Cielquan/rstcheck
-    rev: 3f92957478422df87bd730abde66f089cc1ee19b  # frozen: 3.4.0
+  - repo: https://github.com/rstcheck/rstcheck
+    rev: 77751d7a7d81a5d47aa344d802f41809c4d063c0  # frozen: v6.1.1
     hooks:
       - id: rstcheck
         additional_dependencies: ["sphinx"]
@@ -137,7 +134,7 @@ repos:
 #: -------------------------------------------------------------------------------------
   # poetry - python dependency management
   - repo: https://github.com/Cielquan/mirrors-poetry
-    rev: de20845626cb378ff59a7b009825b76ebadaca59 # frozen: 1.2.2
+    rev: 7e519d0e66da9e078ffd2a06eacac5d88d31ac63  # frozen: 1.2.2
     hooks:
       - id: poetry-check
 
@@ -150,7 +147,7 @@ repos:
   #: Block skip: `# yamllint disable[ rule:<RULE>]`
   #: Block skip end: `# yamllint enable`
   - repo: https://github.com/adrienverge/yamllint
-    rev: 16e0f9d7b2ba9d0fc8c27d27611d4473b7c4dd54  # frozen: v1.25.0
+    rev: 9cce2940414e9560ae4c8518ddaee2ac1863a4d2  # frozen: v1.28.0
     hooks:
       - id: yamllint
 
