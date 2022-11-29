@@ -135,8 +135,8 @@ flake8-eradicate = ["-E800"]
 
 # -- RSTCHECK CONFIG ------------------------------------------------------------------
 [tool.rstcheck]
-ignore_directives = ["mdinclude","spelling","click","jira_issue"]
-ignore_roles = ["repo","issue","pull","user"]
+ignore_directives = ["mdinclude", "spelling:word-list", "click", "jira_issue"]
+ignore_roles = ["repo", "issue", "pull","user"]
 
 
 # -- PYLINT CONFIG --------------------------------------------------------------------

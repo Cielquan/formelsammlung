@@ -104,10 +104,10 @@ nitpick_ignore = [("py:class", "SessionRunner")]
 
 extensions.append("sphinx.ext.extlinks")
 extlinks = {
-    "repo": (f"{__gh_repository_link__}/%s", "Repo's "),
-    "issue": (f"{__gh_repository_link__}/issues/%s", "#"),
-    "pull": (f"{__gh_repository_link__}/pull/%s", "pr"),
-    "user": ("https://github.com/%s", "@"),
+    "repo": (f"{__gh_repository_link__}/%s", "Repo's %s"),
+    "issue": (f"{__gh_repository_link__}/issues/%s", "#%s"),
+    "pull": (f"{__gh_repository_link__}/pull/%s", "pr%s"),
+    "user": ("https://github.com/%s", "@%s"),
 }
 
 
