@@ -211,8 +211,8 @@ repos:
         require_serial: true
 
   # poetry - python dependency maJSONnagement
-  - repo: https://github.com/python-poetry/poetry
-    rev: 3f741f77a2822b6fe0cdf2f27cce2c701e011fc2  # frozen: 1.2.0rc1
+  - repo: https://github.com/Cielquan/mirrors-poetry
+    rev: 7e519d0e66da9e078ffd2a06eacac5d88d31ac63  # frozen: 1.2.2
     hooks:
       - id: poetry-check
 
@@ -221,7 +221,7 @@ repos:
   # ----------------------------------------------
 
   # rstcheck - rst file checker
-  - repo: https://github.com/Cielquan/mirrors-poetry
+  - repo: https://github.com/rstcheck/rstcheck
     rev: 77751d7a7d81a5d47aa344d802f41809c4d063c0  # frozen: v6.1.1
     hooks:
       - id: rstcheck
