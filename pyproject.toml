@@ -80,8 +80,6 @@ testing = [
   "flask",
   "nox",
 ]
-coverage = ["coverage", "coverage-conditional-plugin"]
-diff-cover = ["diff-cover"]
 docs = [
   "sphinx",
   "m2r2",
