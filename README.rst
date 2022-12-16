@@ -125,7 +125,7 @@ This project is licensed under the GPL-3.0 or later.
 
 .. Pipeline
 
-.. |gha_test_code| image:: https://img.shields.io/github/workflow/status/Cielquan/formelsammlung/Test%20code/main?style=flat-square&logo=github&label=Test%20code
+.. |gha_test_code| image:: https://img.shields.io/github/actions/workflow/status/Cielquan/formelsammlung/test-code.yml?branch=main&style=flat-square&logo=github&label=Test%20code
     :target: https://github.com/Cielquan/formelsammlung/actions?query=workflow%3A%22Test+code%22
     :alt: GitHub Actions - Test code
 
@@ -133,7 +133,7 @@ This project is licensed under the GPL-3.0 or later.
     :target: https://codeclimate.com/github/Cielquan/formelsammlung
     :alt: Code Climate - Coverage
 
-.. |gha_code_quality| image:: https://img.shields.io/github/workflow/status/Cielquan/formelsammlung/Code%20qualitiy/main?style=flat-square&logo=github&label=Code%20qualitiy
+.. |gha_code_quality| image:: https://img.shields.io/github/actions/workflow/status/Cielquan/formelsammlung/code-quality.yml?branch=main&style=flat-square&logo=github&label=Code%20quality
     :target: https://github.com/Cielquan/formelsammlung/actions?query=workflow%3A%22Code+qualitiy%22
     :alt: GitHub Actions - Code qualitiy
 
@@ -146,7 +146,7 @@ This project is licensed under the GPL-3.0 or later.
     :target: https://codeclimate.com/github/Cielquan/formelsammlung
     :alt: Code Climate - Maintainability
 
-.. |gha_test_docs| image:: https://img.shields.io/github/workflow/status/Cielquan/formelsammlung/Test%20documentation/main?style=flat-square&logo=github&label=Test%20documentation
+.. |gha_test_docs| image:: https://img.shields.io/github/actions/workflow/status/Cielquan/formelsammlung/test-docs.yml?branch=main&style=flat-square&logo=github&label=Test%20documentation
     :target: https://github.com/Cielquan/formelsammlung/actions?query=workflow%3A%22Test+documentation%22
     :alt: GitHub Actions - Test docs
 
