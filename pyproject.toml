@@ -77,8 +77,6 @@ testing = [
   "pytest-randomly",
   "pytest-mock",
   "pytest-flask",
-  "flask",
-  "nox",
 ]
 docs = [
   "sphinx",
@@ -87,8 +85,6 @@ docs = [
   "sphinx-autodoc-typehints",
   "sphinxcontrib-apidoc",
   "sphinxcontrib-spelling",
-  "flask",
-  "nox",
 ]
 
 
