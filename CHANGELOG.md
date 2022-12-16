@@ -19,7 +19,7 @@ For a list of all available releases see the
 
 ### BREAKING CHANGES
 
-- Drop support for python 3.6
+- Drop support for python 3.6 and 3.7
 - Remove nox_session module
 - Update many dependencies
 
