@@ -33,7 +33,7 @@ classifiers = [
 env_exe_runner = 'formelsammlung.env_exe_runner:cli_caller'
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8.1"
 # EXTRA flask
 flask = {version = ">=1.1.2,<3.0.0", optional = true}
 # EXTRA testing
@@ -54,7 +54,6 @@ sphinx-autodoc-typehints = { version = ">=1.15", optional = true }
 sphinxcontrib-apidoc = { version = ">=0.3", optional = true }
 sphinxcontrib-spelling = { version = ">=7.3", optional = true }
 # MAIN DEPENDENCIES
-importlib-metadata = {version = ">=1.6,<5.0", python = "<3.8"}
 
 [tool.poetry.dev-dependencies]
 pre-commit = ">=2.17"
