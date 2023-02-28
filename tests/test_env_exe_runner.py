@@ -84,6 +84,7 @@ def test__check_venv_success(tmp_path: Path) -> None:
     exe.write_text("This is a file.")
     #: Change cwd to tmp dir
     with change_cwd(tmp_path):
+
         result = env_exe_runner._check_venv(venv_name, filename)
 
         assert result is not None
@@ -98,6 +99,7 @@ def test__check_venv_fail(tmp_path: Path) -> None:
     filename = "testfile"
     #: Change cwd to tmp dir
     with change_cwd(tmp_path):
+
         result = env_exe_runner._check_venv(venv_name, filename)
 
         assert result is None
@@ -121,6 +123,7 @@ def test__check_runner_envs_success(runner_name: str, tmp_path: Path) -> None:
     exe.write_text("This is a file.")
     #: Change cwd to tmp dir
     with change_cwd(tmp_path):
+
         result = env_exe_runner._check_runner_envs(runner_name, ["env1", "env2"], filename)
 
         assert result is not None
@@ -141,6 +144,7 @@ def test__check_runner_envs_fail(runner_name: str, tmp_path: Path) -> None:
     filename = "testfile"
     #: Change cwd to tmp dir
     with change_cwd(tmp_path):
+
         result = env_exe_runner._check_runner_envs(runner_name, ["env1", "env2"], filename)
 
         assert result is None
