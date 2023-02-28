@@ -47,7 +47,6 @@ def env_exe_runner(
     error_msgs = []
 
     for runner in venv_runner:
-
         if runner in ("tox", "nox"):
             error_msgs.append(f"- '{runner}' envs: {envs}")
             cmd_path = _check_runner_envs(runner, envs, tool)
