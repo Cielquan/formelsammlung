@@ -129,5 +129,4 @@ def calculate_string(expression: str) -> Optional[NumberType]:
         raise StringCalculatorError(
             f"Expression `{expression}` could not be calculated due to: `{exc}`."
         ) from exc
-    else:
-        return ret_val  # type: ignore[no-any-return]
+    return ret_val  # type: ignore[no-any-return]
