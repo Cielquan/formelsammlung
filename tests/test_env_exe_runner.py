@@ -87,8 +87,8 @@ def test__check_venv_success(tmp_path: Path) -> None:
     with change_cwd(tmp_path):
 
         result = env_exe_runner._check_venv(venv_name, filename)
-        # fmt: on
 
+        # fmt: on
         assert result is not None
         assert result.absolute() == Path(exe)
 
@@ -104,8 +104,8 @@ def test__check_venv_fail(tmp_path: Path) -> None:
     with change_cwd(tmp_path):
 
         result = env_exe_runner._check_venv(venv_name, filename)
-        # fmt: on
 
+        # fmt: on
         assert result is None
 
 
@@ -130,8 +130,8 @@ def test__check_runner_envs_success(runner_name: str, tmp_path: Path) -> None:
     with change_cwd(tmp_path):
 
         result = env_exe_runner._check_runner_envs(runner_name, ["env1", "env2"], filename)
-        # fmt: on
 
+        # fmt: on
         assert result is not None
         assert result.absolute() == Path(exe)
 
@@ -153,6 +153,6 @@ def test__check_runner_envs_fail(runner_name: str, tmp_path: Path) -> None:
     with change_cwd(tmp_path):
 
         result = env_exe_runner._check_runner_envs(runner_name, ["env1", "env2"], filename)
-        # fmt: on
 
+        # fmt: on
         assert result is None
