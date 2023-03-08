@@ -44,7 +44,9 @@ coverage-conditional-plugin = { version = ">=0.5", optional = true }
 pytest-sugar = { version = ">=0.9.5", optional = true }
 pytest-randomly = { version = ">=3.0", optional = true }
 pytest-mock = {version = ">=3.7", optional = true}
+pytest-flask = {version = ">=1.2", optional = true}
 # EXTRA docs
+sphinx = { version = ">=6", optional = true }
 sphinx-autobuild = { version = "2021.3.14", optional = true }
 m2r2 = { version = ">=0.3.2", optional = true }
 # TODO:#i# wait for fix: https://github.com/MrDogeBro/sphinx_rtd_dark_mode/issues/28
