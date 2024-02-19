@@ -1,4 +1,5 @@
 """Calculate arithmetic expressions from strings."""
+
 import ast
 import operator
 import sys

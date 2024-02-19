@@ -1,4 +1,5 @@
 """Get environment variables and transform their type."""
+
 import os
 import re
 from typing import Any, Iterable, NoReturn, Optional, Pattern, Set, Union

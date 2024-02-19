@@ -1,4 +1,5 @@
 """Tests for `flask_sphinx_docs` module."""
+
 # pylint: disable=W0212
 from pathlib import Path
 
