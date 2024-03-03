@@ -2,6 +2,7 @@
 
 from typing import List
 
+
 try:
     from importlib.metadata import metadata as get_md
 except ModuleNotFoundError:  # pragma: py-gte-38
