@@ -1,4 +1,5 @@
 """Tests for `venv_utils` module."""
+
 import os
 import shutil
 import sys

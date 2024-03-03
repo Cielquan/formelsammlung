@@ -1,4 +1,5 @@
 """Tests for `envvar` module."""
+
 # pylint: disable=protected-access
 import re
 from decimal import Decimal

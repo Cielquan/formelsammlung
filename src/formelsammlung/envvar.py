@@ -1,4 +1,5 @@
 """Get environment variables and transform their type."""
+
 import os
 import re
 from typing import Any, Iterable, NoReturn, Optional, Pattern, Set, Union
@@ -14,7 +15,7 @@ INT_REGEX = r"^[\d]+(_\d+)*$"
 FLOAT_REGEX = r"^[\d]+(_\d+)*\.\d+$"
 
 
-class EnvVarGetter:  # pylint: disable=too-many-instance-attributes
+class EnvVarGetter:  # pylint: disable=too-many-instance-attributes,too-many-arguments
     """Class containing the config for :meth:`EnvVarGetter.getenv_typed`."""
 
     def __init__(
