@@ -44,7 +44,7 @@ class _StringCalculator(ast.NodeVisitor):
     ) -> NumberType:  # pragma: py-lt-38
         """Handle `Constant` nodes."""
         ret_val = node.value
-        if not isinstance(ret_val, NUMBERTYPES):
+        if not isinstance(ret_val, NUMBERTYPES) or isinstance(ret_val, bool):
             raise ValueError(f"Extracted `Constant` is not of type {NumberType}.")
         return ret_val
 
@@ -61,7 +61,7 @@ class _StringCalculator(ast.NodeVisitor):
         # safety hurdle from visist_Constant for backwards compatibility
         if sys.version_info[0:2] < (3, 8):  # pragma: py-gte-38
             ret_val = self.visit(node.value)
-            if not isinstance(ret_val, NUMBERTYPES):
+            if not isinstance(ret_val, NUMBERTYPES) or isinstance(ret_val, bool):
                 raise ValueError(f"`Expr` did not return a {NumberType}.")
             return ret_val
 
