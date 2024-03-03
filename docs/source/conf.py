@@ -1,4 +1,5 @@
 """Configuration file for the Sphinx documentation builder."""
+
 import os
 import re
 import shutil
@@ -8,7 +9,7 @@ from importlib.util import find_spec
 from pathlib import Path
 
 import sphinx.ext.autodoc
-import sphinx_rtd_theme  # type: ignore[import]
+import sphinx_rtd_theme  # type: ignore[import-untyped]
 from sphinx.application import Sphinx
 
 from formelsammlung import __author__, __gh_repository_link__, __project__, __version__

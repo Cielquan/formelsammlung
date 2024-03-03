@@ -1,4 +1,5 @@
 """Tests for `tox_env_exe_runner` module."""
+
 # pylint: disable=protected-access
 import os
 import subprocess  # noqa: S404

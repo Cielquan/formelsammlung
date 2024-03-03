@@ -1,4 +1,5 @@
 """Utility function for working with virtual environments."""
+
 import contextlib
 import os
 import shutil

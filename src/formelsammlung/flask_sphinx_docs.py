@@ -1,4 +1,5 @@
 """Serve sphinx docs in your flask app."""
+
 from pathlib import Path
 from typing import Optional
 

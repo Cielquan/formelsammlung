@@ -1,4 +1,5 @@
 """Tests for `strcalc` module."""
+
 import random
 from typing import Union
 

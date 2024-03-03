@@ -1,4 +1,5 @@
 """Script for preparing the repo for a new release."""
+
 import argparse
 import re
 import subprocess  # noqa: S404

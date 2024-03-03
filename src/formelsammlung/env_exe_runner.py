@@ -1,4 +1,5 @@
 """Call tools from tox environments."""
+
 import subprocess  # noqa: S404
 import sys
 from pathlib import Path
