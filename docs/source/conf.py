@@ -9,7 +9,7 @@ from importlib.util import find_spec
 from pathlib import Path
 
 import sphinx.ext.autodoc
-import sphinx_rtd_theme
+import sphinx_rtd_theme  # type: ignore[import-untyped]
 from formelsammlung import __author__, __gh_repository_link__, __project__, __version__
 from sphinx.application import Sphinx
 
