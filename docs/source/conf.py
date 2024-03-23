@@ -10,8 +10,10 @@ from pathlib import Path
 
 import sphinx.ext.autodoc
 import sphinx_rtd_theme  # type: ignore[import-untyped]
-from formelsammlung import __author__, __gh_repository_link__, __project__, __version__
 from sphinx.application import Sphinx
+
+from formelsammlung import __author__, __gh_repository_link__, __project__, __version__
+
 
 needs_sphinx = "3.1"  #: Minimum Sphinx version to build the docs
 
