@@ -1,8 +1,3 @@
-.. spelling:word-list::
-
-    Bugfixes
-    bugfixes
-
 Git(hub) Workflow
 =================
 

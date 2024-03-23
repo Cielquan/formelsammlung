@@ -1,8 +1,10 @@
 
 api
+apidoc
 arg
 args
 attr
+autoapidoc
 bool
 boolean
 bugfixes
@@ -71,6 +73,7 @@ rtd
 sdist
 sds
 setter
+sphinxcontrib
 st
 strcalc
 submodule
@@ -89,5 +92,6 @@ venv
 venv's
 venv_runner
 virtualenv
+virtualenvs
 xml
 yaml
