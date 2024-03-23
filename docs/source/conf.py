@@ -10,10 +10,8 @@ from pathlib import Path
 
 import sphinx.ext.autodoc
 import sphinx_rtd_theme  # type: ignore[import-untyped]
-from sphinx.application import Sphinx
-
 from formelsammlung import __author__, __gh_repository_link__, __project__, __version__
-
+from sphinx.application import Sphinx
 
 needs_sphinx = "3.1"  #: Minimum Sphinx version to build the docs
 
@@ -164,7 +162,7 @@ spelling_word_list_filename = "spelling_dict.txt"
 spelling_show_suggestions = True
 spelling_exclude_patterns = ["autoapi/**", "autoapidoc/**"]
 
-if find_spec("sphinxcontrib.spelling") is not None:
+if find_spec("sphinxcontrib.spelling") is not None and os.environ["SPHINX_SPELLING"] == "true":
     extensions.append("sphinxcontrib.spelling")
 else:
     NOT_LOADED_MSGS.append("## 'sphinxcontrib-spelling' extension not loaded - not installed")
