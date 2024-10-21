@@ -1,6 +1,6 @@
 ---
 minimum_pre_commit_version: "2.17"
-default_stages: [commit]
+default_stages: [pre-commit]
 
 ci:
   skip: [mypy, pylint, python-safety-dependencies-check, flakeheaven]
@@ -13,7 +13,7 @@ repos:
   - repo: meta
     hooks:
       - id: identity
-        stages: [commit, manual]
+        stages: [pre-commit, manual]
       - id: check-hooks-apply
         stages: [manual]
       - id: check-useless-excludes
@@ -25,7 +25,7 @@ repos:
 
   # file checking out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 2c9f875913ee60ca25ce70243dc24d5b6415598c # frozen: v4.6.0
+    rev: cef0300fd0fc4d2a87a85fa2093c6b283ea36f4b  # frozen: v5.0.0
     hooks:
       - id: check-case-conflict
       - id: check-shebang-scripts-are-executable
@@ -55,7 +55,7 @@ repos:
 
   # pyupgrade - upgrade old syntax to new
   - repo: https://github.com/asottile/pyupgrade
-    rev: 12af25eb252deaaecb6b259df40d01f42e716dc3 # frozen: v3.15.2
+    rev: 28b9414e6448be4cb61f51220f8cb88c582981a8  # frozen: v3.18.0
     hooks:
       - id: pyupgrade
         args: ["--py37-plus"]
@@ -68,14 +68,14 @@ repos:
 
   # black - python formatter
   - repo: https://github.com/psf/black
-    rev: 3702ba224ecffbcec30af640c149f231d90aebdb # frozen: 24.4.2
+    rev: 1b2427a2b785cc4aac97c19bb4b9a0de063f9547  # frozen: 24.10.0
     hooks:
       - id: black
         args: ["--safe"]
 
   # blacken-docs - black for python code in docs (rst/md/tex)
   - repo: https://github.com/asottile/blacken-docs
-    rev: 960ead214cd1184149d366c6d27ca6c369ce46b6 # frozen: 1.16.0
+    rev: d4e2940d27621c7f20215459be05703947618b7b  # frozen: 1.19.0
     hooks:
       - id: blacken-docs
         exclude: testing|tests
@@ -117,12 +117,12 @@ repos:
 
   # code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 2c9f875913ee60ca25ce70243dc24d5b6415598c # frozen: v4.6.0
+    rev: cef0300fd0fc4d2a87a85fa2093c6b283ea36f4b  # frozen: v5.0.0
     hooks:
       - id: end-of-file-fixer
-        stages: [commit]
+        stages: [pre-commit]
       - id: trailing-whitespace
-        stages: [commit]
+        stages: [pre-commit]
 
   # ####################################################################################
   #
@@ -147,7 +147,7 @@ repos:
 
   # code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 2c9f875913ee60ca25ce70243dc24d5b6415598c # frozen: v4.6.0
+    rev: cef0300fd0fc4d2a87a85fa2093c6b283ea36f4b  # frozen: v5.0.0
     hooks:
       - id: check-merge-conflict
       - id: detect-private-key
@@ -158,7 +158,7 @@ repos:
 
   # python specific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 2c9f875913ee60ca25ce70243dc24d5b6415598c # frozen: v4.6.0
+    rev: cef0300fd0fc4d2a87a85fa2093c6b283ea36f4b  # frozen: v5.0.0
     hooks:
       - id: debug-statements
       - id: fix-encoding-pragma
@@ -212,7 +212,7 @@ repos:
 
   # poetry - python dependency management
   - repo: https://github.com/Cielquan/mirrors-poetry
-    rev: ec25c4d5817d8bcf1d6251c347a1892cb817edb8 # frozen: 1.8.2
+    rev: 8609c684ccd6d868005399a191a2e285e8324b21  # frozen: 1.8.4
     hooks:
       - id: poetry-check
 
@@ -222,7 +222,7 @@ repos:
 
   # rstcheck - rst file checker
   - repo: https://github.com/rstcheck/rstcheck
-    rev: 445861c31d8134562e723d77115721038de2e687 # frozen: v6.2.0
+    rev: f30c4d170a36ea3812bceb5f33004afc213bd797  # frozen: v6.2.4
     hooks:
       - id: rstcheck
         args: ["--config", "pyproject.toml"]
@@ -235,7 +235,7 @@ repos:
 
   # markdownlint - md file checker
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: 24eb4dce508ab81398d14d75179123fca425f12d # frozen: v0.13.0
+    rev: da711fa8b30421506086eb2dc7ea0a6c3cb27b9f  # frozen: v0.14.0
     hooks:
       - id: markdownlint-cli2
 
@@ -245,7 +245,7 @@ repos:
 
   # JSON specific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 2c9f875913ee60ca25ce70243dc24d5b6415598c # frozen: v4.6.0
+    rev: cef0300fd0fc4d2a87a85fa2093c6b283ea36f4b  # frozen: v5.0.0
     hooks:
       - id: check-toml
       - id: check-yaml
