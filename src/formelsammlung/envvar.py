@@ -4,7 +4,6 @@ import os
 import re
 from typing import Any, Iterable, NoReturn, Optional, Pattern, Set, Union
 
-
 #: Default values to convert to ``True`` for environment variables.
 TRUE_BOOL_VALUES = ("1", "y", "yes", "t", "True")
 #: Default values to convert to ``False`` for environment variables.
