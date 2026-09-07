@@ -5,7 +5,6 @@ import sys
 from pathlib import Path
 from typing import List, Optional
 
-
 IS_WIN = sys.platform == "win32"
 EXE = "Scripts/{tool}.exe" if IS_WIN else "bin/{tool}"
 
