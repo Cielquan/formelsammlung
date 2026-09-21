@@ -6,7 +6,6 @@ import subprocess  # noqa: S404
 import sys
 from datetime import date
 
-
 if sys.version_info[0:2] <= (3, 6):
     raise RuntimeError("Script runs only with python 3.7 or newer.")
 
