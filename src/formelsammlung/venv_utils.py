@@ -7,7 +7,6 @@ import sys
 from pathlib import Path
 from typing import Optional, Tuple, Union
 
-
 OS_BIN = "Scripts" if sys.platform == "win32" else "bin"
 
 
