@@ -5,7 +5,6 @@ import operator
 import sys
 from typing import Optional, Union
 
-
 NumberType = Union[int, float, complex]
 NUMBERTYPES = (int, float, complex)
 
